@@ -1,0 +1,2 @@
+# MiniRt
+RayTracer with miniLibX
