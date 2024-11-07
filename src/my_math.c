@@ -1,0 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   my_math.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/11/07 01:48:34 by bamssaye          #+#    #+#             */
+/*   Updated: 2024/11/07 01:48:35 by bamssaye         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../headers/minirt.h"
+
+double	solve_quadratic(double a, double b, double c)
+{
+	double	test;
+	double	t1;
+	double	t2;
+	double	testsqr;
+
+	test = b * b - 4.0 * a * c;
+	if (test < 0.0)
+		return (-1);
+	testsqr = sqrt(test);
+	if (test > 0.0)
+	{
+		t1 = (-b + testsqr) / (2.0 * a);
+		t2 = (-b - testsqr) / (2.0 * a);
+		if (t1 < 0.0 || t2 < 0.0)
+			return (-1);
+		if (t1 < t2)
+			return (t1);
+		else
+			return (t2);
+	}
+	return (-1);
+}
