@@ -18,5 +18,3 @@
 int start_fun(){
 //straaaaaat ....    
 }
-git config --global user.name "bamssaye"
-git config --global user.email "bamssayef@gmail.com"
