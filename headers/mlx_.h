@@ -6,11 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/11/07 01:39:46 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/11/23 09:20:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MLX__H
+# ifndef MLX__H
 # define MLX__H
 # include "minirt.h"
 
