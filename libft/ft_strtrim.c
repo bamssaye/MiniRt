@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/10 05:15:15 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/11/30 01:25:18 by bamssaye         ###   ########.fr       */
+/*   Updated: 2023/11/25 03:13:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,6 @@ char	*ft_strtrim(char const *s1, char const *set)
 // #include <stdio.h>
 // int main()
 // {
-//     char p[] = "wiiiii  i  hello w eh";
-//     printf("%s",ft_strtrim(p,"i"));
+//     char p[] = "    hello w eh   ";
+//     printf("%s",ft_strtrim(p," "));
 // }

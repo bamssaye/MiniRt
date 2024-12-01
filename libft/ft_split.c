@@ -101,13 +101,3 @@ char	**ft_split(char const *s, char c)
 	ft_splitall(str, s, c, countword);
 	return (str);
 }
-// #include <stdio.h>
-// int main()
-// {
-// 	char p[] = "    hello dear ou need     ";
-// 	char **c = ft_split(p, ' ');
-// 	int i = 0;
-// 	while(c[i])
-// 		printf("%s \n", c[i++]);
-// 	ft_freespace(c,i);
-// }

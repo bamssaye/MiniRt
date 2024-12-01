@@ -1,18 +1,11 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   object.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 01:48:38 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/11/07 01:48:39 by bamssaye         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/minirt.h"
 
-double	pl_cale_dist(t_ray *ray, t_plane *pl, int *hit, t_interparam *param)
+int	almost_equal(double a, double b)
+{
+	return (fabs(a - b) < EPSILON);
+}
+
+double	calculate_plane_ray_intersection_distance(t_ray *ray, t_plane *pl, int *hit, t_inters_params *param)
 {
 	double		dist;
 	double		dot;
@@ -21,21 +14,23 @@ double	pl_cale_dist(t_ray *ray, t_plane *pl, int *hit, t_interparam *param)
 	(void)hit;
 	dist = -1;
 	dot = vec3d_dot(&pl->normal, &ray->direction);
+	if (almost_equal(dot, 0))
+		return (0);
 	vec3d_minus(&inters_point, &pl->point, &ray->origin);
 	dist = vec3d_dot(&inters_point, &pl->normal) / dot;
 	if (dist <= 0)
 		return (0);
-	ft_memcpy(&param->f_normal, &pl->normal, sizeof(t_vec3d));
+	ft_memcpy(&param->closest_normal, &pl->normal, sizeof(t_vec3d));
 	if (dot > 0)
 	{
-		param->f_normal.x = -param->f_normal.x;
-		param->f_normal.y = -param->f_normal.y;
-		param->f_normal.z = -param->f_normal.z;
+		param->closest_normal.x = -param->closest_normal.x;
+		param->closest_normal.y = -param->closest_normal.y;
+		param->closest_normal.z = -param->closest_normal.z;
 	}
 	return (dist);
 }
 
-int	sp_intersection_point(t_vec3d *inters, t_ray *ray, double dist)
+int	calculate_sphere_intersection_point(t_vec3d *inters, t_ray *ray, double dist)
 {
 	vec3d_scale(inters, dist, &ray->direction);
 	vec3d_plus(inters, &ray->origin, inters);
@@ -47,16 +42,16 @@ int	sp_intersection_point(t_vec3d *inters, t_ray *ray, double dist)
 	return (0);
 }
 
-double	sp_cale_dist(t_ray *ray, t_sphere *sp)
+double	calculate_sphere_ray_distance(t_ray *ray, t_sphere *sp)
 {
 	double	a;
 	double	b;
 	double	c;
-	t_vec3d	cam2obj;
+	t_vec3d	origin_to_center;
 
-	vec3d_minus(&cam2obj, &ray->origin, &sp->center);
+	vec3d_minus(&origin_to_center, &ray->origin, &sp->center);
 	a = vec3d_dot(&ray->direction, &ray->direction);
-	b = 2.0 * vec3d_dot(&cam2obj, &ray->direction);
-	c = vec3d_dot(&cam2obj, &cam2obj) - (sp->radius * sp->radius);
-	return (solve_quadratic(a, b, c));
+	b = 2.0 * vec3d_dot(&origin_to_center, &ray->direction);
+	c = vec3d_dot(&origin_to_center, &origin_to_center) - (sp->radius * sp->radius);
+	return (solve_quadratic_equation(a, b, c));
 }

@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   camera.c                                           :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 01:48:15 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/11/07 01:48:16 by bamssaye         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "../headers/minirt.h"
 
 int	is_parallel(t_vec3d *v1, t_vec3d *v2)
@@ -29,8 +17,6 @@ int	is_parallel(t_vec3d *v1, t_vec3d *v2)
 
 void	init_camera(t_camera *camera)
 {
-	camera->len = cale_camera_len(camera);
-	camera->aspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
 	camera_look_at(camera);
 	camera_up_vector(camera);
 	camera_right_vector(camera);
@@ -52,20 +38,25 @@ void	camera_look_at(t_camera *camera)
 
 void	camera_top_left_vector(t_camera *cam)
 {
-	t_vec3d	aux;
-	t_vec3d	aux2;
-	t_vec3d	aux3;
-	double	aux_cale;
+	t_vec3d	direction_vector;
+	t_vec3d	scaled_u_vector;
+	t_vec3d	scaled_v_vector;
+	double	view_distance;
 
-	aux_cale = WINDOW_WIDTH / 2;
-	aux_cale = aux_cale / (2.0 * tan(cam->fov * (PI / 180.0) / 2.0));
-	ft_memcpy(&aux, &cam->look_at, sizeof(t_vec3d));
-	vec3d_normalize(&aux);
-	vec3d_scale(&aux, aux_cale, &aux);
-	vec3d_scale(&aux2, WINDOW_WIDTH / 2, &cam->u);
-	vec3d_scale(&aux3, WINDOW_HEIGHT / 2, &cam->v);
-	vec3d_minus(&cam->top_left, &aux, &aux2);
-	vec3d_minus(&cam->top_left, &cam->top_left, &aux3);
+	// Calculate view distance based on FOV and window width
+	view_distance = WINDOW_WIDTH / 2;
+	view_distance = view_distance / (2.0 * tan(cam->fov * (PI / 180.0) / 2.0));
+	// Normalize the camera's look_at direction and scale it
+	ft_memcpy(&direction_vector, &cam->look_at, sizeof(t_vec3d));
+	vec3d_normalize(&direction_vector);
+	vec3d_scale(&direction_vector, view_distance, &direction_vector);
+	// Scale the u and v vectors
+	vec3d_scale(&scaled_u_vector, WINDOW_WIDTH / 2, &cam->u);
+	vec3d_scale(&scaled_v_vector, WINDOW_HEIGHT / 2, &cam->v);
+	// Calculate the top-left corner vector
+	vec3d_minus(&cam->top_left, &direction_vector, &scaled_u_vector);
+	// vec3d_plus(&cam->top_left, &direction_vector, &scaled_u_vector);
+	vec3d_minus(&cam->top_left, &cam->top_left, &scaled_v_vector);
 }
 
 void	camera_up_vector(t_camera *camera)
