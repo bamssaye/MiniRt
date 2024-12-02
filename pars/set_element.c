@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/01 05:42:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/02 00:35:23 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,10 @@ int set_ambient(char **s, t_minirt *aml)
 	t_rgb rgb;
 	double al;
 	
-	if (aml->amc[0])
-		return (printf("ERROT EXITS.. \n"), exit(1), 1);
-	al = ft_atof(s[1]);
-	if (!ft_range(al, 0.0, 1.0))
+	if (aml->amc[0] || !s[1] || !ft_range(ft_atof(s[1]), 0.0, 1.0) 
+		|| !s[2] || s[3])
 		return (printf("ERROR\n"), exit(1), 1);
+	al = ft_atof(s[1]);
 	rgb = check_color(s[2]);
 	aml->amc[0] = 1;
     aml->am_light.al = al;
@@ -35,11 +34,10 @@ int set_camera(char **s, t_minirt *aml)
 	t_xyz vec_xyz;	
 	int fov;
 	
-	if (aml->amc[1])
+	if (aml->amc[1] || !s[1] || !s[2] 
+		|| !ft_range(ft_atof(s[3]), 0, 180) || s[4])
 		return (printf("ERROT EXITS.. \n"), exit(1), 1);
 	fov = ft_atoii(s[3]);
-	if (!ft_range(fov, 0, 180))
-		return (printf("ERROR\n"), exit(1), 1);
 	c_xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	vec_xyz = check_xyz(s[2], -1.0, 1.0);
 	aml->amc[1] = 1;
@@ -55,11 +53,10 @@ int set_light(char **s, t_minirt *aml)
 	double	light_bri;
 	t_rgb   light_rgb;
 	
-	if (aml->amc[2])
+	if (aml->amc[2] || !s[1] || 
+		!ft_range(ft_atof(s[2]), 0, 180) || !s[3] || s[4])
 		return (printf("ERROT EXITS.. \n"), exit(1), 1);
 	light_bri = ft_atof(s[2]);
-	if (!ft_range(light_bri, 0.0, 1.0))
-		return (printf("ERROR\n"), exit(1), 1);
 	light_rgb = check_color(s[3]);
 	light_xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	aml->amc[2] = 1;

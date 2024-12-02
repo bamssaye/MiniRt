@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2024/12/01 02:20:50 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/12/02 00:42:26 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 SRC = main.c \
 	utils/ft_atod.c utils/ft_atoii.c\
 	pars/check_input.c pars/valid_input.c pars/read_file.c\
-	utils/clean_memory.c pars/set_c_am_li.c\
+	utils/clean_memory.c pars/set_element.c\
     #   src/ambient_light_p.c src/camera_2.c src/my_math.c \
     #   src/camera.c src/object.c src/p_plane.c \
     #   src/p_sphere.c src/prog2.c src/prog.c \

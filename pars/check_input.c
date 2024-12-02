@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:06:44 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/01 05:12:21 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/01 23:33:32 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,15 @@ t_rgb check_color(char *str)
 {
 	char **s;
 	t_rgb rgb[1];
-	int  c;
 
+	if (!str)
+		(printf("ERROR\n")), (exit(1));
 	s = ft_split(str, ',');
-	c = 0;
-	if (ft_range(ft_atoii(s[0]), 0, 255) && ++c)
-		rgb[0].r = ft_atoii(s[0]);
-	if (ft_range(ft_atoii(s[1]), 0, 255) && c++)
-		rgb[0].g = ft_atoii(s[1]);
-	if (ft_range(ft_atoii(s[2]), 0, 255) && c++)
-		rgb[0].b = ft_atoii(s[2]);
-	if (c != 3 || s[3])
-		printf("ERROR\n"), exit(1);
+    if (!s[1] || !ft_range(ft_atoii(s[0]), 0, 255) || 
+        !s[2] || !ft_range(ft_atoii(s[1]), 0, 255) || 
+        !ft_range(ft_atoii(s[2]), 0, 255) || s[3])
+        (printf("ERROR\n")), (exit(1));
+    rgb[0] = (t_rgb){ft_atoii(s[0]), ft_atoii(s[1]), ft_atoii(s[2])};
 	arry_c(s);
 	return (rgb[0]);
 }
@@ -69,18 +66,15 @@ t_xyz check_xyz(char *str, double min, double max)
 {
 	char **s;
 	t_xyz xyz[1];
-	int  c;
 
+	if (!str)
+		(printf("ERROR\n")), (exit(1));
 	s = ft_split(str, ',');
-	c = 0;
-	if (ft_range(ft_atof(s[0]), min, max) && ++c)
-		xyz[0].x = ft_atof(s[0]);
-	if (ft_range(ft_atof(s[1]), min, max) && c++)
-		xyz[0].y = ft_atof(s[1]);
-	if (ft_range(ft_atof(s[2]), min, max) && c++)
-		xyz[0].z = ft_atof(s[2]);
-	if (c != 3 || s[3])
-		printf("ERROR\n"), exit(1);
+	if (!s[1] || !ft_range(ft_atof(s[0]), min, max) ||
+		!s[2] || !ft_range(ft_atof(s[1]), min, max) ||
+		!ft_range(ft_atof(s[2]), min, max) || s[3])
+		(printf("ERROR\n")), (exit(1));
+	xyz[0] = (t_xyz){ft_atof(s[0]), ft_atof(s[1]), ft_atof(s[2])};
 	arry_c(s);
 	return (xyz[0]);
 }

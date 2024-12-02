@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:09:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/01 05:47:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/02 00:46:17 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,17 @@ int	valid_line(char **s, t_minirt *mrt)
 	size_t len;
 	
 	len = ft_strlen(s[0]);
-	
 	if (!ft_strncmp(s[0], "A", len))
 		set_ambient(s, mrt);
-	if (!ft_strncmp(s[0], "C", len))
+	else if (!ft_strncmp(s[0], "C", len))
 		set_camera(s, mrt);
-	if (!ft_strncmp(s[0], "L", len))
+	else if (!ft_strncmp(s[0], "L", len))
 		set_light(s, mrt);
-	if (!ft_strncmp(s[0], "L", len))
+	else if (!ft_strncmp(s[0], "sp", len))
 		set_sphere(s, mrt);
-	// if (!ft_strncmp(s[0], "L", len))
-	// 	set_plane(s, mrt);
-	// if (!ft_strncmp(s[0], "L", len))
-	// 	set_cylinder(s, mrt);
+	else if (!ft_strncmp(s[0], "L", len))
+		set_plane(s, mrt);
+	else if (!ft_strncmp(s[0], "L", len))
+		set_cylinder(s, mrt);
 	return (0);
 }

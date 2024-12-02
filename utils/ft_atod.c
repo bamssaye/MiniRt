@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 02:36:00 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/11/30 22:13:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/01 22:46:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ double	ft_atof(char *nptr)
 	int		i;
 	int		sign;
 
+	if (!nptr)
+		return (ft_putstr_fd("ERROR\n", 2), exit(1), 1);
 	i = 0;
 	sign = 1;
 	v = 0;

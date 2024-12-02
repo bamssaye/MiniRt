@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/01 05:49:08 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/02 00:46:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,9 @@ t_xyz   check_xyz(char *str, double min, double max);
 int     set_ambient(char **s, t_minirt *aml);
 int     set_camera(char **s, t_minirt *aml);
 int     set_light(char **s, t_minirt *aml);
-
-
+int     set_sphere(char **s, t_minirt *aml);
+int     set_plane(char **s, t_minirt *aml);
+int     set_cylinder(char **s, t_minirt *aml);
 ///////////////////////////////////////////////
 // int			strreplace_space(char *str);
 // int			read_rt_file(char *filepath, t_prog *prog);
