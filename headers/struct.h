@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/01 05:20:00 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:29:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,39 +54,76 @@ typedef struct s_light // Light
 typedef struct s_sphere // Sphere
 {
     char    sp[2];
-    t_xyz   sph_xyz;
-    double  sph_dia;
-    t_rgb   sph_rgb;
+    t_xyz   sph_xyz[1];
+    double  sph_dia[1];
+    t_rgb   sph_rgb[1];
 } t_sphere;
 
 typedef struct s_plane // Plane
 {
     char    pl[2];
-    t_xyz   pl_xyz;
-    t_xyz   vec_xyz;
-    t_rgb   pl_rgb;   
+    t_xyz   *pl_xyz;
+    t_xyz   *vec_xyz;
+    t_rgb   *pl_rgb;   
 }   t_plane;
 
 typedef struct s_cylinder // Cylinder
 {
     char    cy[2];
-    t_xyz   cy_xyz;
-    t_xyz   vec_xyz;
-    double  c_dia;
-    double  c_hei;
-    t_rgb   sy_rgb;
+    t_xyz   *cy_xyz;
+    t_xyz   *vec_xyz;
+    double  *c_dia;
+    double  *c_hei;
+    t_rgb   *sy_rgb;
 }   t_cylinder;
+
+typedef struct s_objects
+{
+    char                type[2];
+    t_list              *object;
+    // struct s_objects    *next;
+}   t_objects;
 
 typedef struct s_minirt //  capital letter can only be declared once
 {
     t_a_light   am_light;
     t_camera    camera;
     t_light     light; 
-    int         amc[3];  
+    int         amc[3];
+    int         count_ob[3];
+    t_objects   objects[3];
 }   t_minirt;
 
 
 
 
-
 # endif
+/*
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}				t_list;
+typedef struct s_xyz 
+{
+	double			x;
+	double			y;
+	double			z;
+}				t_xyz;
+
+typedef struct s_sphere 
+{
+    t_xyz   sph_xyz[1];
+} t_sphere;
+
+typedef struct s_objects
+{
+    t_list              *object_t;
+}   t_objects;
+
+typedef struct s_minirt
+{
+    t_objects   objects[3];
+}   t_minirt;
+
+*/

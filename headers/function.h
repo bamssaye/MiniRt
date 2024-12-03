@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/02 00:46:43 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/03 05:12:29 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ int     ft_isspace(int c);
 int     ft_range(double n, double min, double max);
 int     check_li(char *str);
 char    **_tospace(char *str);
-t_rgb   check_color(char *str);
-t_xyz   check_xyz(char *str, double min, double max);
+t_rgb   check_color(char *str, char **lin);
+t_xyz   check_xyz(char *str, double min, double max, char **lin);
 int     set_ambient(char **s, t_minirt *aml);
 int     set_camera(char **s, t_minirt *aml);
 int     set_light(char **s, t_minirt *aml);
