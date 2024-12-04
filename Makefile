@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2024/12/03 03:08:02 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/12/04 01:32:41 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,7 @@ $(OBGDIR)/%.o:pars/%.c
 all: $(NAME)
 
 $(LIBFT):
-	$(MAKE) --no-print-directory -C ./libft
+	@$(MAKE) --no-print-directory -C ./libft
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 

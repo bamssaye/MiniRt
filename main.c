@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/03 05:18:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/04 01:00:23 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void ft_init(t_minirt *mrt)
 	
 	i = -1;
 	ft_memset(mrt->amc, 0, sizeof(mrt->amc));
+	ft_memset(mrt->count_ob, 0, sizeof(mrt->amc));
 	while (++i < 3)
 		mrt->objects[i].object = NULL;
 	// mrt->objects[0]
@@ -72,12 +73,12 @@ int	main(int ac, char **av)
 	// 	printf("sp--------\n");
 	// }
 	// printf("count OBJECT: %d\n", minirt.count_ob[0]);
-	// free_cmd(minirt.objects[0].object);
+	free_cmd(minirt.objects[0].object);
 	// // free(minirt.objects[0].object->content);
-	// t_sphere *ob;
-	// ob = (t_sphere*)minirt.objects[0].object->content;
+	//t_sphere *ob;
+	//ob = (t_sphere*)minirt.objects[0].object->content;
 	// fprint(ob);
-	// free(ob);
-	// free(minirt.objects[0].object);
+	//free(ob);
+	//free(minirt.objects[0].object);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/03 05:29:22 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/04 04:14:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,9 +62,9 @@ typedef struct s_sphere // Sphere
 typedef struct s_plane // Plane
 {
     char    pl[2];
-    t_xyz   *pl_xyz;
-    t_xyz   *vec_xyz;
-    t_rgb   *pl_rgb;   
+    t_xyz   pl_xyz[1];
+    t_xyz   vec_xyz[1];
+    t_rgb   pl_rgb[1];   
 }   t_plane;
 
 typedef struct s_cylinder // Cylinder
@@ -92,6 +92,7 @@ typedef struct s_minirt //  capital letter can only be declared once
     int         amc[3];
     int         count_ob[3];
     t_objects   objects[3];
+    char        buffer[BUFFER_SIZE];
 }   t_minirt;
 
 

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/03 05:14:14 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/04 04:52:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ int set_ambient(char **s, t_minirt *aml)
 	
 	if (aml->amc[0] || !s[1] || !ft_range(ft_atof(s[1]), 0.0, 1.0) 
 		|| !s[2] || s[3])
-		return (printf("ERROR\n"), exit(1), 1);
+		return (printf("ERROR\n"), 1);
 	al = ft_atof(s[1]);
 	rgb = check_color(s[2], s);
+	if (rgb.r == -1)
+		return (printf("ddddd\n"), 1);
 	aml->amc[0] = 1;
     aml->am_light.al = al;
     aml->am_light.al_rgb = rgb;
@@ -36,7 +38,7 @@ int set_camera(char **s, t_minirt *aml)
 	
 	if (aml->amc[1] || !s[1] || !s[2] 
 		|| !ft_range(ft_atof(s[3]), 0, 180) || s[4])
-		return (printf("ERROT EXITS2.. \n"), exit(1), 1);
+		return (printf("ERROT EXITS2.. \n"), 1);
 	fov = ft_atoii(s[3]);
 	c_xyz = check_xyz(s[1], -IN_MIN, IN_MAX, s);
 	vec_xyz = check_xyz(s[2], -1.0, 1.0, s);

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/04 17:43:19 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/11/30 00:06:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/04 02:47:29 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 1
 # endif
 
 
@@ -79,6 +79,6 @@ t_list				*ft_lstlast(t_list *lst);
 void				ft_lstdelone(t_list *lst, void (*del)(void *));
 void				ft_lstclear(t_list **lst, void (*del)(void *));
 void				ft_lstiter(t_list *lst, void (*f)(void *));
-char				*get_next_line(int fd);
+char				*get_next_line(int fd, char **buffer);
 
 #endif

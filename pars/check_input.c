@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:06:44 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/03 05:12:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/04 04:54:56 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char **_tospace(char *str)
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
 	line = ft_split(str, ' ');
-	return (free(str), line);
+	return (line);
 }
 
 t_rgb check_color(char *str, char **lin)
@@ -57,7 +57,7 @@ t_rgb check_color(char *str, char **lin)
     if (!s[1] || !ft_range(ft_atoii(s[0]), 0, 255) || 
         !s[2] || !ft_range(ft_atoii(s[1]), 0, 255) || 
         !ft_range(ft_atoii(s[2]), 0, 255) || s[3])
-        (arry_c(s), arry_c(lin), printf("ERROR\n")), (exit(1));
+        return (arry_c(s), (t_rgb){-1,-1,-1});
     rgb[0] = (t_rgb){ft_atoii(s[0]), ft_atoii(s[1]), ft_atoii(s[2])};
 	arry_c(s);
 	return (rgb[0]);
