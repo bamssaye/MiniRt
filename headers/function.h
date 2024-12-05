@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/04 01:31:06 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 04:42:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,29 @@
 # include "struct.h"
 
 //////////////////////// PARSINING
-double	ft_atof(char *nptr);
-int	    ft_atoii(const char *nptr);
-char    **ft_readfile(char *path, t_minirt *mrt);
-int	    valid_line(char **s, t_minirt *mrt);
-void	arry_c(char **str);
-int     ft_isspace(int c);
-int     ft_range(double n, double min, double max);
-int     check_li(char *str);
-char    **_tospace(char *str);
-t_rgb   check_color(char *str, char **lin);
-t_xyz   check_xyz(char *str, double min, double max, char **lin);
-int     set_ambient(char **s, t_minirt *aml);
-int     set_camera(char **s, t_minirt *aml);
-int     set_light(char **s, t_minirt *aml);
-int     set_sphere(char **s, t_minirt *aml);
-int     set_plane(char **s, t_minirt *aml);
-int     set_cylinder(char **s, t_minirt *aml);
+t_plane     *plane_ob(t_xyz p_xyz, t_xyz v_xyz, t_rgb rgb);
+t_sphere    *sphere_ob(t_xyz xyz, t_rgb rgb, double dia);
+t_cylinder  *cylinder_ob(t_xyz cxyz, t_xyz vxyz, double *d_h, t_rgb rgb);
+t_rgb       check_color(char *str);
+t_xyz       check_xyz(char *str, double min, double max);
+t_atof      ft_atof(char *nptr);
+t_atoi      ft_atoii(const char *nptr);
+char        **tospace(char *str);
+void        arry_c(char **str);
+int        ft_readfile(char *path, t_minirt *mrt);
+int         set_ambient(char **s, t_minirt *aml);
+int         set_camera(char **s, t_minirt *aml);
+int         set_light(char **s, t_minirt *aml);
+int         set_sphere(char **s, t_minirt *aml);
+int         set_plane(char **s, t_minirt *aml);
+int         set_cylinder(char **s, t_minirt *aml);
+int         check_str(char **s, int size);
+int         valid_line(char **s, t_minirt *mrt);
+int         ft_isspace(int c);
+int         ft_range(t_atoi n, double min, double max);
+int         ft_ranges(t_atof n, double min, double max);
+int         check_li(char *str);
+
 ///////////////////////////////////////////////
 // int			strreplace_space(char *str);
 // int			read_rt_file(char *filepath, t_prog *prog);

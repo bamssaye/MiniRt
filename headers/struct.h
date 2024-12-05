@@ -6,19 +6,33 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/04 04:14:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 05:19:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # ifndef STRUCT_H
 # define STRUCT_H
 
+typedef struct s_atof // Valid Double
+{
+	double			num;
+    int             isv; //is valid (0 or 1) 
+    int             i;
+    int             sign;
+}				t_atof;
+
+typedef struct s_atoi // Valid INT
+{
+	int			num;
+    int         isv;    //is valid (0 or 1) 
+}				t_atoi;
 
 typedef struct s_color // Colors RGB
 {
 	int			r;
 	int			g;
 	int			b;
+    int         isv; //is valid (0 or 1) 
 }				t_rgb;
 
 typedef struct s_xyz // Coordinates x, y, z
@@ -26,6 +40,7 @@ typedef struct s_xyz // Coordinates x, y, z
 	double			x;
 	double			y;
 	double			z;
+    int             isv; //is valid (0 or 1) 
 }				t_xyz;
 ////////
 typedef struct s_a_light // Ambient lightning
@@ -70,18 +85,17 @@ typedef struct s_plane // Plane
 typedef struct s_cylinder // Cylinder
 {
     char    cy[2];
-    t_xyz   *cy_xyz;
-    t_xyz   *vec_xyz;
-    double  *c_dia;
-    double  *c_hei;
-    t_rgb   *sy_rgb;
+    t_xyz   cy_xyz[1];
+    t_xyz   vec_xyz[1];
+    double  c_dia[1];
+    double  c_hei[1];
+    t_rgb   sy_rgb[1];
 }   t_cylinder;
 
 typedef struct s_objects
 {
     char                type[2];
     t_list              *object;
-    // struct s_objects    *next;
 }   t_objects;
 
 typedef struct s_minirt //  capital letter can only be declared once
@@ -99,32 +113,3 @@ typedef struct s_minirt //  capital letter can only be declared once
 
 
 # endif
-/*
-typedef struct s_list
-{
-	void			*content;
-	struct s_list	*next;
-}				t_list;
-typedef struct s_xyz 
-{
-	double			x;
-	double			y;
-	double			z;
-}				t_xyz;
-
-typedef struct s_sphere 
-{
-    t_xyz   sph_xyz[1];
-} t_sphere;
-
-typedef struct s_objects
-{
-    t_list              *object_t;
-}   t_objects;
-
-typedef struct s_minirt
-{
-    t_objects   objects[3];
-}   t_minirt;
-
-*/

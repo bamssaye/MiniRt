@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/11/12 03:42:44 by bamssaye          #+#    #+#              #
-#    Updated: 2024/11/30 00:06:46 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/12/04 23:50:23 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ all: $(NAME)
 $(NAME): $(OBG)
 	@$(AR) $(NAME) $(OBG)
 	
-clean: 
+clean:
 	$(RM) $(OBJDIR)
 fclean: clean
 	$(RM) $(NAME)

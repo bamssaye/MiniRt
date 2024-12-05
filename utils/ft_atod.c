@@ -6,62 +6,54 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 02:36:00 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/04 01:30:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 03:20:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-void	list_available(void)
-{
-	ft_putstr_fd("\n\t#  The parameter is invalid. #\n", 2);
-}
 
-static int	err(char *str, int i, int c, int *sign)
+static int	err(char *str, int c, t_atof *a)
 {
 	if (c == 0)
 	{
-		while ((str[i] >= 9 && str[i] <= 13) || (str[i] == 32))
-			i++;
-		if (str[i] == '-')
-			*sign *= -1;
-		if (str[i] == '+' || str[i] == '-')
-			i++;
+		while ((str[a->i] >= 9 && str[a->i] <= 13) || (str[a->i] == 32))
+			a->i++;
+		if (str[a->i] == '-')
+			a->sign *= -1;
+		if (str[a->i] == '+' || str[a->i] == '-')
+			a->i++;
 	}
-	if (c == 1 && !ft_isdigit(str[i]))
-		list_available();
-	if (c == 2 && str[i] != '.' && str[i])
-		list_available();
-	if (c == 3 && str[i] != '\0')
-		list_available();
-	return (i);
+	if ((c == 1 && !ft_isdigit(str[a->i])) || 
+    (c == 2 && str[a->i] != '.' && str[a->i]) || 
+    (c == 3 && str[a->i] != '\0'))
+    	a->isv = 1;
+	return (a->i);
 }
 
-double	ft_atof(char *nptr)
+t_atof	ft_atof(char *nptr)
 {
-	double	v;
-	double	p;
-	int		i;
-	int		sign;
+	t_atof	num[1];
+	double	(v), (p);
 
 	if (!nptr)
-		return (ft_putstr_fd("ERROR\n", 2), exit(1), 1);
-	i = 0;
-	sign = 1;
+		return ((t_atof){0, 1, 0, 0});
+	num[0] = (t_atof){0, 0, 0, 1};
 	v = 0;
 	p = 1.0;
-	i = err(nptr, i, 0, &sign);
-	err(nptr, i, 1, &sign);
-	while (ft_isdigit(nptr[i]))
-		v = 10 * v + nptr[i++] - '0';
-	err(nptr, i, 2, &sign);
-	if (nptr[i] == '.' && nptr[i + 1] != '\0')
-		i++;
-	while (ft_isdigit(nptr[i]))
+	num[0].i = err(nptr, 0, num);
+	err(nptr, 1, num);
+	while (ft_isdigit(nptr[num[0].i]))
+		v = 10 * v + nptr[num[0].i++] - '0';
+	err(nptr, 2, num);
+	if (nptr[num[0].i] == '.' && nptr[num[0].i + 1] != '\0')
+		num[0].i++;
+	while (ft_isdigit(nptr[num[0].i]))
 	{
-		v = 10.0 * v + (nptr[i++] - '0');
+		v = 10.0 * v + (nptr[num[0].i++] - '0');
 		p *= 10;
 	}
-	err(nptr, i, 3, &sign);
-	return (sign * v / p);
+	err(nptr, 3, num);
+	num[0].num = num[0].sign * v / p;
+	return (num[0]);
 }

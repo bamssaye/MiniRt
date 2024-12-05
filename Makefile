@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2024/12/04 01:32:41 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/12/05 04:19:15 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRC = main.c \
 	utils/ft_atod.c utils/ft_atoii.c\
 	pars/check_input.c pars/valid_input.c pars/read_file.c\
 	utils/clean_memory.c pars/set_element.c\
-	pars/set_object.c\
+	pars/set_object.c utils/utils.c pars/creat_object.c\
     #   src/ambient_light_p.c src/camera_2.c src/my_math.c \
     #   src/camera.c src/object.c src/p_plane.c \
     #   src/p_sphere.c src/prog2.c src/prog.c \
