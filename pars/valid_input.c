@@ -12,12 +12,10 @@
 
 #include "../headers/minirt.h"
 
-
-
 int	valid_line(char **s, t_minirt *mrt)
 {
-	size_t len;
-	
+	size_t	len;
+
 	if (!s)
 		return (1);
 	len = ft_strlen(s[0]);

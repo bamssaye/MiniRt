@@ -6,31 +6,63 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 04:48:24 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/05 04:53:34 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 06:57:35 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "headers/minirt.h"
+#include "../headers/minirt.h"
 
 
-void sphere(t_sphere *sph){
+void printf_sphere(t_sphere *sph){
 	fprintf(stderr, "{%f, %f, %f} -- %f -- [%d, %d, %d]\n",
 		sph->sph_xyz[0].x, sph->sph_xyz[0].y, sph->sph_xyz[0].z,
         sph->sph_dia[0],
 		sph->sph_rgb[0].r, sph->sph_rgb[0].g, sph->sph_rgb[0].b);
 }
-void plane(t_plane *sph){
+void printf_plane(t_plane *sph){
 	fprintf(stderr, " pl {%f, %f, %f} -- vec ; {%f, %f, %f} -- [%d, %d, %d]\n",
 		sph->pl_xyz[0].x, sph->pl_xyz[0].y, sph->pl_xyz[0].z,
         sph->vec_xyz[0].x, sph->vec_xyz[0].y, sph->vec_xyz[0].z,
 		sph->pl_rgb[0].r, sph->pl_rgb[0].g, sph->pl_rgb[0].b);
 }
-void cylinder(t_cylinder *sph){
+void printf_cylinder(t_cylinder *sph){
 	fprintf(stderr, "cyl{%f, %f, %f}--vec{%f, %f, %f}--{%f},{%f}--[%d, %d, %d]\n",
 		sph->cy_xyz[0].x, sph->cy_xyz[0].y, sph->cy_xyz[0].z,
 		sph->vec_xyz[0].x, sph->vec_xyz[0].y, sph->vec_xyz[0].z,
         sph->c_dia[0], sph->c_hei[0],
 		sph->sy_rgb[0].r, sph->sy_rgb[0].g, sph->sy_rgb[0].b);
+}
+void all_printf(t_cylinder *cyl, t_plane *plane, t_sphere *sph, t_minirt *minirt)
+{
+	t_list	*objc;
+	
+	printf("sp--------\n");
+	objc = minirt->objects[0].object;
+	while (objc){
+		printf_sphere(sph);
+		objc = objc->next;
+	}
+	printf("count OBJECT: %d\n", minirt->count_ob[0]);
+	free_cmd(minirt->objects[0].object);
+	printf("sp--------\n");
+	printf("plane--------\n");
+	objc = minirt->objects[1].object;
+	while (objc){
+		printf_plane(plane);
+		objc = objc->next;
+	}
+	printf("count OBJECT: %d\n", minirt->count_ob[1]);
+	free_cmd(minirt->objects[1].object);
+	printf("plane--------\n");
+	objc = minirt->objects[2].object;
+	printf("cylinder--------\n");
+	while (objc){
+		printf_cylinder(cyl);
+		objc = objc->next;
+	}
+	printf("count OBJECT: %d\n", minirt->count_ob[2]);
+	free_cmd(minirt->objects[2].object);
+	printf("cylinder--------\n");
 }
 // void fprintcla(t_minirt *minirt){
 //     printf("Ambient : {%f}, [%d,%d,%d]\n", minirt->am_light.al, minirt->am_light.al_rgb.r, minirt->am_light.al_rgb.g, minirt->am_light.al_rgb.b);

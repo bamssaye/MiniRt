@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2024/12/05 04:19:15 by bamssaye         ###   ########.fr        #
+#    Updated: 2024/12/05 07:53:02 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,17 +25,15 @@ SRC = main.c \
 	pars/check_input.c pars/valid_input.c pars/read_file.c\
 	utils/clean_memory.c pars/set_element.c\
 	pars/set_object.c utils/utils.c pars/creat_object.c\
+	#utils/test_print_object.c \ #test file 
     #   src/ambient_light_p.c src/camera_2.c src/my_math.c \
     #   src/camera.c src/object.c src/p_plane.c \
     #   src/p_sphere.c src/prog2.c src/prog.c \
     #   src/vector_2.c src/vector_3.c src/vector_basic.c \
     #   src/color.c src/a_raytrace.c src/rerender.c \
     #   src/ft_strtod.c src/mlx_util.c src/a_raytrace_2.c \
-	  
     #   utils/get_next_line.c \
-	
-      #utils/get_next_line_utils.c \
-      
+    #utils/get_next_line_utils.c \
 ##################################
 OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))
 
@@ -55,7 +53,7 @@ $(OBGDIR)/%.o:pars/%.c
 all: $(NAME)
 
 $(LIBFT):
-	@$(MAKE) --no-print-directory -C ./libft
+	$(MAKE) --no-print-directory -C ./libft
 $(NAME): $(OBJ) $(LIBFT)
 	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) $(LIBFT) -o $(NAME)
 

@@ -6,12 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 02:36:00 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/05 03:20:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 06:36:08 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
 
 static int	err(char *str, int c, t_atof *a)
 {
@@ -24,18 +23,20 @@ static int	err(char *str, int c, t_atof *a)
 		if (str[a->i] == '+' || str[a->i] == '-')
 			a->i++;
 	}
-	if ((c == 1 && !ft_isdigit(str[a->i])) || 
-    (c == 2 && str[a->i] != '.' && str[a->i]) || 
-    (c == 3 && str[a->i] != '\0'))
-    	a->isv = 1;
+	if (c == 1 && !ft_isdigit(str[a->i]))
+		a->isv = 1;
+	else if (c == 2 && str[a->i] != '.' && str[a->i])
+		a->isv = 1;
+	else if (c == 3 && str[a->i] != '\0')
+		a->isv = 1;
 	return (a->i);
 }
 
 t_atof	ft_atof(char *nptr)
 {
 	t_atof	num[1];
-	double	(v), (p);
 
+	double (v), (p);
 	if (!nptr)
 		return ((t_atof){0, 1, 0, 0});
 	num[0] = (t_atof){0, 0, 0, 1};

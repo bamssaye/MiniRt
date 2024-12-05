@@ -6,20 +6,18 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 23:36:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/05 04:14:49 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 06:29:36 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../headers/minirt.h"
-
 
 t_atoi	ft_atoii(const char *nptr)
 {
-	int		i, p;
 	t_atoi	num[1];
 	long	n;
 
+	int (i), (p);
 	i = 0;
 	p = 1;
 	n = 0;
@@ -37,6 +35,6 @@ t_atoi	ft_atoii(const char *nptr)
 	}
 	if (nptr[i] != '\0')
 		return ((t_atoi){0, 1});
-	num[0].num = n * p; 
+	num[0].num = n * p;
 	return (num[0]);
 }

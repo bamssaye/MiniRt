@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/05 04:53:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/05 07:52:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,6 @@ void ft_init(t_minirt *mrt)
 	//mrt->objects[2] = NULL;
 }
 
-void	free_cmd(t_list *cmd)
-{
-	t_list	*tmp;
-
-	if (!cmd)
-		return ;
-	while (cmd)
-	{
-		tmp = cmd;
-		cmd = cmd->next;
-		free(tmp->content);
-		free(tmp);
-		tmp = NULL;
-	}
-}
 int	main(int ac, char **av)
 {
 	t_minirt minirt;
@@ -49,19 +34,8 @@ int	main(int ac, char **av)
 	ft_init(&minirt);
 	if (ft_readfile(av[1], &minirt))
 		return (printf("ERROOR\n"), 1);
-	t_list	*objc;
-	
-	objc = minirt.objects[2].object;
-	while (objc){
-		printf("sp--------\n");
-		fprintd((t_cylinder*)objc->content);
-		objc = objc->next;
-		printf("sp--------\n");
-	}
-	printf("count OBJECT: %d\n", minirt.count_ob[2]);
-	free_cmd(minirt.objects[0].object);
-	free_cmd(minirt.objects[1].object);
-	free_cmd(minirt.objects[2].object);
+	///print object
+	//all_printf((t_cylinder*)minirt.objects[2].object, (t_plane*)minirt.objects[1].object, (t_sphere*)minirt.objects[0].object, &minirt);
 
 	return (0);
 }
