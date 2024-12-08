@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/06 05:04:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/06 06:07:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ typedef struct s_xyz// Coordinates x, y, z
 	int		isv;	
 }	t_xyz;
 ////////
+typedef struct s_ray// Coordinates x, y, z
+{
+	t_xyz		ori; // origin
+	t_xyz		dir; // direcation
+}	t_ray;
+
 typedef struct s_a_light// Ambient lightning
 {
 	t_rgb		al_rgb;
@@ -129,6 +135,8 @@ typedef struct s_minirt //  capital letter can only be declared once
 	int	amc[3];      // check if light, camera, Ambient set many time
 	int	count_ob[3]; // count object for every element , sphere ...
 	char		buffer[BUFFER_SIZE];
+	int	x;
+	int	y;
 }			t_minirt;
 
 #endif

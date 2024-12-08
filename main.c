@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/06 05:45:14 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/06 06:22:02 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void ft_init(t_minirt *mrt)
 	i = -1;
 	ft_memset(mrt->amc, 0, sizeof(mrt->amc));
 	ft_memset(mrt->count_ob, 0, sizeof(mrt->amc));
+	mrt->x = 0;
+	mrt->y = 0;
 	while (++i < 3)
 		mrt->objects[i].object = NULL;
 }
