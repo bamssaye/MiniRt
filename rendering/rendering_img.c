@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 06:02:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/06 06:42:17 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/09 08:57:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,25 +41,34 @@
 // 	ft_memcpy(&color, &param.final_color, sizeof(t_color));
 // 	return (convert_color_to_int(&color));
 // }
-int	render_image(t_minirt *mrt)
-{
-	t_ray	ray;
-	int		color;
+// t_ray	generate_ray(int x, int y, t_minirt *mrt)
+// {
+// 	t_ray ray[1];
 
-	mrt->x = 0;
-	while (mrt->x < W_WIDTH)
-	{
-		mrt->y = 0;
-		while (mrt->y < W_HEIGHT)
-		{
+// 	ray->dir.x = x *mrt->camera.
+// }
+
+
+
+// int	render_image(t_minirt *mrt)
+// {
+// 	t_ray	ray;
+// 	int		color;
+
+// 	mrt->x = 0;
+// 	while (mrt->x < W_WIDTH)
+// 	{
+// 		mrt->y = 0;
+// 		while (mrt->y < W_HEIGHT)
+// 		{
 			
 			
-			mrt->y++;
-		}
-		mrt->x++;
-	}
-	return (0);
-}
+// 			mrt->y++;
+// 		}
+// 		mrt->x++;
+// 	}
+// 	return (0);
+// }
 /*
 generate_ray(&ray, mrt, mrt->x, mrt->y);
 color = calculate_pixel_color(&ray, prog);

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/06 06:07:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/09 09:03:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct s_camera // Camera
 	int fov;
 	char		c;
 }			t_camera;
-
+//t_xyz		normalize[1];
 typedef struct s_light // Light
 {
 	t_rgb		light_rgb;
