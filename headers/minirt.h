@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/06 05:06:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/17 06:06:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@
 # define PI 3.14159265358979323846f
 # define SPHERE 0
 # define PLANE 1
+# define CYLINDER 2
 
 #endif

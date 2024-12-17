@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/05 06:26:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/17 06:07:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	set_sphere(char **s, t_minirt *aml)
 	obj = sphere_ob(xyz, rgb, dia);
 	if (!obj || xyz.isv || rgb.isv || !++(aml->count_ob[0]))
 		return (1);
-	ft_lstadd_back(&aml->objects[0].object, ft_lstnew(obj));
+	ft_lstadd_back(&aml->objects[SPHERE].object, ft_lstnew(obj));
 	return (0);
 }
 
@@ -46,7 +46,7 @@ int	set_plane(char **s, t_minirt *aml)
 	plane = plane_ob(pxyz, vxyz, rgb);
 	if (!plane || vxyz.isv || pxyz.isv || rgb.isv || !++(aml->count_ob[1]))
 		return (1);
-	ft_lstadd_back(&aml->objects[1].object, ft_lstnew(plane));
+	ft_lstadd_back(&aml->objects[PLANE].object, ft_lstnew(plane));
 	return (0);
 }
 
@@ -68,6 +68,6 @@ int	set_cylinder(char **s, t_minirt *aml)
 	cylinder = cylinder_ob(cxyz, vxyz, v, rgb);
 	if (!cylinder || vxyz.isv || cxyz.isv || rgb.isv || !++(aml->count_ob[2]))
 		return (1);
-	ft_lstadd_back(&aml->objects[2].object, ft_lstnew(cylinder));
+	ft_lstadd_back(&aml->objects[CYLINDER].object, ft_lstnew(cylinder));
 	return (0);
 }

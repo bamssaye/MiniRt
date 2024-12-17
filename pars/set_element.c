@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/05 06:21:11 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/17 06:14:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	set_camera(char **s, t_minirt *aml)
 	aml->camera.c_xyz = c_xyz;
 	aml->camera.vec_xyz = vec_xyz;
 	aml->camera.fov = fov;
+	camera_init(&aml->camera);
 	return (0);
 }
 

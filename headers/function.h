@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/06 05:05:56 by bamssaye         ###   ########.fr       */
+/*   Updated: 2024/12/17 06:14:35 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,7 @@ void		printf_cylinder(t_cylinder *sph);
 void		all_printf(t_cylinder *cyl, t_plane *plane, t_sphere *sph,
 				t_minirt *minirt);
 //////////////////////////////
+t_xyz	vc3d_normalize(t_xyz a);
+void camera_init(t_camera *cm);
 ///////////////////////////////////////////////
 #endif
