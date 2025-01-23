@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/22 16:34:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/23 12:22:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,19 @@ int	color_scale(t_color *res, double scale, t_color *a);
 int	rgb_to_int(int r, int g, int b);
 int	color_plus(t_color *res, t_color *a, t_color *b);
 void	set_default_color(t_color *color);
+t_vec3d	vec3d_scale(double scale, t_vec3d a);
+double	vec3d_length(t_vec3d a);
+t_vec3d	vec3d_cross(t_vec3d a, t_vec3d b);
+t_vec3d	vec3d_plus(t_vec3d a, t_vec3d b);
+t_vec3d	vec3d_minus(t_vec3d a, t_vec3d b);
+t_vec3d	vec3d_normalize(t_vec3d a);
+double	vec3d_dot(t_vec3d a, t_vec3d b);
+int	sp_inter(void *object, t_inter_p *intersection);
+int	is_parallel(t_vec3d v1, t_vec3d v2);
+t_vec3d	c_look_at(t_camera *camera);
+t_vec3d	c_topleft(t_camera *cam);
+t_vec3d	c_up_v(t_camera *camera);
+t_vec3d	c_r_v(t_camera *camera);
 ///////////////////////////////////////////
 ///////Printf to test?/??
 void		printf_sphere(t_sphere *sph);

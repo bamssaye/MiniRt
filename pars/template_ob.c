@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/22 15:53:34 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/23 11:51:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia);
 t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb);
 t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color rgb);
+int			sp_inter(void *object, t_inter_p *intersection);
 
 
 t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia)
@@ -31,8 +32,8 @@ t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia)
 	obj->center = xyz;
 	obje->type = SPHERE;
 	obje->object = obj;
-	// obje->clean = ;
-	// obje->test_intersection = ;
+	obje->clean = NULL;
+	obje->test_intersection = sp_inter;
 	return (obj);
 }
 t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb)

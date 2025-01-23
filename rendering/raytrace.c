@@ -6,34 +6,66 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 06:01:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/22 18:31:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/23 14:49:19 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-void	generate_ray(t_ray *ray, t_minirt *prog, int x, int y);
-void	trace_light_at_intersection(t_minirt *prog, t_inter_p *param);
-int	check_intersection_with_object(t_object *obj, t_inter_p *param);
-int	trace_ray_to_objects(t_minirt *prog, t_inter_p *param);
-int	calculate_pixel_color(t_ray *ray, t_minirt *prog);
-int	set_intersection_info(t_inter_p *param, t_object *focus_obj);
-int	init_intersection_param(t_minirt *prog, t_ray *ray, t_inter_p *param);
-int	reset_intersection_focus(t_inter_p *param);
-int	calculate_light_intensity_scale(t_obslight *l_param, t_inter_p *p);
-void	initialize_light_parameters(t_minirt *prog, t_inter_p *param, t_obslight *light_param);
-int	trace_ray_to_light_source(t_minirt *prog, t_inter_p *param, t_obslight *light_param);
+// void	generate_ray(t_ray *ray, t_minirt *prog, int x, int y)
+// {
+// 	t_camera	*cam;
 
-void	generate_ray(t_ray *ray, t_minirt *prog, int x, int y)
+// 	cam = (t_camera *)&prog->camera;
+// 	ray->direction.x = x * cam->u.x + y * cam->v.x + cam->top_left.x;
+// 	ray->direction.y = x * cam->u.y + y * cam->v.y + cam->top_left.y;
+// 	ray->direction.z = x * cam->u.z + y * cam->v.z + cam->top_left.z;
+// 	vec3d_normalize(&ray->direction);
+// 	copy_vec3d(&ray->origin, &cam->position);
+// }
+// int	reset_intersection_focus(t_inter_p *param)
+// {
+// 	param->closest_distance = INFINITY;
+// 	param->closest_color = (t_color){0, 0, 0};
+// 	return (0);
+// }
+void	init_param(t_ray *ray, t_inter_p *param)
 {
-	t_camera	*cam;
+	param->ray = ray;
+	param->closest_distance = INFINITY;
+	param->closest_color = (t_color){0, 0, 0};
+	param->inters_normal = (t_vec3d){0, 0, 0};
+	param->inters_point  = (t_vec3d){0, 0, 0};
+	param->inters_dist = INFINITY;
+	param->is_closest_hit = 0;
+	param->inters_object_id = -1;
+	param->inters_color = (t_color){0, 0, 0};
+}
+int	ray_object(t_minirt *prog, t_inter_p *param) //trace_ray_to_objects
+{
+	t_list		*lst;
+	t_object	*current_object;
+	int			hit_detected;
 
-	cam = (t_camera *)&prog->camera;
-	ray->direction.x = x * cam->u.x + y * cam->v.x + cam->top_left.x;
-	ray->direction.y = x * cam->u.y + y * cam->v.y + cam->top_left.y;
-	ray->direction.z = x * cam->u.z + y * cam->v.z + cam->top_left.z;
-	vec3d_normalize(&ray->direction);
-	copy_vec3d(&ray->origin, &cam->position);
+	lst = prog->objects.object;
+	while (lst)
+	{
+		reset_intersection_focus(param);
+		current_object = (t_object *)lst->content;
+		if (current_object->type == SPHERE)
+			hit_detected = sp_inter(current_object, param);
+		else if (current_object->type == PLANE)
+			hit_detected = check_plane_intersection(current_object, param);
+		else if (current_object->type == CYLINDER)
+			hit_detected = check_cylinder_intersection(current_object, param);
+		if(hit_detected)
+			if (param->is_closest_hit == 1)
+				if (param->closest_distance < param->inters_dist)
+					set_intersection_info(param, current_object);
+		lst = lst->next;
+	}
+	(void)hit_detected;
+	return (1);
 }
 
 int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
@@ -43,8 +75,10 @@ int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
 	int				hit;
 
 	color = (t_color){0, 0, 0};
-	param.ray = ray;
-	init_intersection_param(prog, ray, &param);
+	// param.ray = ray;
+	init_param(ray, &param);
+	
+	// init_intersection_param(prog, ray, &param);
 	hit = trace_ray_to_objects(prog, &param);
 	if (hit)
 		trace_light_at_intersection(prog, &param);
@@ -61,30 +95,13 @@ int	set_intersection_info(t_inter_p *param, t_object *focus_obj)
 	return (0);
 }
 
-int	init_intersection_param(t_minirt *prog, t_ray *ray, t_inter_p *param)
-{
-	(void)prog;
-	(void)ray;
-	reset_intersection_focus(param);
-	vec3d_init(&param->inters_normal, 0, 0, 0);
-	vec3d_init(&param->inters_point, 0, 0, 0);
-	param->inters_dist = INFINITY;
-	param->is_closest_hit = 0;
-	param->inters_object_id = -1;
-	param->inters_color = (t_color){0, 0, 0};
-	return (0);
-}
 
-int	reset_intersection_focus(t_inter_p *param)
-{
-	param->closest_distance = INFINITY;
-	param->closest_color = (t_color){0, 0, 0};
-	return (0);
-}
+
+
 
 int	calculate_light_intensity_scale(t_obslight *l_param, t_inter_p *p)
 {
-	l_param->angle = acos(vec3d_dot(&p->inters_normal, &l_param->light_direction));
+	l_param->angle = acos(vec3d_dot(p->inters_normal, l_param->light_direction));
 	if (l_param->angle <= 1.570796)
 		l_param->angle_scale = (1.0 - (l_param->angle / 1.570796));
 	else
@@ -170,28 +187,3 @@ int	check_intersection_with_object(t_object *obj, t_inter_p *param)
 	return (temp);
 }
 
-int	trace_ray_to_objects(t_minirt *prog, t_inter_p *param)
-{
-	t_list		*lst;
-	t_object	*current_object;
-	int			hit_detected;
-
-	lst = prog->objects.object;
-	while (lst)
-	{
-		reset_intersection_focus(param);
-		current_object = (t_object *)lst->content;
-		if (current_object->type == SPHERE)
-			hit_detected = sp_inter(current_object, param);
-		else if (current_object->type == PLANE)
-			hit_detected = check_plane_intersection(current_object, param);
-		else if (current_object->type == CYLINDER)
-			hit_detected = check_cylinder_intersection(current_object, param);
-		if (param->is_closest_hit == 1)
-			if (param->closest_distance < param->inters_dist)
-				set_intersection_info(param, current_object);
-		lst = lst->next;
-	}
-	(void)hit_detected;
-	return (1);
-}
