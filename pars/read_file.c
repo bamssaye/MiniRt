@@ -6,21 +6,22 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:47:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:57:06 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-int check_filename(char *s)
+int	check_filename(char *s)
 {
-	char *type;
-	
+	char	*type;
+
 	type = ft_strchr(s, '.');
-	if(!type || ft_strncmp(type, ".rt", ft_strlen(type)))
+	if (!type || ft_strncmp(type, ".rt", ft_strlen(type)))
 		return (1);
 	return (0);
 }
+
 int	check_lis(char *str)
 {
 	int	i;
@@ -31,7 +32,8 @@ int	check_lis(char *str)
 			return (1);
 	return (0);
 }
-int tospaces(char *str, t_minirt *mrt)
+
+int	tospaces(char *str, t_minirt *mrt)
 {
 	char	**line;
 	int		i;
@@ -54,7 +56,7 @@ int	ft_readfile(char *path, t_minirt *mrt)
 {
 	static char	*buffer;
 
-	char *(line);//, **(check_line);
+	char *(line);
 	int (fd);
 	if (check_filename(path))
 		return (1);
@@ -66,11 +68,9 @@ int	ft_readfile(char *path, t_minirt *mrt)
 		line = get_next_line(fd, &buffer);
 		if (!line)
 			break ;
-		// check_line = tospace(line);
 		if (tospaces(line, mrt))
-			return (free(line), free(buffer), free_cmd(mrt->object), close(fd), 1);
-		///////
-		// arry_c(check_line);
+			return (free(line), free(buffer), free_cmd(mrt->object), close(fd),
+				1);
 		free(line);
 	}
 	close(fd);

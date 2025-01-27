@@ -12,10 +12,9 @@
 
 #include "../headers/minirt.h"
 
-
 int	set_sphere(char **s, t_minirt *aml)
 {
-	t_object 	*sphere;
+	t_object	*sphere;
 	double		dia;
 	t_vec3d		xyz;
 	t_color		rgb;
@@ -35,10 +34,10 @@ int	set_sphere(char **s, t_minirt *aml)
 
 int	set_plane(char **s, t_minirt *aml)
 {
-	t_color	rgb;
+	t_color		rgb;
 	t_object	*plane;
-	t_vec3d	pxyz;
-	t_vec3d	vxyz;
+	t_vec3d		pxyz;
+	t_vec3d		vxyz;
 
 	if (check_str(s, 4))
 		return (1);
@@ -46,7 +45,7 @@ int	set_plane(char **s, t_minirt *aml)
 	pxyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	rgb = check_color(s[3]);
 	if (vxyz.isv || pxyz.isv || rgb.isv || !++(aml->obj_count))
-		return (1); 
+		return (1);
 	plane = plane_ob(pxyz, vxyz, rgb);
 	if (!plane)
 		return (1);

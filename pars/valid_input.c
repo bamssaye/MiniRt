@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:09:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 02:34:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:57:45 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,6 @@ int	valid_line(char **s, t_minirt *mrt)
 {
 	size_t	len;
 
-	
-	// if (!s)
-	// 	return (1);
 	len = ft_strlen(s[0]);
 	if (!ft_strncmp(s[0], "A", len))
 		return (set_ambient(s, mrt));

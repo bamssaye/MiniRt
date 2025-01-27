@@ -6,12 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:54 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:19:54 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:54:26 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
 
 double	cy_ray_dista(t_ray ray, t_cylinder cy)
 {
@@ -28,10 +27,10 @@ double	cy_ray_dista(t_ray ray, t_cylinder cy)
 	return (quad_equa(a, b, c));
 }
 
-void cy_caps(t_plane *pl, t_cylinder *cy)
+void	cy_caps(t_plane *pl, t_cylinder *cy)
 {
 	t_vec3d		offset;
-	t_vec3d		cap_ce; // cap center
+	t_vec3d		cap_ce;
 
 	offset = vec3d_scale(cy->len / 2.0, cy->normal);
 	cap_ce = vec3d_plus(cy->point, offset);
@@ -66,6 +65,7 @@ int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
 	}
 	return (0);
 }
+
 int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
 {
 	t_vec3d	point_to_center;
@@ -78,12 +78,14 @@ int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
 	{
 		if (plane_inter(&pl[i], intersection))
 		{
-			point_to_center = vec3d_minus(intersection->closest.point, pl[i].point);
+			point_to_center = vec3d_minus(intersection->closest.point,
+					pl[i].point);
 			if (vec3d_length(point_to_center) < cy->radius)
 			{
 				intersection->closest.dista = intersection->closest.dista;
 				intersection->hit_clos = 1;
-				ft_memcpy(&intersection->closest.color, &cy->color, sizeof(t_color));
+				ft_memcpy(&intersection->closest.color, &cy->color,
+					sizeof(t_color));
 				return (1);
 			}
 		}
@@ -104,12 +106,12 @@ void	cy_inter(t_cylinder *cy, t_in_pa *f_inter)
 	{
 		f_inter->hit_clos = tmp_inter[0].hit_clos;
 		ft_memcpy(&f_inter->closest, &tmp_inter[0].closest, sizeof(t_npc));
-		return;
+		return ;
 	}
 	if (check_cylinder_caps_intersection(cy, &tmp_inter[1]))
 	{
 		f_inter->hit_clos = tmp_inter[1].hit_clos;
 		ft_memcpy(&f_inter->closest, &tmp_inter[1].closest, sizeof(t_npc));
-		return;
+		return ;
 	}
 }

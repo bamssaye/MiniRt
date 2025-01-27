@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/22 16:45:11 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/28 00:06:26 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
+# include <mlx.h>
 # include <fcntl.h>
 # include "../libft/libft.h"
-# include "../minilibx/mlx.h"
 # include "function.h"
 # define P_NAME "miniRT"
 # define W_WIDTH 1000
@@ -40,6 +40,4 @@
 # define L 2
 # define C 1
 # define A 0
-
-
 #endif

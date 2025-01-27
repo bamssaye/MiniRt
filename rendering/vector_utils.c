@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 03:27:12 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/26 22:17:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:46:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,16 @@ t_vec3d	vec3d_cross(t_vec3d a, t_vec3d b)
 		.z = a.x * b.y - a.y * b.x,
 	});
 }
+
 t_vec3d	vec3d_plus(t_vec3d a, t_vec3d b)
 {
-    return ((t_vec3d){
+	return ((t_vec3d){
 		.x = a.x + b.x,
 		.y = a.y + b.y,
 		.z = a.z + b.z,
 	});
 }
+
 t_vec3d	vec3d_minus(t_vec3d a, t_vec3d b)
 {
 	return ((t_vec3d){
@@ -45,6 +47,7 @@ t_vec3d	vec3d_minus(t_vec3d a, t_vec3d b)
 		.z = a.z - b.z,
 	});
 }
+
 t_vec3d	vec3d_normalize(t_vec3d a)
 {
 	double	length;
@@ -56,4 +59,3 @@ t_vec3d	vec3d_normalize(t_vec3d a)
 		.z = a.z / length,
 	});
 }
-

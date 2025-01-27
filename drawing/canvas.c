@@ -24,7 +24,7 @@ int	render_image(t_minirt *prog)
 		prog->y = 0;
 		while (prog->y < W_HEIGHT)
 		{
-			printf("\rRendering: %d%%", (prog->x * 100 / W_WIDTH) + 1 );
+			printf("\rRendering: %d%%", (prog->x * 100 / W_WIDTH) + 1);
 			ray = ray_gen(prog->camera, prog->x, prog->y);
 			color = calculate_pixel_color(&ray, prog);
 			mlx_putpixel(&prog->mlx.img, prog->x, prog->y, color);

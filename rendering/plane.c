@@ -6,19 +6,17 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:34 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:20:00 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:52:08 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-
 double	pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest)
 {
-	double dist;
-	double dot;
 	t_vec3d		inter_p;
 
+	double (dist), (dot);
 	dist = -1;
 	dot = vec3d_dot(pl.normal, ray.direction);
 	inter_p = vec3d_minus(pl.point, ray.origin);
@@ -30,18 +28,18 @@ double	pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest)
 		closest->normal = multi_(closest->normal);
 	return (dist);
 }
-t_npc pl_closest(t_vec3d ray, t_plane pl, double dist, t_vec3d origin)
+
+t_npc	pl_closest(t_vec3d ray, t_plane pl, double dist, t_vec3d origin)
 {
-	return((t_npc){
+	return ((t_npc){
 		.color = pl.color,
 		.dista = dist,
 		.normal = pl.normal,
 		.point = (t_vec3d){
-			.x = origin.x + dist * ray.x,
-			.y = origin.y + dist * ray.y,
-			.z = origin.z + dist * ray.z,
-		}
-	});
+		.x = origin.x + dist * ray.x,
+		.y = origin.y + dist * ray.y,
+		.z = origin.z + dist * ray.z,
+	}});
 }
 
 int	plane_inter(t_plane *plane, t_in_pa *param)
@@ -59,7 +57,7 @@ int	plane_inter(t_plane *plane, t_in_pa *param)
 	return (dist);
 }
 
-t_plane copy_pl(t_vec3d po, t_vec3d no, t_color col, t_vec3d offset)
+t_plane	copy_pl(t_vec3d po, t_vec3d no, t_color col, t_vec3d offset)
 {
 	if (offset.isv)
 	{
@@ -67,12 +65,10 @@ t_plane copy_pl(t_vec3d po, t_vec3d no, t_color col, t_vec3d offset)
 		return ((t_plane){
 			.color = col,
 			.normal = offset,
-			.point = po
-		});
+			.point = po});
 	}
 	return ((t_plane){
-			.color = col,
-			.normal = no,
-			.point = po
-	});
+		.color = col,
+		.normal = no,
+		.point = po});
 }

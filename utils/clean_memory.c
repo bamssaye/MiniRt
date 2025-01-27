@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:07:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:50:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/01/27 23:41:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@ void	arry_c(char **str)
 
 void	free_cmd(t_list *cmd)
 {
-	t_list	*tmp;
-	t_object *t;
+	t_list		*tmp;
+	t_object	*t;
 
 	if (!cmd)
 		return ;
@@ -39,7 +39,7 @@ void	free_cmd(t_list *cmd)
 	{
 		tmp = cmd;
 		cmd = cmd->next;
-		t = (t_object*)tmp->content;
+		t = (t_object *)tmp->content;
 		free(t->object);
 		free(t);
 		free(tmp);
@@ -47,7 +47,7 @@ void	free_cmd(t_list *cmd)
 	}
 }
 
-void free_obj(t_object *obj)
+void	free_obj(t_object *obj)
 {
 	if (!obj)
 		return ;

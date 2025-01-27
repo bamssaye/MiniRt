@@ -51,7 +51,8 @@ t_color	check_color(char *str)
 	while (s[++i])
 		if (!ft_range(ft_atoii(s[i]), 0, 255))
 			return (arry_c(s), (t_color){-1, -1, -1, 1});
-	rgb[0] = (t_color){ft_atoii(s[0]).num, ft_atoii(s[1]).num, ft_atoii(s[2]).num,0};
+	rgb[0] = (t_color){ft_atoii(s[0]).num, ft_atoii(s[1]).num,
+		ft_atoii(s[2]).num, 0};
 	arry_c(s);
 	return (rgb[0]);
 }
