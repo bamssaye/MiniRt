@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 15:10:02 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:48:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 05:02:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	min(int a, int min)
 t_color	color_plus(t_color a, t_color b)
 {
 	return ((t_color){
+		.isv = 0,
 		.r = min(a.r + b.r, 255),
 		.g = min(a.g + b.g, 255),
 		.b = min(a.b + b.b, 255)});
@@ -35,7 +36,17 @@ int	ctoi(t_color color)
 t_color	color_scale(double scale, t_color a)
 {
 	return ((t_color){
+		.isv = 0,
 		.r = (scale * (double)a.r),
 		.g = (scale * (double)a.g),
 		.b = (scale * (double)a.b)});
+}
+
+t_color color_a(t_color a, t_color b)
+{
+	return ((t_color){
+		.isv = 0,
+		.r = (a.r * b.r) / 255,
+		.g = (a.g * b.g) / 255,
+		.b = (a.b * b.b) / 255});
 }

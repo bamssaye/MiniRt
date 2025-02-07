@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:15:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 05:10:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 int	set_ambient(char **s, t_minirt *aml)
 {
 	double	al;
+	t_color	rgb;
 
-	if (aml->amc[A] || check_str(s, 2) || !ft_ranges(ft_atof(s[1]), 0.0, 1.0))
+
+	if (aml->amc[A] || check_str(s, 3) || !ft_ranges(ft_atof(s[1]), 0.0, 1.0))
 		return (1);
 	al = ft_atof(s[1]).num;
+	rgb = check_color(s[2]);
+	if (rgb.isv)
+		return (1);
 	aml->amc[A] = 1;
 	aml->am_light.al = al;
+	aml->am_light.al_rgb = color_scale(al, rgb);
 	return (0);
 }
 
@@ -53,7 +59,7 @@ int	set_light(char **s, t_minirt *aml)
 	t_vec3d	light_vec3d;
 	double	light_bri;
 
-	if (aml->amc[L] || check_str(s, 3) || !ft_ranges(ft_atof(s[2]), 0, 180))
+	if (aml->amc[L] || check_str(s, 3) || !ft_ranges(ft_atof(s[2]), 0.0, 1.0))
 		return (1);
 	light_bri = ft_atof(s[2]).num;
 	light_vec3d = check_xyz(s[1], -IN_MIN, IN_MAX);

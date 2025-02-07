@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/10 05:14:06 by bamssaye          #+#    #+#             */
-/*   Updated: 2024/12/03 03:22:11 by bamssaye         ###   ########.fr       */
+/*   Created: 2025/02/07 02:14:20 by bamssaye          #+#    #+#             */
+/*   Updated: 2025/02/07 02:14:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/minirt.h"
 
 static int	ft_wordcount(char const *s, char c)
 {
@@ -101,13 +101,3 @@ char	**ft_split(char const *s, char c)
 	ft_splitall(str, s, c, countword);
 	return (str);
 }
-// #include <stdio.h>
-// int main()
-// {
-// 	char p[] = "    hello dear ou need     ";
-// 	char **c = ft_split(p, ' ');
-// 	int i = 0;
-// 	while(c[i])
-// 		printf("%s \n", c[i++]);
-// 	ft_freespace(c,i);
-// }

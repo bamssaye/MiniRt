@@ -6,11 +6,16 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/30 23:36:20 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:41:49 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 02:46:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+
+static int	ft_isdigit(int c)
+{
+	return (c >= '0' && c <= '9');
+}
 
 t_atoi	ft_atoii(const char *nptr)
 {

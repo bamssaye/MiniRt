@@ -6,21 +6,18 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/28 00:06:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 03:23:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FUNCTION_H
 # define FUNCTION_H
 
-# include "struct.h"
 
 ///////////////////////////////////////////
 /////////////////////////////// PARSINING
 t_color		check_color(char *str);
 t_vec3d		check_xyz(char *str, double min, double max);
-t_atof		ft_atof(char *nptr);
-t_atoi		ft_atoii(const char *nptr);
 char		**tospace(char *str);
 void		arry_c(char **str);
 void		free_cmd(t_list *cmd);
@@ -53,6 +50,7 @@ t_color		color_scale(double scale, t_color a);
 int			min(int a, int min);
 t_color		color_plus(t_color a, t_color b);
 int			ctoi(t_color color);
+t_color color_a(t_color a, t_color b);
 ///////////////////////////////////////////
 ////////////////////////// SPHER
 double		sp_ray_dista(t_ray ray, t_sphere sp);
@@ -60,12 +58,12 @@ t_npc		c_sp_inter(t_ray ray, double dist, t_sphere sp);
 void		sp_inter(t_sphere *sp, t_in_pa *intersection);
 t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia);
 
-///////////////////////////////////////////
-////////////////////////// Color Utils
-t_color		color_scale(double scale, t_color a);
-int			min(int a, int min);
-t_color		color_plus(t_color a, t_color b);
-int			ctoi(t_color color);
+// ///////////////////////////////////////////
+// ////////////////////////// Color Utils
+// t_color		color_scale(double scale, t_color a);
+// int			min(int a, int min);
+// t_color		color_plus(t_color a, t_color b);
+// int			ctoi(t_color color);
 ///////////////////////////////////////////
 ////////////////////////// PLANE
 double		pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest);
@@ -111,7 +109,26 @@ void		ft_hooks_fun(t_minirt *mrt);
 int			ft_clear_all(t_minirt *mrt);
 void		mlx_putpixel(t_image *data, int x, int y, int color);
 int			render_image(t_minirt *prog);
-////////////////TEST
+///////////////////////////////////////////
+////////////////////////// UTILS
+t_color 	cpy_color(t_color co);
+t_vec3d 	cpy_vec(t_vec3d ve);
+t_in_pa 	cpy_tmp_inter(t_in_pa a);
+t_npc		cpy_npc(t_npc a);
+t_atof		ft_atof(char *nptr);
+t_atoi		ft_atoii(const char *nptr);
+int	    	ft_isalnum(int c);
+char		*ft_strchr(const char *s, int c);
+int	    	ft_strncmp(const char *s1, const char *s2, size_t len);
+size_t		ft_strlen(const char *s);
+void		*ft_calloc(size_t nmemb, size_t size);
+void		*ft_memset(void *s, int c, size_t n);
+char		**ft_split(char const *s, char c);
+char		*get_next_line(int fd, char **buffer);
+void		ft_lstadd_back(t_list **lst, t_list *new);
+t_list		*ft_lstnew(void *content);
+///////////////////////////////////////////
+////////////////////////// TEST
 void		vec_print(t_vec3d a);
 void		color_prints(t_color a);
 void		free_obj(t_object *obj);

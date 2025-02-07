@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:18:36 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:48:13 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 04:54:55 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,10 @@ t_obslight	initlight_inter(t_light l_param, t_in_pa *pa)
 
 	light_dire = vec3d_minus(l_param.position, pa->inters.point);
 	return ((t_obslight){
-		.angle = 0.0,
 		.angle_scale = 0.0,
 		.light = (t_slight){
 		.ambient_color = (t_color){0, 0, 0, 0},
-			.light_color = (t_color){0, 0, 0, 0},
+		.light_color = (t_color){0, 0, 0, 0},
 		},
 		.light_dire = vec3d_normalize(light_dire),
 		.max_dista = vec3d_length(light_dire),

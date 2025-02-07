@@ -6,12 +6,16 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/28 00:06:26 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 05:26:34 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINIRT_H
 # define MINIRT_H
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
 # include <unistd.h>
 # include <stdio.h>
@@ -24,10 +28,11 @@
 # include <sys/stat.h>
 # include <mlx.h>
 # include <fcntl.h>
-# include "../libft/libft.h"
+// # include "../libft/libft.h"
+# include "struct.h"
 # include "function.h"
 # define P_NAME "miniRT"
-# define W_WIDTH 1000
+# define W_WIDTH 500
 # define W_HEIGHT 500
 # define IN_MAX 2147483647
 # define IN_MIN 2147483648
@@ -40,4 +45,5 @@
 # define L 2
 # define C 1
 # define A 0
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:57:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 03:46:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb)
 		return (NULL);
 	obj->color = rgb;
 	obj->point = p_xyz;
-	obj->normal = v_xyz;
+	obj->normal = vec3d_normalize(v_xyz);
 	obje->type = PLANE;
 	obje->object = obj;
 	return (obje);
@@ -59,7 +59,7 @@ t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color rgb)
 	obj->len = d_h[1];
 	obj->point = cxyz;
 	obj->color = rgb;
-	obj->normal = vxyz;
+	obj->normal = vec3d_normalize(vxyz);
 	obje->type = CYLINDER;
 	obje->object = obj;
 	return (obje);

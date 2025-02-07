@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_line.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/28 11:10:43 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/28 00:07:37 by bamssaye         ###   ########.fr       */
+/*   Created: 2025/02/07 02:16:57 by bamssaye          #+#    #+#             */
+/*   Updated: 2025/02/07 02:22:35 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../headers/minirt.h"
+
 
 static int	ft_getline(char *getline, char *buffer);
 static char	*ft_free(char *getline, char **buffer);
 
-static char	*ft_strjoi(char *s1, char *s2)
+static char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -57,7 +58,7 @@ char	*get_next_line(int fd, char **buffer)
 		*buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	while (1)
 	{
-		getline = ft_strjoi(getline, *buffer);
+		getline = ft_strjoin(getline, *buffer);
 		if (ft_getline(getline, *buffer))
 			return (getline);
 		bytes = read(fd, *buffer, BUFFER_SIZE);
@@ -97,30 +98,3 @@ static char	*ft_free(char *getline, char **buffer)
 	free(getline);
 	return (NULL);
 }
-
-// int	main(void)
-// {
-// 	int		fd;
-// 	char	*line;
-// 	static char	*buffer;
-
-// 	fd = open("../utils/test.rt", O_RDONLY);
-// 	if (fd == -1)
-// 	{
-// 		printf("Error opening file\n");
-// 		return (1);
-// 	}
-// 	while (1)
-// 	{
-// 		line = get_next_line(fd, &buffer);
-// 		if (!line)
-// 			break;
-// 		printf ("Line: %s",line);
-// 		free (line);
-// 		break;
-// 	}
-// 	free(buffer);
-// 	// free(line);
-// 	close (fd);
-// 	return (0);
-// }

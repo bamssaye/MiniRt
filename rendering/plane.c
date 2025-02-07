@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:34 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:52:08 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 06:48:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ double	pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest)
 	dist = vec3d_dot(inter_p, pl.normal) / dot;
 	if ((dist <= 0) || (fabs(dot - 0) < EPSILON))
 		return (0);
-	ft_memcpy(&closest->normal, &pl.normal, sizeof(t_vec3d));
+	closest->normal = cpy_vec(pl.normal);
 	if (dot > 0)
 		closest->normal = multi_(closest->normal);
 	return (dist);

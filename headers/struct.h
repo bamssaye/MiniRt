@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/28 00:06:43 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 04:54:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,12 @@ typedef struct s_mlx
 }			t_mlx;
 ///////////////////////////////////////////
 ////////////////////////// ATOI && ATOF
+typedef struct s_list
+{
+	void			*content;
+	struct s_list	*next;
+}					t_list;
+
 typedef struct s_atof
 {
 	double	num;
@@ -105,7 +111,7 @@ typedef struct s_camera
 }			t_camera;
 typedef struct s_a_light
 {
-	// t_color		al_rgb;
+	t_color		al_rgb;
 	double		al;
 }			t_a_light;
 typedef struct s_light
@@ -145,7 +151,6 @@ typedef struct s_obslight
 {
 	t_ray		ray;
 	t_vec3d		light_dire;
-	double		angle;
 	double		max_dista;
 	double		angle_scale;
 	int			stuck;

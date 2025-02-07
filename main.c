@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/28 00:04:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 02:04:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	ft_init(t_minirt *mrt)
 {
-	int	i;
-
-	i = -1;
 	ft_memset(mrt->amc, 0, sizeof(mrt->amc));
 	mrt->x = 0;
 	mrt->y = 0;
