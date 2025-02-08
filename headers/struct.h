@@ -132,7 +132,7 @@ typedef struct s_light
 {
 	t_vec3d		position;
 	double		intensity;
-	// t_color		color;
+	t_color		color;
 }			t_light;
 ///////////////////////////////////////////
 ////////////////////////// INTERSECTION 
