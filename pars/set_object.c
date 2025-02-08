@@ -6,11 +6,23 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:48:52 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 07:31:34 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+
+char *check_path(char *str)
+{
+	if (ft_strncmp(str, "texture:./", 10))
+		return (NULL);
+	if (access(str+8, R_OK))
+		return(NULL);
+	else
+		return (str+8);
+	return (NULL);
+}
+
 
 int	set_sphere(char **s, t_minirt *aml)
 {
@@ -18,13 +30,15 @@ int	set_sphere(char **s, t_minirt *aml)
 	double		dia;
 	t_vec3d		xyz;
 	t_color		rgb;
+	char		*path;
 
-	if (check_str(s, 4) || ft_atof(s[2]).isv)
+	if ( check_str(s, 5) || ft_atof(s[2]).isv)
 		return (1);
 	xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	dia = ft_atof(s[2]).num;
 	rgb = check_color(s[3]);
-	sphere = sphere_ob(xyz, rgb, dia);
+	path = check_path(s[4]);
+	sphere = sphere_ob(xyz, rgb, dia, path);
 	if (!sphere || xyz.isv || rgb.isv || !++(aml->obj_count))
 		return (free_obj(sphere), 1);
 	sphere->id = aml->obj_count;
@@ -38,7 +52,9 @@ int	set_plane(char **s, t_minirt *aml)
 	t_object	*plane;
 	t_vec3d		pxyz;
 	t_vec3d		vxyz;
+	char		*path;
 
+	path = NULL;
 	if (check_str(s, 4))
 		return (1);
 	vxyz = check_xyz(s[2], -1, 1);
@@ -46,7 +62,7 @@ int	set_plane(char **s, t_minirt *aml)
 	rgb = check_color(s[3]);
 	if (vxyz.isv || pxyz.isv || rgb.isv || !++(aml->obj_count))
 		return (1);
-	plane = plane_ob(pxyz, vxyz, rgb);
+	plane = plane_ob(pxyz, vxyz, rgb, path);
 	if (!plane)
 		return (1);
 	plane->id = aml->obj_count;

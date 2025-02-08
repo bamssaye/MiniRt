@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 05:26:34 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/07 23:46:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@
 # define SPHERE 0
 # define PLANE 1
 # define CYLINDER 2
+# define LIGHT 3
 # define EPSILON 0.00001
 # define SIZE 4
 # define L 2

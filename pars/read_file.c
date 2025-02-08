@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:57:06 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 02:49:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ int	tospaces(char *str, t_minirt *mrt)
 	while (str[++i])
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
+	if(str[0] == '#')
+		return (0);
 	if (check_lis(str))
 		return (0);
 	line = ft_split(str, ' ');
@@ -65,10 +67,11 @@ int	ft_readfile(char *path, t_minirt *mrt)
 		return (1);
 	while (1)
 	{
+
 		line = get_next_line(fd, &buffer);
 		if (!line)
 			break ;
-		if (tospaces(line, mrt))
+		else if (tospaces(line, mrt))
 			return (free(line), free(buffer), free_cmd(mrt->object), close(fd),
 				1);
 		free(line);

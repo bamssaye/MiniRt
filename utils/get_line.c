@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 02:16:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 02:22:35 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 04:12:15 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*get_next_line(int fd, char **buffer)
 		bytes = read(fd, *buffer, BUFFER_SIZE);
 		if (bytes <= 0)
 			return (ft_free(getline, buffer));
-		*(buffer + bytes) = 0;
+		// *(buffer + bytes) = 0;
 	}
 	return (NULL);
 }

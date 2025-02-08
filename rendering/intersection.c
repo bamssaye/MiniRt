@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:18:36 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 04:54:55 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 05:29:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_obslight	initlight_inter(t_light l_param, t_in_pa *pa)
 
 	light_dire = vec3d_minus(l_param.position, pa->inters.point);
 	return ((t_obslight){
-		.angle_scale = 0.0,
 		.light = (t_slight){
 		.ambient_color = (t_color){0, 0, 0, 0},
 		.light_color = (t_color){0, 0, 0, 0},
@@ -33,7 +32,9 @@ t_obslight	initlight_inter(t_light l_param, t_in_pa *pa)
 		.stuck = 0});
 }
 
-void	inter_wobject(t_object *obj, t_in_pa *param)
+
+
+void	inter_wobject(t_object *obj, t_in_pa *param, t_minirt *aml)
 	//check_intersection_with_object
 {
 	t_plane		*plane;
@@ -43,6 +44,7 @@ void	inter_wobject(t_object *obj, t_in_pa *param)
 	if (obj->type == SPHERE)
 	{
 		sp = (t_sphere *)obj->object;
+		(void)aml;
 		sp_inter(sp, param);
 	}
 	else if (obj->type == PLANE)

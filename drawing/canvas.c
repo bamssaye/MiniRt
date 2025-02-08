@@ -6,11 +6,12 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 03:30:18 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 19:12:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 04:03:29 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+
 
 int	render_image(t_minirt *prog)
 {

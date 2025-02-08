@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:55:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:50:13 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 05:59:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ t_npc	c_sp_inter(t_ray ray, double dist, t_sphere sp)
 	point = vec3d_plus(ray.origin, point);
 	normal = vec3d_minus(point, sp.center);
 	normal = vec3d_normalize(normal);
+	// p_c(sp.color);
 	return ((t_npc){
 		.color = sp.color,
 		.dista = dist,
@@ -40,6 +41,24 @@ t_npc	c_sp_inter(t_ray ray, double dist, t_sphere sp)
 		.point = point});
 }
 
+t_color get_sphere_texture_color(t_tex tex, t_vec3d hit_point, t_sphere sphere)
+{
+    double u, v;
+    int x, y;
+    char *pixel;
+    
+    u = 0.5 + atan2(hit_point.z - sphere.center.z, hit_point.x - sphere.center.x) / (2 * PI);
+    v = 0.5 - asin((hit_point.y - sphere.center.y) / sphere.radius) / PI;
+    x = (int)(u * tex.width) % tex.width;
+    y = (int)(v * tex.height) % tex.height;
+    pixel = tex.addr + (y * tex.line_length + x * (tex.bpp / 8));
+    return ((t_color){
+        (unsigned char)pixel[2],
+        (unsigned char)pixel[1],
+        (unsigned char)pixel[0],
+        0
+    });
+}
 void	sp_inter(t_sphere *sp, t_in_pa *intersection)
 {
 	double	dist;
@@ -49,5 +68,7 @@ void	sp_inter(t_sphere *sp, t_in_pa *intersection)
 	{
 		intersection->closest = c_sp_inter(*intersection->ray, dist, *sp);
 		intersection->hit_clos = 1;
+		intersection->closest.color = get_sphere_texture_color(sp->tex,
+			intersection->closest.point, *sp);
 	}
 }

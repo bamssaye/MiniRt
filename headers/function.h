@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 03:23:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 06:39:01 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 
 ///////////////////////////////////////////
+void p_c(t_color a);
 /////////////////////////////// PARSINING
 t_color		check_color(char *str);
 t_vec3d		check_xyz(char *str, double min, double max);
@@ -56,20 +57,14 @@ t_color color_a(t_color a, t_color b);
 double		sp_ray_dista(t_ray ray, t_sphere sp);
 t_npc		c_sp_inter(t_ray ray, double dist, t_sphere sp);
 void		sp_inter(t_sphere *sp, t_in_pa *intersection);
-t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia);
+t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path);
 
-// ///////////////////////////////////////////
-// ////////////////////////// Color Utils
-// t_color		color_scale(double scale, t_color a);
-// int			min(int a, int min);
-// t_color		color_plus(t_color a, t_color b);
-// int			ctoi(t_color color);
 ///////////////////////////////////////////
 ////////////////////////// PLANE
 double		pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest);
 t_npc		pl_closest(t_vec3d ray, t_plane pl, double dist, t_vec3d origin);
 int			plane_inter(t_plane *plane, t_in_pa *param);
-t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb);
+t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb, char *path);
 
 ///////////////////////////////////////////
 ////////////////////////// CYLINDER
@@ -95,9 +90,9 @@ t_vec3d		multi_(t_vec3d normal);
 ///////////////////////////////////////////
 ////////////////////////// RAY TRACING
 t_ray		ray_gen(t_camera cam, int x, int y);
-void		inter_wobject(t_object *obj, t_in_pa *param);
-void		trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist);
-void		trace_rtobj(t_list *obj, t_in_pa *pa);
+void		inter_wobject(t_object *obj, t_in_pa *param, t_minirt *aml);
+void		trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist, t_minirt *aml);
+void		trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml);
 t_obslight	initlight_inter(t_light l_param, t_in_pa *pa);
 void		trace_light_at_intersection(t_minirt *prog, t_in_pa *param);
 int			calculate_pixel_color(t_ray *ray, t_minirt *prog);

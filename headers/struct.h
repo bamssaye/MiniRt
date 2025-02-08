@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 04:54:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 06:37:47 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ typedef struct s_img
 	int		width;
 	int		endian;
 }			t_image;
+
 typedef struct s_mlx
 {
 	void	*mlx;
@@ -76,17 +77,30 @@ typedef struct s_ray
 }	t_ray;
 ///////////////////////////////////////////
 ////////////////////////// OBJECT : SPHERE, PLANE, CYLINDER
+typedef struct s_tex
+{
+	void	*img;
+	char	*addr;
+	int		bpp;
+	int		width;
+	int		endian;
+	int		height;
+	int 	line_length;
+	char	*path;
+}			t_tex;
 typedef struct s_sphere
 {
 	t_vec3d		center;
 	t_color		color;
 	double		radius;
+	t_tex		tex;
 }			t_sphere;
 typedef struct s_plane
 {
 	t_vec3d		point;
 	t_vec3d		normal;
 	t_color		color;
+	t_tex		tex;
 }			t_plane;
 typedef struct s_cylinder
 {
@@ -118,7 +132,7 @@ typedef struct s_light
 {
 	t_vec3d		position;
 	double		intensity;
-	t_color		color;
+	// t_color		color;
 }			t_light;
 ///////////////////////////////////////////
 ////////////////////////// INTERSECTION 
@@ -152,22 +166,37 @@ typedef struct s_obslight
 	t_ray		ray;
 	t_vec3d		light_dire;
 	double		max_dista;
-	double		angle_scale;
 	int			stuck;
 	t_slight	light;
 }				t_obslight;
 ///////////////////////////////////////////
-////////////////////////// MAIN 
+////////////////////////// object
 typedef struct s_objects
 {
 	void		*object;
 	int			type;
 	int			id;
 }			t_object;
+///////////////////////////////////////////
+////////////////////////// Trace light intersaction
+
+typedef struct s_trace_light
+{
+	t_obslight	l_pa;
+	t_npc		inters;
+	t_list		*lst;
+	t_object	*objt;
+	t_color		final_c;
+	t_color		color;
+	t_color		ambient_color;
+	double		angle_scale;
+} t_trace_light;
+
+///////////////////////////////////////////
+////////////////////////// MAIN
 
 typedef struct s_minirt
 {
-	t_object	objects;
 	t_list		*object;
 	t_a_light	am_light;
 	t_camera	camera;

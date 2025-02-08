@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:54 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 07:09:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 02:10:20 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ double	cy_ray_dista(t_ray ray, t_cylinder cy)
 	c = vec3d_dot(ori, ori) - pow(cc, 2) - (cy.radius * cy.radius);
 	return (quad_equa(a, b, c));
 }
-void p_c(t_color a)
-{
-	fprintf(stderr, "[%d, %d, %d]\n", a.r, a.g, a.b);
-}
-void p_cs(t_vec3d a)
-{
-	fprintf(stderr, "[%f, %f, %f]\n", a.x, a.y, a.z);
-}
+// void p_c(t_color a)
+// {
+// 	fprintf(stderr, "[%d, %d, %d]\n", a.r, a.g, a.b);
+// }
+// void p_cs(t_vec3d a)
+// {
+// 	fprintf(stderr, "[%f, %f, %f]\n", a.x, a.y, a.z);
+// }
 
 void	cy_caps(t_plane *pl, t_cylinder *cy)
 {
@@ -111,6 +111,7 @@ void	cy_inter(t_cylinder *cy, t_in_pa *f_inter)
 	i = -1;
 	while (++i < 3)
 		tmp_inter[i] = cpy_tmp_inter(*f_inter);
+	
 	if (check_cylinder_hit(cy, &tmp_inter[0]))
 	{
 		f_inter->hit_clos = tmp_inter[0].hit_clos;
