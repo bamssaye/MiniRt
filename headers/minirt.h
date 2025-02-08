@@ -26,7 +26,8 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <mlx.h>
+// # include <mlx.h>
+#include "../minilibx/mlx.h"
 # include <fcntl.h>
 // # include "../libft/libft.h"
 # include "struct.h"

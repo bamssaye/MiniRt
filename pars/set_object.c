@@ -12,6 +12,27 @@
 
 #include "../headers/minirt.h"
 
+
+char	*ft_strdup(const char *s)
+{
+	char	*str;
+	size_t	len;
+	int		i;
+
+	len = ft_strlen(s);
+	str = malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
+}
+
 char *check_path(char *str)
 {
 	if (ft_strncmp(str, "texture:./", 10))
@@ -19,10 +40,9 @@ char *check_path(char *str)
 	if (access(str+8, R_OK))
 		return(NULL);
 	else
-		return (str+8);
+		return (ft_strdup(str));
 	return (NULL);
 }
-
 
 int	set_sphere(char **s, t_minirt *aml)
 {
@@ -32,14 +52,16 @@ int	set_sphere(char **s, t_minirt *aml)
 	t_color		rgb;
 	char		*path;
 
-	if ( check_str(s, 5) || ft_atof(s[2]).isv)
+	if (check_str(s, 4) || ft_atof(s[2]).isv)
 		return (1);
 	xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	dia = ft_atof(s[2]).num;
 	rgb = check_color(s[3]);
-	path = check_path(s[4]);
-	sphere = sphere_ob(xyz, rgb, dia, path);
-	if (!sphere || xyz.isv || rgb.isv || !++(aml->obj_count))
+	path = check_path(s[3]);
+	if (path)
+		aml->count_t++;
+	sphere = sphere_ob(xyz, rgb, dia, path); //check  path leaks
+	if (!sphere || xyz.isv || (rgb.isv && !path)|| !++(aml->obj_count))
 		return (free_obj(sphere), 1);
 	sphere->id = aml->obj_count;
 	ft_lstadd_back(&aml->object, ft_lstnew(sphere));
@@ -60,11 +82,10 @@ int	set_plane(char **s, t_minirt *aml)
 	vxyz = check_xyz(s[2], -1, 1);
 	pxyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	rgb = check_color(s[3]);
-	if (vxyz.isv || pxyz.isv || rgb.isv || !++(aml->obj_count))
-		return (1);
+	path = check_path(s[3]);
 	plane = plane_ob(pxyz, vxyz, rgb, path);
-	if (!plane)
-		return (1);
+	if (vxyz.isv || pxyz.isv || (rgb.isv && !path) || !++(aml->obj_count))
+		return (free_obj(plane), 1);
 	plane->id = aml->obj_count;
 	ft_lstadd_back(&aml->object, ft_lstnew(plane));
 	return (0);

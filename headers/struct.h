@@ -176,6 +176,7 @@ typedef struct s_objects
 	void		*object;
 	int			type;
 	int			id;
+	int			t;
 }			t_object;
 ///////////////////////////////////////////
 ////////////////////////// Trace light intersaction
@@ -203,6 +204,7 @@ typedef struct s_minirt
 	t_light		light;
 	t_mlx		mlx;
 	int			obj_count;
+	int			count_t;
 	int			amc[3];
 	char		buffer[BUFFER_SIZE];
 	int			x;
