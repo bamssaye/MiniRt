@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   spher.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 11:55:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 05:59:41 by bamssaye         ###   ########.fr       */
+/*   Created: 2025/02/08 14:19:52 by iel-koub          #+#    #+#             */
+/*   Updated: 2025/02/08 14:19:54 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-double	sp_ray_dista(t_ray ray, t_sphere sp) //calculate_sphere_ray_dista
+double	sp_ray_dista(t_ray ray, t_sphere sp) // calculate_sphere_ray_dista
 {
 	t_vec3d		ori;
 

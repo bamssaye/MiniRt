@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   load_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 05:25:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 05:26:45 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:22:05 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_tex    get_texture(void *mlx, *path){
-
+t_tex    get_texture(void *mlx, *path)
+{
 	t_tex   tex;
  	// char *path = "./1.xpm";
 	if (!access(path, R_OK))

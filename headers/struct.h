@@ -159,6 +159,7 @@ typedef struct s_slight
 {
 	t_color		light_color;
 	t_color		ambient_color;
+	t_color 	specular_color;
 }			t_slight;
 
 typedef struct s_obslight
@@ -169,6 +170,7 @@ typedef struct s_obslight
 	int			stuck;
 	t_slight	light;
 }				t_obslight;
+
 ///////////////////////////////////////////
 ////////////////////////// object
 typedef struct s_objects

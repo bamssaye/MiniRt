@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   template_ob.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 07:15:18 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 14:21:43 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path)
 	obj = malloc(sizeof(t_sphere));
 	if (!obj)
 		return (free(obje), NULL);
-	obj->radius = dia;
+	obj->radius = (dia / 2);
 	obj->color = rgb;
 	obj->center = xyz;
 	obj->tex = init_img(path);
@@ -76,7 +76,7 @@ t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color rgb)
 	obj = malloc(sizeof(t_cylinder));
 	if (!obj)
 		return (free(obje), NULL);
-	obj->radius = d_h[0];
+	obj->radius = (d_h[0] / 2);
 	obj->len = d_h[1];
 	obj->point = cxyz;
 	obj->color = rgb;

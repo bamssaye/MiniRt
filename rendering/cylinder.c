@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/23 12:20:54 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 02:10:20 by bamssaye         ###   ########.fr       */
+/*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
+/*   Updated: 2025/02/08 14:19:06 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,6 @@ double	cy_ray_dista(t_ray ray, t_cylinder cy)
 	c = vec3d_dot(ori, ori) - pow(cc, 2) - (cy.radius * cy.radius);
 	return (quad_equa(a, b, c));
 }
-// void p_c(t_color a)
-// {
-// 	fprintf(stderr, "[%d, %d, %d]\n", a.r, a.g, a.b);
-// }
-// void p_cs(t_vec3d a)
-// {
-// 	fprintf(stderr, "[%f, %f, %f]\n", a.x, a.y, a.z);
-// }
 
 void	cy_caps(t_plane *pl, t_cylinder *cy)
 {
@@ -101,7 +93,6 @@ int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
 	}
 	return (0);
 }
-
 
 void	cy_inter(t_cylinder *cy, t_in_pa *f_inter)
 {
