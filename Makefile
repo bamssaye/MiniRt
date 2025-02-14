@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2025/02/12 02:52:22 by bamssaye         ###   ########.fr        #
+#    Updated: 2025/02/14 07:08:22 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME =  miniRT
 OBGDIR = obj
 CC = cc
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 RM = rm -rf
 # LIBFT = ./libft/libft.a
 MLX_DIR = minilibx

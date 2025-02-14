@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/11 08:19:17 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 06:23:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include "struct.h"
 # include "function.h"
 # define P_NAME "miniRT"
-# define W_WIDTH 400
-# define W_HEIGHT 400
+# define W_WIDTH 600
+# define W_HEIGHT 600
 # define IN_MAX 2147483647
 # define IN_MIN 2147483648
 # define PI 3.14159265358979323846f
@@ -47,5 +47,13 @@
 # define L 2
 # define C 1
 # define A 0
-
+# define MSG_1 "ERROR, Run : ./miniRt scene/*.rt\n {* : file name}"
+# define MSG_2 "ERROR, File not found... !\n *file name must be .rt"
+# define MSG_3 "ERROR, Check line data..."
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
 #endif

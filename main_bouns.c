@@ -1,45 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bouns.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 07:33:07 by bamssaye         ###   ########.fr       */
+/*   Created: 2025/02/14 05:56:45 by bamssaye          #+#    #+#             */
+/*   Updated: 2025/02/14 06:54:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/minirt.h"
 
-int print_err(char *str)
-{
-	return (printf("%s\n", str), 1);
-}
-void    load_img(void *mlx, t_tex *img, char *str){
 
-	// t_tex   tex;
-    char    name[30];
+t_tex    load_img(void *mlx, char *path, char *str){
+
+	t_tex   tex;
+    char    name[50];
     int i;
     
     i = -1;
-    while (str[++i]){
-        name[i] = str[i];}
-	fprintf(stderr, "%s", img->path);
+    while (str[++i])
+        name[i] = str[i];
     int j =-1;
-    while (img->path[++j] && i < 20)
-        name[i++] = img->path[j];
+    while (path[++j])
+        name[i] = path[j];
     name[i] = '\0';
-	if (img->path)
-		free(img->path);
-	img->path = name;
-    img->img = mlx_xpm_file_to_image(mlx, name, &img->width, &img->height);
-	if (!img->img)
-		img->check_valid = 1;
-    img->addr = mlx_get_data_addr(img->img, &img->bpp, \
-		&img->line_length, &img->endian);
-    // return (tex);
+    printf("%s", name);
+	tex.path = path;
+    tex.img = mlx_xpm_file_to_image(mlx, path+8, &tex.width, &tex.height);
+	if (!tex.img)
+		exit(1);
+    tex.addr = mlx_get_data_addr(tex.img, &tex.bpp,
+        &tex.line_length, &tex.endian);
+    return (tex);
 }
+
 void load_texture(t_minirt *rt, t_list *lst)
 {
 	t_list *tmp;
@@ -54,7 +50,7 @@ void load_texture(t_minirt *rt, t_list *lst)
 		if (obj->type == SPHERE && obj->t)
 		{
 			sp = (t_sphere*)obj->object;
-			load_img(rt->mlx.mlx, sp->tex, "./texture/");
+			sp->tex = load_img(rt->mlx.mlx, sp->tex.path, "./texture/");
 		}
 		// if (obj->type == PLANE && obj->t)
 		// {
@@ -69,19 +65,20 @@ void load_texture(t_minirt *rt, t_list *lst)
 		tmp = tmp->next;
 	}
 }
+
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;
 
 	if (ac != 2)
-		return (print_err(MSG_1));
-	minirt.bouns = 1;
-	if (ft_readfile(av[1], &minirt))
 		return (1);
+	ft_init(&minirt);
+	if (ft_readfile(av[1], &minirt))
+		return (printf("Error\n"), 1);
 	ft_init_win(&minirt);
 	if (minirt.count_t)
 		load_texture(&minirt, minirt.object);
-	// render_image(&minirt);
-	// ft_hooks_fun(&minirt);
+	render_image(&minirt);
+	ft_hooks_fun(&minirt);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/26 22:09:26 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 08:48:03 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 04:50:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ double	vec3d_dot(t_vec3d *a, t_vec3d *b)
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }
 
-double	vec3d_length(t_vec3d *a)
+double	vec3d_magnitude(t_vec3d *a)
 {
 	return (sqrt(a->x * a->x + a->y * a->y + a->z * a->z));
 }

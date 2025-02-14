@@ -6,33 +6,30 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:54 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 09:16:24 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 04:50:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
+/*
+	ex : d_dn => dot(direction, normal)
+	a = d_dd - (d_dn)^2
+	b = 2 * (d_do - (d_dn)*(d_on))
+	c = d_xx - (d_on)^2 - r*r
+*/
 double	cy_ray_dista(t_ray ray, t_cylinder cy)
 {
 	t_vec3d	ori;
 
-	double (a), (b), (c), (po), (bb), (cc);
+	double (a), (b), (c), (d_dn), (d_on);
 	ori = vec3d_minus(&ray.origin, &cy.point);
-	po = vec3d_dot(&ray.direction, &cy.normal);
-	a = vec3d_dot(&ray.direction, &ray.direction) - pow(po, 2);
-	bb = vec3d_dot(&ray.direction, &cy.normal);
-	cc = vec3d_dot(&ori, &cy.normal);
-	b = 2.0 * (vec3d_dot(&ori, &ray.direction) - bb * cc);
-	c = vec3d_dot(&ori, &ori) - pow(cc, 2) - (cy.radius * cy.radius);
+	d_on = vec3d_dot(&ori, &cy.normal);
+	d_dn = vec3d_dot(&ray.direction, &cy.normal);
+	a = vec3d_dot(&ray.direction, &ray.direction) - (d_dn * d_dn);
+	b = 2.0 * (vec3d_dot(&ori, &ray.direction) - d_dn * d_on);
+	c = vec3d_dot(&ori, &ori) - (d_on * d_on) - (cy.radius * cy.radius);
 	return (quad_equa(a, b, c));
-}
-void p_c(t_color a)
-{
-	fprintf(stderr, "[%d, %d, %d]\n", a.r, a.g, a.b);
-}
-void p_cs(t_vec3d a)
-{
-	fprintf(stderr, "[%f, %f, %f]\n", a.x, a.y, a.z);
 }
 
 void	cy_caps(t_plane *pl, t_cylinder *cy)
@@ -98,7 +95,7 @@ int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
 		{
 			point_to_center = vec3d_minus(&intersection->closest.point,
 					&pl[i].point);
-			if (vec3d_length(&point_to_center) < cy->radius)
+			if (vec3d_magnitude(&point_to_center) < cy->radius)
 				return (1);
 		}
 		i++;

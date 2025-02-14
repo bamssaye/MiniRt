@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 08:52:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 07:20:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 ///////////////////////////////////////////
 void p_c(t_color a);
 /////////////////////////////// PARSINING
+int print_err(char *str);
 t_color		check_color(char *str);
 t_vec3d		check_xyz(char *str, double min, double max);
 char		**tospace(char *str);
@@ -57,7 +58,7 @@ t_color color_a(t_color a, t_color b);
 double		sp_ray_dista(t_ray ray, t_sphere sp);
 t_npc		c_sp_inter(t_ray ray, double dist, t_sphere sp);
 void		sp_inter(t_sphere *sp, t_in_pa *intersection);
-t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path);
+t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, t_tex *img);
 
 ///////////////////////////////////////////
 ////////////////////////// PLANE
@@ -80,7 +81,7 @@ t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color rgb);
 ///////////////////////////////////////////
 ////////////////////////// VECTOR
 t_vec3d		vec3d_scale(double scale, t_vec3d *a);
-double		vec3d_length(t_vec3d *a);
+double		vec3d_magnitude(t_vec3d *a);
 t_vec3d		vec3d_cross(t_vec3d *a, t_vec3d *b);
 t_vec3d		vec3d_plus(t_vec3d *a, t_vec3d *b);
 t_vec3d		vec3d_minus(t_vec3d *a, t_vec3d *b);

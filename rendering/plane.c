@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:34 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 08:51:13 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 04:50:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ t_npc	pl_closest(t_vec3d ray, t_plane pl, double dist, t_vec3d origin)
 // 	t_vec3d (up), (right);
 // 	up = (t_vec3d){0, 1, 0, 0};
 //     right = vec3d_cross(plane.normal, up);
-//     if (vec3d_length(right) < 0.01)
+//     if (vec3d_magnitude(right) < 0.01)
 //     {
 //         up = (t_vec3d){0, 0, 1, 0};
 //         right = vec3d_cross(plane.normal, up);

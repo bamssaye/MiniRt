@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 08:54:54 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 07:23:46 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_tex init_img(char *path)
 	});
 }
 
-t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path)
+t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, t_tex *img)
 {
 	t_sphere	*obj;
 	t_object	*obje;
@@ -35,9 +35,9 @@ t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path)
 	obj->radius = dia;
 	obj->color = rgb;
 	obj->center = xyz;
-	obj->tex = init_img(path);
-	if (path)
-		obje->t = 1;
+	obj->tex = img;
+	// if (img->path)
+	// 	obje->t = 1;
 	obje->type = SPHERE;
 	obje->object = obj;
 	return (obje);

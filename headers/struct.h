@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/11 08:36:47 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 07:23:57 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ typedef struct s_tex
 	int		height;
 	int 	line_length;
 	char	*path;
+	int		check_valid;
 }			t_tex;
 typedef struct s_sphere
 {
 	t_vec3d		center;
 	t_color		color;
 	double		radius;
-	t_tex		tex;
+	t_tex		*tex;
 }			t_sphere;
 typedef struct s_plane
 {
@@ -203,12 +204,13 @@ typedef struct s_minirt
 	t_camera	camera;
 	t_light		light;
 	t_mlx		mlx;
-	int			obj_count;
+	int			obj_c;
 	int			count_t;
 	int			amc[3];
 	char		buffer[BUFFER_SIZE];
 	int			x;
 	int			y;
+	int			bouns;
 }			t_minirt;
 ///////////////////////////////////////////
 #endif

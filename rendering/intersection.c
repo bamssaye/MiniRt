@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:18:36 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 08:55:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 04:50:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ t_obslight	initlight_inter(t_light l_param, t_in_pa *pa)
 		.light_color = (t_color){0, 0, 0, 0},
 		},
 		.light_dire = vec3d_normalize(&light_dire),
-		.max_dista = vec3d_length(&light_dire),
+		.max_dista = vec3d_magnitude(&light_dire),
 		.ray = (t_ray){
 			.origin = pa->inters.point,
 			.direction = vec3d_normalize(&light_dire),

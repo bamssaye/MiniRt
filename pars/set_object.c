@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 07:31:34 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 07:34:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,15 +33,21 @@ char	*ft_strdup(const char *s)
 	return (str);
 }
 
-char *check_path(char *str)
+char *check_path(char *str, int bouns)
 {
-	if (ft_strncmp(str, "texture:./", 10))
+	if (!bouns)
 		return (NULL);
-	if (access(str+8, R_OK))
-		return(NULL);
-	else
-		return (ft_strdup(str));
-	return (NULL);
+	if (ft_strncmp(str, "texture:", 8))
+		return (NULL);
+	return (ft_strdup(str+8));
+}
+t_tex init_imgs()
+{
+	return ((t_tex){
+		.img = NULL,
+		.addr = NULL,
+		.path = NULL
+	});
 }
 
 int	set_sphere(char **s, t_minirt *aml)
@@ -50,20 +56,22 @@ int	set_sphere(char **s, t_minirt *aml)
 	double		dia;
 	t_vec3d		xyz;
 	t_color		rgb;
-	char		*path;
+	t_tex		img;
 
 	if (check_str(s, 4) || ft_atof(s[2]).isv)
 		return (1);
 	xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	dia = ft_atof(s[2]).num;
 	rgb = check_color(s[3]);
-	path = check_path(s[3]);
-	if (path)
+	img = init_imgs();
+	img.path = check_path(s[3], aml->bouns);
+	if (img.path)
 		aml->count_t++;
-	sphere = sphere_ob(xyz, rgb, dia, path); //check  path leaks
-	if (!sphere || xyz.isv || (rgb.isv && !path)|| !++(aml->obj_count))
+	sphere = sphere_ob(xyz, rgb, dia, &img); //check  path leaks
+	// fprintf(stderr,"%)
+	if (!sphere || xyz.isv || (rgb.isv && !img.path)|| !++(aml->obj_c))
 		return (free_obj(sphere), 1);
-	sphere->id = aml->obj_count;
+	sphere->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(sphere));
 	return (0);
 }
@@ -82,11 +90,13 @@ int	set_plane(char **s, t_minirt *aml)
 	vxyz = check_xyz(s[2], -1, 1);
 	pxyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	rgb = check_color(s[3]);
-	path = check_path(s[3]);
+	path = check_path(s[3], aml->bouns);
+	if (path)
+		aml->count_t++;
 	plane = plane_ob(pxyz, vxyz, rgb, path);
-	if (vxyz.isv || pxyz.isv || (rgb.isv && !path) || !++(aml->obj_count))
+	if (vxyz.isv || pxyz.isv || (rgb.isv && !path) || !++(aml->obj_c))
 		return (free_obj(plane), 1);
-	plane->id = aml->obj_count;
+	plane->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(plane));
 	return (0);
 }
@@ -98,6 +108,7 @@ int	set_cylinder(char **s, t_minirt *aml)
 	t_vec3d		vxyz;
 	t_vec3d		cxyz;
 	double		v[2];
+	char		*path;
 
 	if (check_str(s, 6) || ft_atof(s[3]).isv || ft_atof(s[4]).isv)
 		return (1);
@@ -106,10 +117,15 @@ int	set_cylinder(char **s, t_minirt *aml)
 	rgb = check_color(s[5]);
 	v[0] = ft_atof(s[3]).num;
 	v[1] = ft_atof(s[4]).num;
+	path = check_path(s[5], aml->bouns);
+	// printf("%s\n",path);
+	// exit(1);
+	if (path)
+		aml->count_t++;
 	cylinder = cylinder_ob(cxyz, vxyz, v, rgb);
-	if (!cylinder || vxyz.isv || cxyz.isv || rgb.isv || !++(aml->obj_count))
+	if (!cylinder || vxyz.isv || cxyz.isv || (rgb.isv && !path) || !++(aml->obj_c))
 		return (free_obj(cylinder), 1);
-	cylinder->id = aml->obj_count;
+	cylinder->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(cylinder));
 	return (0);
 }

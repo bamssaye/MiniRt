@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 02:49:11 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 06:37:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,42 @@ int	tospaces(char *str, t_minirt *mrt)
 	return (arry_c(line), 0);
 }
 
+void	ft_init(t_minirt *mrt)
+{
+	ft_memset(mrt->amc, 0, sizeof(mrt->amc));
+	mrt->x = 0;
+	mrt->y = 0;
+	mrt->count_t = 0;
+	mrt->object = NULL;
+	mrt->obj_c = 0;
+}
+int  free_line_error(char *line, t_list *obj, int *fd, char *buf)
+{
+	free(line);
+	free(buf);
+	free_cmd(obj);
+	close(*fd);
+	return (print_err(MSG_3));
+}
 int	ft_readfile(char *path, t_minirt *mrt)
 {
 	static char	*buffer;
 
 	char *(line);
 	int (fd);
+	ft_init(mrt);
 	if (check_filename(path))
-		return (1);
+		return (print_err(MSG_2));
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (1);
+		return (print_err(MSG_2));
 	while (1)
 	{
-
 		line = get_next_line(fd, &buffer);
 		if (!line)
 			break ;
 		else if (tospaces(line, mrt))
-			return (free(line), free(buffer), free_cmd(mrt->object), close(fd),
-				1);
+			return (free_line_error(line, mrt->object, &fd, buffer));
 		free(line);
 	}
 	close(fd);
