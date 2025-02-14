@@ -6,13 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 03:27:12 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 05:19:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:22:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_vec3d	vec3d_scale(double scale, t_vec3d *a)
+t_vec3d	v_scale(double scale, t_vec3d *a)
 {
 	return ((t_vec3d){
 		.x = a->x * scale,

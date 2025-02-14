@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:54 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 04:50:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:22:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 	b = 2 * (d_do - (d_dn)*(d_on))
 	c = d_xx - (d_on)^2 - r*r
 */
-double	cy_ray_dista(t_ray ray, t_cylinder cy)
+double	cy_ray_dista(t_ray ray, t_cy cy)
 {
 	t_vec3d	ori;
 
@@ -32,22 +32,22 @@ double	cy_ray_dista(t_ray ray, t_cylinder cy)
 	return (quad_equa(a, b, c));
 }
 
-void	cy_caps(t_plane *pl, t_cylinder *cy)
+void	cy_caps(t_pl *pl, t_cy *cy)
 {
 	t_vec3d		offset;
 	t_vec3d		cap_ce;
 
-	offset = vec3d_scale(cy->len / 2.0, &cy->normal);
+	offset = v_scale(cy->len / 2.0, &cy->normal);
 	cap_ce = vec3d_plus(&cy->point, &offset);
 	offset.isv = 0;
 	pl[0] = copy_pl(&cap_ce, &cy->normal, &cy->color, &offset);
-	offset = vec3d_scale(-cy->len / 2.0, &cy->normal);
+	offset = v_scale(-cy->len / 2.0, &cy->normal);
 	cap_ce = vec3d_plus(&cy->point, &offset);
 	offset.isv = 1;
 	pl[1] = copy_pl(&cap_ce, &cy->normal, &cy->color, &offset);
 }
 
-int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
+int	check_cylinder_hit(t_cy *cy, t_in_pa *p)
 {
 	double	dist;
 	t_vec3d	point_to_center;
@@ -55,7 +55,7 @@ int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
 	dist = cy_ray_dista(*p->ray, *cy);
 	if (dist > 0.0)
 	{
-		p->closest.point = vec3d_scale(dist, &p->ray->direction);
+		p->closest.point = v_scale(dist, &p->ray->direction);
 		p->closest.point = vec3d_plus(&p->ray->origin, &p->closest.point);
 		p->closest.normal = vec3d_minus(&p->closest.point, &cy->point);
 		p->closest.normal = vec3d_normalize(&p->closest.normal);
@@ -70,7 +70,7 @@ int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
 	}
 	return (0);
 }
-int	plane_interss(t_plane *plane, t_ray *ray, t_npc *closet)
+int	plane_interss(t_pl *plane, t_ray *ray, t_npc *closet)
 {
 	double	dist;
 	dist = pl_ray_dista(*ray, *plane, closet);
@@ -81,10 +81,10 @@ int	plane_interss(t_plane *plane, t_ray *ray, t_npc *closet)
 	return (dist);
 }
 
-int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
+int	check_cylinder_caps_intersection(t_cy *cy, t_in_pa *intersection)
 {
 	t_vec3d	point_to_center;
-	t_plane	pl[2];
+	t_pl	pl[2];
 	int		i;
 
 	i = 0;
@@ -104,7 +104,7 @@ int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
 }
 
 
-void	cy_inter(t_cylinder *cy, t_in_pa *f_inter)
+void	cy_inter(t_cy *cy, t_in_pa *f_inter)
 {
 	t_in_pa	tmp_inter;
 

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 05:54:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:24:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 		return (free(obje), NULL);
 	obj->intensity = light_bri;
 	obj->color = color;
-	obj->position = vec3d_scale(light_bri, &light_vec3d);	
+	obj->position = v_scale(light_bri, &light_vec3d);	
 	obje->type = LIGHT;
 	obje->object = obj;
 	return (obje);
@@ -89,7 +89,7 @@ int	set_light(char **s, t_minirt *aml)
 	aml->amc[L] = 1;
 	light = light_ob(light_vec3d, light_bri, color);
 	// aml->light.intensity = light_bri;
-	// aml->light.position = vec3d_scale(light_bri, light_vec3d);
+	// aml->light.position = v_scale(light_bri, light_vec3d);
 	ft_lstadd_back(&aml->object, ft_lstnew(light));
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 07:23:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:15:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,15 +94,19 @@ typedef struct s_sphere
 	t_vec3d		center;
 	t_color		color;
 	double		radius;
-	t_tex		*tex;
-}			t_sphere;
+	t_tex		tex;
+	t_tex		n_map;
+
+}			t_sp;
 typedef struct s_plane
 {
 	t_vec3d		point;
 	t_vec3d		normal;
 	t_color		color;
 	t_tex		tex;
-}			t_plane;
+	t_tex		n_map;
+
+}			t_pl;
 typedef struct s_cylinder
 {
 	t_vec3d		point;
@@ -110,7 +114,9 @@ typedef struct s_cylinder
 	t_color		color;
 	double		radius;
 	double		len;
-}			t_cylinder;
+	t_tex		tex;
+	t_tex		n_map;
+}			t_cy;
 ///////////////////////////////////////////
 ////////////////////////// ENV : CAMERA, LIGHT, EMBIENT LIGHT
 typedef struct s_camera
@@ -196,10 +202,19 @@ typedef struct s_trace_light
 
 ///////////////////////////////////////////
 ////////////////////////// MAIN
+typedef struct s_obj
+{
+	t_sp	*sp;
+	t_pl		*pl;
+	t_cy	*cy;
+	t_object	*obj;
+} t_obj;
+
 
 typedef struct s_minirt
 {
 	t_list		*object;
+	t_obj		objs;
 	t_a_light	am_light;
 	t_camera	camera;
 	t_light		light;

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:59:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 10:33:19 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_clear_all(t_minirt *mrt)
 {
 	mlx_destroy_image(mrt->mlx.mlx, mrt->mlx.img.img);
 	mlx_destroy_window(mrt->mlx.mlx, mrt->mlx.win);
-	mlx_destroy_display(mrt->mlx.mlx);
+	// mlx_destroy_display(mrt->mlx.mlx);
 	free_cmd(mrt->object);
 	free(mrt->mlx.mlx);
 	exit(0);

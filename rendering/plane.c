@@ -6,13 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:34 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 04:50:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:04:58 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-double	pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest)
+double	pl_ray_dista(t_ray ray, t_pl pl, t_npc *closest)
 {
 	t_vec3d		inter_p;
 
@@ -29,7 +29,7 @@ double	pl_ray_dista(t_ray ray, t_plane pl, t_npc *closest)
 	return (dist);
 }
 
-t_npc	pl_closest(t_vec3d ray, t_plane pl, double dist, t_vec3d origin)
+t_npc	pl_closest(t_vec3d ray, t_pl pl, double dist, t_vec3d origin)
 {
 	return ((t_npc){
 		.color = pl.color,
@@ -41,33 +41,8 @@ t_npc	pl_closest(t_vec3d ray, t_plane pl, double dist, t_vec3d origin)
 		.z = origin.z + dist * ray.z,
 	}});
 }
-// t_color pl_texture_col(t_tex tex, t_vec3d hit_point, t_plane plane)
-// {
-//     char *pixel;
 
-// 	double (u), (v);
-// 	t_vec3d (up), (right);
-// 	up = (t_vec3d){0, 1, 0, 0};
-//     right = vec3d_cross(plane.normal, up);
-//     if (vec3d_magnitude(right) < 0.01)
-//     {
-//         up = (t_vec3d){0, 0, 1, 0};
-//         right = vec3d_cross(plane.normal, up);
-//     }
-//     u = vec3d_dot(hit_point, vec3d_normalize(right));
-//     v = vec3d_dot(hit_point, vec3d_normalize(vec3d_cross(right, plane.normal)));
-//     u = fmod(u * 0.1, 1.0);
-//     v = fmod(v * 0.1, 1.0);
-//     if (u < 0)
-// 		u += 1.0;
-//     if (v < 0)
-// 		v += 1.0;
-//     pixel = tex.addr + ((int)(v * tex.height) % tex.height) * tex.line_length 
-//                           + ((int)(u * tex.width) % tex.width) * (tex.bpp / 8);
-//     return (t_color){pixel[2], pixel[1], pixel[0], 0};
-// }
-
-int	plane_inter(t_plane *plane, t_in_pa *param)
+int	plane_inter(t_pl *plane, t_in_pa *param)
 {
 	double	dist;
 	t_vec3d	*ray;
@@ -86,17 +61,17 @@ int	plane_inter(t_plane *plane, t_in_pa *param)
 	return (dist);
 }
 
-t_plane	copy_pl(t_vec3d *po, t_vec3d *no, t_color *col, t_vec3d *offset)
+t_pl	copy_pl(t_vec3d *po, t_vec3d *no, t_color *col, t_vec3d *offset)
 {
 	if (offset->isv)
 	{
-		*offset = vec3d_scale(-1, no);
-		return ((t_plane){
+		*offset = v_scale(-1, no);
+		return ((t_pl){
 			.color = cpy_color(col),
 			.normal = *offset,
 			.point = *po});
 	}
-	return ((t_plane){
+	return ((t_pl){
 		.color = cpy_color(col),
 		.normal = *no,
 		.point = *po});

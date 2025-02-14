@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 05:56:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 06:54:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:15:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ void load_texture(t_minirt *rt, t_list *lst)
 {
 	t_list *tmp;
 	t_object *obj;
-	t_sphere	*sp;
-	// t_plane		*pl;
+	t_sp	*sp;
+	// t_pl		*pl;
 	
 	tmp = lst;
 	while (tmp)
@@ -49,17 +49,17 @@ void load_texture(t_minirt *rt, t_list *lst)
 		obj = (t_object*)tmp->content;
 		if (obj->type == SPHERE && obj->t)
 		{
-			sp = (t_sphere*)obj->object;
+			sp = (t_sp*)obj->object;
 			sp->tex = load_img(rt->mlx.mlx, sp->tex.path, "./texture/");
 		}
 		// if (obj->type == PLANE && obj->t)
 		// {
-		// 	sp = (t_sphere*)obj->object;
+		// 	sp = (t_sp*)obj->object;
 		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
 		// }
 		// if (obj->type == SPHERE)
 		// {
-		// 	sp = (t_sphere*)obj->object;
+		// 	sp = (t_sp*)obj->object;
 		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
 		// }
 		tmp = tmp->next;

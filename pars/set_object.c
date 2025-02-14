@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 07:34:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/14 15:05:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,33 +50,31 @@ t_tex init_imgs()
 	});
 }
 
-int	set_sphere(char **s, t_minirt *aml)
+int	set_sp(char **s, t_minirt *aml)
 {
 	t_object	*sphere;
 	double		dia;
 	t_vec3d		xyz;
 	t_color		rgb;
-	t_tex		img;
+	char		*path;
 
 	if (check_str(s, 4) || ft_atof(s[2]).isv)
 		return (1);
 	xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	dia = ft_atof(s[2]).num;
 	rgb = check_color(s[3]);
-	img = init_imgs();
-	img.path = check_path(s[3], aml->bouns);
-	if (img.path)
+	path = check_path(s[3], aml->bouns);
+	if (path)
 		aml->count_t++;
-	sphere = sphere_ob(xyz, rgb, dia, &img); //check  path leaks
-	// fprintf(stderr,"%)
-	if (!sphere || xyz.isv || (rgb.isv && !img.path)|| !++(aml->obj_c))
+	sphere = sphere_ob(xyz, rgb, dia, path); //check  path leaks
+	if (!sphere || xyz.isv || (rgb.isv && !path)|| !++(aml->obj_c))
 		return (free_obj(sphere), 1);
 	sphere->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(sphere));
 	return (0);
 }
 
-int	set_plane(char **s, t_minirt *aml)
+int	set_pl(char **s, t_minirt *aml)
 {
 	t_color		rgb;
 	t_object	*plane;
@@ -101,7 +99,7 @@ int	set_plane(char **s, t_minirt *aml)
 	return (0);
 }
 
-int	set_cylinder(char **s, t_minirt *aml)
+int	set_cy(char **s, t_minirt *aml)
 {
 	t_object	*cylinder;
 	t_color		rgb;
