@@ -6,7 +6,7 @@
 /*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/08 14:19:06 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/14 14:05:33 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ double	cy_ray_dista(t_ray ray, t_cylinder cy)
 {
 	t_vec3d	ori;
 
-	double (a), (b), (c), (po), (bb), (cc);
+	double(a), (b), (c), (po), (bb), (cc);
 	ori = vec3d_minus(ray.origin, cy.point);
 	po = vec3d_dot(ray.direction, cy.normal);
 	a = vec3d_dot(ray.direction, ray.direction) - pow(po, 2);
@@ -29,8 +29,8 @@ double	cy_ray_dista(t_ray ray, t_cylinder cy)
 
 void	cy_caps(t_plane *pl, t_cylinder *cy)
 {
-	t_vec3d		offset;
-	t_vec3d		cap_ce;
+	t_vec3d	offset;
+	t_vec3d	cap_ce;
 
 	offset = vec3d_scale(cy->len / 2.0, cy->normal);
 	cap_ce = vec3d_plus(cy->point, offset);
@@ -48,72 +48,68 @@ int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
 	t_vec3d	point_to_center;
 
 	dist = cy_ray_dista(*p->ray, *cy);
-	if (dist > 0.0)
-	{
-		p->closest.point = vec3d_scale(dist, p->ray->direction);
-		p->closest.point = vec3d_plus(p->ray->origin, p->closest.point);
-		
-		p->closest.normal = vec3d_minus(p->closest.point, cy->point);
-		p->closest.normal = vec3d_normalize(p->closest.normal);
-		point_to_center = vec3d_minus(p->closest.point, cy->point);
-		if (fabs(vec3d_dot(point_to_center, cy->normal)) < cy->len / 2.0)
-		{
-			p->closest.dista = dist;
-			p->hit_clos = 1;
-			p->closest.color = cpy_color(cy->color);
-			return (1);
-		}
-	}
-	return (0);
+    if (dist > 0.0)
+    {
+	    p->closest.point = vec3d_plus(p->ray->origin, vec3d_scale(dist, p->ray->direction));
+	    p->closest.normal = vec3d_normalize(vec3d_minus(p->closest.point, cy->point));
+	    point_to_center = vec3d_minus(p->closest.point, cy->point);
+	    if (fabs(vec3d_dot(point_to_center, cy->normal)) < cy->len / 2.0)
+	    {
+		    p->closest.dista = dist;
+		    p->hit_clos = 1;
+		    p->closest.color = cpy_color(cy->color);
+		    return (1);
+	    }
+	   
+    } 
+    return (0);
 }
 
-int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *intersection)
+int	check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *inter)
 {
 	t_vec3d	point_to_center;
 	t_plane	pl[2];
 	int		i;
 
-	i = 0;
+    i = 0;
 	cy_caps(pl, cy);
 	while (i < 2)
 	{
-		if (plane_inter(&pl[i], intersection))
+		if (plane_inter(&pl[i], inter))
 		{
-			point_to_center = vec3d_minus(intersection->closest.point,
-					pl[i].point);
+			point_to_center = vec3d_minus(inter->closest.point, pl[i].point);
 			if (vec3d_length(point_to_center) < cy->radius)
 			{
-				intersection->closest.dista = intersection->closest.dista;
-				intersection->hit_clos = 1;
-				intersection->closest.color = cpy_color(cy->color);
+				if (vec3d_dot(inter->ray->direction, pl[i].normal) > 0)
+					inter->closest.normal = vec3d_scale(-1, pl[i].normal);
+				else
+					inter->closest.normal = pl[i].normal;
+
+				inter->closest.dista = inter->closest.dista;
+				inter->hit_clos = 1;
+				inter->closest.color = cpy_color(cy->color);
 				return (1);
 			}
 		}
-		i++;
+        i++;
 	}
 	return (0);
 }
 
-void	cy_inter(t_cylinder *cy, t_in_pa *f_inter)
+void cy_inter(t_cylinder *cy, t_in_pa *f_inter)
 {
-	int		i;
-	t_in_pa	tmp_inter[3];
+    t_in_pa tmp;
 
-	i = -1;
-	while (++i < 3)
-		tmp_inter[i] = cpy_tmp_inter(*f_inter);
-	
-	if (check_cylinder_hit(cy, &tmp_inter[0]))
-	{
-		f_inter->hit_clos = tmp_inter[0].hit_clos;
-		f_inter->closest = cpy_npc(tmp_inter[0].closest);
-		return ;
-	}
-	if (check_cylinder_caps_intersection(cy, &tmp_inter[1]))
-	{
-		f_inter->hit_clos = tmp_inter[1].hit_clos;
-		f_inter->closest = cpy_npc(tmp_inter[1].closest);
-		return ;
-	}
+    tmp = *f_inter;
+    if (check_cylinder_hit(cy, &tmp))
+    {
+        *f_inter = tmp;
+        return;
+    }
+    tmp = *f_inter;
+    if (check_cylinder_caps_intersection(cy, &tmp))
+    {
+        *f_inter = tmp;
+        return;
+    }
 }
-	
