@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:54 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:22:25 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:44:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int	plane_interss(t_pl *plane, t_ray *ray, t_npc *closet)
 	return (dist);
 }
 
-int	check_cylinder_caps_intersection(t_cy *cy, t_in_pa *intersection)
+int	check_cylinder_caps_intersection(t_cy *cy, t_in_pa *inter)
 {
 	t_vec3d	point_to_center;
 	t_pl	pl[2];
@@ -91,9 +91,9 @@ int	check_cylinder_caps_intersection(t_cy *cy, t_in_pa *intersection)
 	cy_caps(pl, cy);
 	while (i < 2)
 	{
-		if (plane_interss(&pl[i], intersection->ray, &intersection->closest))
+		if (plane_interss(&pl[i], inter->ray, &inter->closest))
 		{
-			point_to_center = vec3d_minus(&intersection->closest.point,
+			point_to_center = vec3d_minus(&inter->closest.point,
 					&pl[i].point);
 			if (vec3d_magnitude(&point_to_center) < cy->radius)
 				return (1);

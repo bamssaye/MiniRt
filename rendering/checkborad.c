@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:56:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_color sp_checkerboard(t_vec3d *hpoint, t_sp *sp)
 {	
 	double (u), (v), (scale);
     int (x), (y);
-	u = 0.5 + atan2(hpoint->z - sp->center.z, hpoint->x - sp->center.x) / (2 * PI);
+	u = 0.5 + atan2(hpoint->z - sp->center.z, \
+        hpoint->x - sp->center.x) / (2 * PI);
     v = 0.5 - asin((hpoint->y - sp->center.y) / sp->radius) / PI;
     scale = 60;
     x = floor(u * scale);
@@ -61,7 +62,8 @@ t_color cy_checkerboard(t_vec3d *hpoint, t_cy *cy)
 {
 	double (u), (v), (scale);
     int (x),(y);
-    u = 0.5 + atan2(hpoint->z - cy->point.z, hpoint->x - cy->point.x) / (2 * PI);
+    u = 0.5 + atan2(hpoint->z - cy->point.z, \
+        hpoint->x - cy->point.x) / (2 * PI);
     v = fabs((hpoint->y - cy->point.y) / cy->len);
     scale = 60;
     x = floor(u * scale);

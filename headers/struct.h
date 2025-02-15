@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 06:38:04 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 11:10:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,6 +215,13 @@ typedef struct t_rota
 	int		id_obj;
 	t_object	*slected;
 } t_rota;
+
+typedef struct s_key
+{
+	int x;
+	int left;
+} t_key;
+
 typedef struct s_minirt
 {
 	t_list		*object;
@@ -224,6 +231,7 @@ typedef struct s_minirt
 	t_light		light;
 	t_mlx		mlx;
 	t_rota		selected;
+	t_key		key;
 	int			obj_c;
 	int			count_t;
 	int			amc[3];

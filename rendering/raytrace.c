@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 06:01:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 06:04:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 09:45:29 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml)
 				pa->inters.dista = pa->closest.dista;
 				pa->inters = cpy_npc(&pa->closest);
 				pa->iobj_id = objt->id;
-				fprintf(stderr, "---{00}\n");
 			}
 		}
 		lst = lst->next;

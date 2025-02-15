@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 06:05:08 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 11:35:02 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 
 
 ///////////////////////////////////////////
+void rotate_z(t_object *obj, double angle);
+void rotate_x(t_object *obj, double angle);
+void rotate_y(t_object *obj, double angle);
+void transle_x(t_object *obj, double x);
+void transle_y(t_object *obj, double y);
+void transle_z(t_object *obj, double z);
 void p_c(t_color a);
 /////////////////////////////// PARSINING
 int print_err(char *str, char *s);
@@ -74,7 +80,7 @@ t_pl		copy_pl(t_vec3d *po, t_vec3d *no, t_color *col, t_vec3d *offset);
 void		cy_caps(t_pl *pl, t_cy *cy);
 int			check_cylinder_hit(t_cy *cy, t_in_pa *p);
 int			check_cylinder_caps_intersection(t_cy *cy,
-				t_in_pa *intersection);
+				t_in_pa *inter);
 void		cy_inter(t_cy *cy, t_in_pa *f_inter);
 t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color rgb);
 

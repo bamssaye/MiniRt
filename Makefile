@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2025/02/15 03:46:48 by bamssaye         ###   ########.fr        #
+#    Updated: 2025/02/15 09:55:41 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,11 +17,11 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 RM = rm -rf
 
-# MLX_DIR = mlxx
-# MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+MLX_DIR = mlxx
+MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
 
-MLX_DIR = minilibx
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+# MLX_DIR = minilibx
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 
 #################################
 VPATH = utils:pars:drawing:tuples:rendering
@@ -29,7 +29,7 @@ SRC = main.c check_input.c read_file.c set_element.c set_object.c
 SRC += template_ob.c valid_input.c plane.c raytrace.c spher.c mlx_utlis.c
 SRC += camera.c color.c cylinder.c intersection.c math.c vector_utils.c
 SRC += clean_memory.c ft_atod.c ft_atoii.c pars_utils.c canvas.c new_vec.c
-SRC += libft_utils.c get_line.c ft_split.c lst_addback.c
+SRC += libft_utils.c get_line.c ft_split.c lst_addback.c rotation.c
 OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))
 
 $(OBGDIR)/%.o:%.c

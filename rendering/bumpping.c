@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:30:53 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:42:25 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:57:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ t_vec3d map_normal(t_object *obj, t_vec3d *point)
     if (obj->type == SPHERE)
         bmp = sp_texture(&((t_sp*)obj->object)->n_map, point, \
         (t_sp*)obj->object);
-    else if (obj->type == SPHERE)
+    else if (obj->type == PLANE)
         bmp = pl_texture(&((t_pl*)obj->object)->n_map, point, \
         (t_pl*)obj->object);
-    else if (obj->type == SPHERE)
+    else if (obj->type == CYLINDER)
         bmp = cy_texture(&((t_cy*)obj->object)->n_map, point, \
         (t_cy*)obj->object);
     // else if (obj->type == SPHERE)

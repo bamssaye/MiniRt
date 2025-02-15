@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 12:56:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_color sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp)
     
     double (u), (v);
     int (x), (y);
-	u = 0.5 + atan2(hpoint->z - sp->center.z, hpoint->x - sp->center.x) / (2 * PI);
+	u = 0.5 + atan2(hpoint->z - sp->center.z, \
+        hpoint->x - sp->center.x) / (2 * PI);
     v = 0.5 - asin((hpoint->y - sp->center.y) / sp->radius) / PI;
     x = (int)(u * tex->width) % tex->width;
     y = (int)(v * tex->height) % tex->height;
@@ -58,8 +59,10 @@ t_color pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl)
         u += 1.0;
     if (v < 0)
         v += 1.0;
-    pixel = tex->addr + ((int)(v * tex->height) % tex->height) * tex->line_length + ((int)(u * tex->width) % tex->width) * (tex->bpp / 8);
-    return ((t_color){(unsigned char)pixel[2], (unsigned char)pixel[1], (unsigned char)pixel[0], 0});
+    pixel = tex->addr + ((int)(v * tex->height) % tex->height) * \
+     tex->line_length + ((int)(u * tex->width) % tex->width) * (tex->bpp / 8);
+    return ((t_color){(unsigned char)pixel[2], (unsigned char)pixel[1], \
+        (unsigned char)pixel[0], 0});
 }
 
 t_color cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy)
