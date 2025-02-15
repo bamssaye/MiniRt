@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 06:38:04 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,13 +204,17 @@ typedef struct s_trace_light
 ////////////////////////// MAIN
 typedef struct s_obj
 {
-	t_sp	*sp;
+	t_sp		*sp;
 	t_pl		*pl;
-	t_cy	*cy;
+	t_cy		*cy;
 	t_object	*obj;
 } t_obj;
 
-
+typedef struct t_rota
+{
+	int		id_obj;
+	t_object	*slected;
+} t_rota;
 typedef struct s_minirt
 {
 	t_list		*object;
@@ -219,6 +223,7 @@ typedef struct s_minirt
 	t_camera	camera;
 	t_light		light;
 	t_mlx		mlx;
+	t_rota		selected;
 	int			obj_c;
 	int			count_t;
 	int			amc[3];

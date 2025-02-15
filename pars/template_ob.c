@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 04:29:36 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path)
 	obj->color = rgb;
 	obj->center = xyz;
 	obj->tex = init_img(path);
-	// if (img->path)
-	// 	obje->t = 1;
+	if (path)
+		obje->t = 1;
 	obje->type = SPHERE;
 	obje->object = obj;
 	return (obje);
@@ -56,7 +56,7 @@ t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb, char *path)
 		return (free(obje), NULL);
 	obj->color = rgb;
 	obj->point = p_xyz;
-	obj->tex = init_img(path);
+	obj->tex.path = path;
 	obj->normal = vec3d_normalize(&v_xyz);
 	obje->type = PLANE;
 	obje->object = obj;

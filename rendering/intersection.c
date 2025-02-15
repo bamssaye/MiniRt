@@ -6,14 +6,14 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 12:18:36 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 04:36:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
+//initialize_light_parameters
 t_obslight	initlight_inter(t_light l_param, t_in_pa *pa)
-	//initialize_light_parameters
 {
 	t_vec3d		light_dire;
 
@@ -33,9 +33,8 @@ t_obslight	initlight_inter(t_light l_param, t_in_pa *pa)
 }
 
 
-
-void	inter_wobject(t_object *obj, t_in_pa *param, t_minirt *aml)
-	//check_intersection_with_object
+//check_intersection_with_object
+void	inter_wobject(t_object *obj, t_in_pa *param, t_minirt *aml)	
 {
 	t_pl		*plane;
 	t_cy	*cy;

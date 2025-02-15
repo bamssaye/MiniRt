@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 05:56:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:15:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 03:37:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_tex    load_img(void *mlx, char *path, char *str){
     while (path[++j])
         name[i] = path[j];
     name[i] = '\0';
-    printf("%s", name);
 	tex.path = path;
     tex.img = mlx_xpm_file_to_image(mlx, path+8, &tex.width, &tex.height);
 	if (!tex.img)

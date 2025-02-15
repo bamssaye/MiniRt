@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:55:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 15:03:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 03:37:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	sp_inter(t_sp *sp, t_in_pa *intersection)
 	{
 		intersection->closest = c_sp_inter(*intersection->ray, dist, *sp);
 		intersection->hit_clos = 1;
-		if (sp->tex.img)
-			intersection->closest.color = spher_texture_color(sp->tex, intersection->closest.point, *sp);
+		// if (sp->tex.img)
+		// 	intersection->closest.color = spher_texture_color(sp->tex, intersection->closest.point, *sp);
 	}
 }

@@ -6,13 +6,14 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 06:01:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 08:53:46 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 06:04:51 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_ray	ray_gen(t_camera cam, int x, int y) //generate_ray
+//generate_ray
+t_ray	ray_gen(t_camera cam, int x, int y)
 {
 	t_ray	ray;
 
@@ -23,9 +24,8 @@ t_ray	ray_gen(t_camera cam, int x, int y) //generate_ray
 		.direction = vec3d_normalize(&ray.direction),
 		.origin = cam.position});
 }
-
-void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist, t_minirt *aml)
-	//trace ray to light source
+//trace ray to light source
+void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist, t_minirt *aml)	
 {
 	t_list		*lst;
 	t_object	*objt;
@@ -48,8 +48,8 @@ void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist, t_minirt *a
 			*stuck = 1;	
 	}
 }
-
-void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml) //trace_ray_to_objects
+//trace_ray_to_objects
+void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml)
 {
 	t_list		*lst;
 	t_object	*objt;
@@ -68,12 +68,12 @@ void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml) //trace_ray_to_objects
 				pa->inters.dista = pa->closest.dista;
 				pa->inters = cpy_npc(&pa->closest);
 				pa->iobj_id = objt->id;
+				fprintf(stderr, "---{00}\n");
 			}
 		}
 		lst = lst->next;
 	}
 }
-
 
 void trace_light_at_intersection(t_minirt *prog, t_in_pa *param)
 {
@@ -106,7 +106,7 @@ void trace_light_at_intersection(t_minirt *prog, t_in_pa *param)
 
 int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
 {
-	t_color		color;
+	// t_color		color;
 	t_in_pa		param;
 
 	ft_memset(&param, 0, sizeof(t_in_pa));
@@ -118,6 +118,6 @@ int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
 	param.iobj_id = -1;
 	trace_rtobj(prog->object, &param, prog);
 	trace_light_at_intersection(prog, &param);
-	color = cpy_color(&param.final_color);
-	return (ctoi(color));
+	// color = cpy_color(&param.final_color);
+	return (ctoi(param.final_color));
 }

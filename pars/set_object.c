@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 15:05:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 04:34:35 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ int	set_sp(char **s, t_minirt *aml)
 	path = check_path(s[3], aml->bouns);
 	if (path)
 		aml->count_t++;
-	sphere = sphere_ob(xyz, rgb, dia, path); //check  path leaks
+	sphere = sphere_ob(xyz, rgb, dia, path);
 	if (!sphere || xyz.isv || (rgb.isv && !path)|| !++(aml->obj_c))
-		return (free_obj(sphere), 1);
+		return (free(path), free_obj(sphere), 1);
 	sphere->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(sphere));
 	return (0);
@@ -93,7 +93,7 @@ int	set_pl(char **s, t_minirt *aml)
 		aml->count_t++;
 	plane = plane_ob(pxyz, vxyz, rgb, path);
 	if (vxyz.isv || pxyz.isv || (rgb.isv && !path) || !++(aml->obj_c))
-		return (free_obj(plane), 1);
+		return (free(path), free_obj(plane), 1);
 	plane->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(plane));
 	return (0);
@@ -122,7 +122,7 @@ int	set_cy(char **s, t_minirt *aml)
 		aml->count_t++;
 	cylinder = cylinder_ob(cxyz, vxyz, v, rgb);
 	if (!cylinder || vxyz.isv || cxyz.isv || (rgb.isv && !path) || !++(aml->obj_c))
-		return (free_obj(cylinder), 1);
+		return (free(path), free_obj(cylinder), 1);
 	cylinder->id = aml->obj_c;
 	ft_lstadd_back(&aml->object, ft_lstnew(cylinder));
 	return (0);
