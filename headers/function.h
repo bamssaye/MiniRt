@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 11:35:02 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 17:30:16 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@
 void rotate_z(t_object *obj, double angle);
 void rotate_x(t_object *obj, double angle);
 void rotate_y(t_object *obj, double angle);
+void transle_x(t_object *obj, double x);
+void transle_y(t_object *obj, double y);
+void transle_z(t_object *obj, double z);
 void transle_x(t_object *obj, double x);
 void transle_y(t_object *obj, double y);
 void transle_z(t_object *obj, double z);

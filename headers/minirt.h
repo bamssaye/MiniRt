@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 04:39:06 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 16:47:12 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@
 # define L 2
 # define C 1
 # define A 0
+# define YES 1
+# define NO 0
 # define MSG_1 "ERROR, Run : ./miniRt scene/*.rt\n {* : file name}"
 # define MSG_2 "ERROR, File not found... !\n *file name must be .rt"
 # define MSG_3 "ERROR, Check line data..."

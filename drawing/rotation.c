@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 06:13:09 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 10:11:33 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/15 17:17:54 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void rotate_x(t_object *obj, double angle)
     double (cos_x), (sin_x), (y), (z);
     cos_x = cos(angle * (PI / 180));
     sin_x = sin(angle * (PI / 180));
-    if (obj->type == PLANE)
+    if (obj->type == PLANE && obj->t++)
     {
         objs.sp = (t_sp*)obj->object;
         y = objs.sp->center.y;
@@ -32,7 +32,7 @@ void rotate_x(t_object *obj, double angle)
         objs.sp->center.y = (y * cos_x) - (z * sin_x);
         objs.sp->center.z = (y * sin_x) + (z * cos_x);
     }
-    if (obj->type == CYLINDER)
+    if (obj->type == CYLINDER && obj->t++)
     {
         objs.cy = (t_cy*)obj->object;
         y = objs.cy->normal.y;
@@ -51,7 +51,7 @@ void rotate_y(t_object *obj, double angle)
     double (cos_y), (sin_y), (x), (z);
     cos_y = cos(angle * (PI / 180));
     sin_y = sin(angle * (PI / 180));
-    if (obj->type == PLANE)
+    if (obj->type == PLANE && obj->t++)
     {
         objs.pl = (t_pl*)obj->object;
         x = objs.pl->normal.x;
@@ -60,7 +60,7 @@ void rotate_y(t_object *obj, double angle)
         objs.pl->normal.z = -(x * sin_y) + (z * cos_y);
         objs.pl->normal = vec3d_normalize(&objs.pl->normal);
     }
-    if (obj->type == CYLINDER)
+    if (obj->type == CYLINDER && obj->t++)
     {
         objs.cy = (t_cy*)obj->object;
         x = objs.cy->normal.x;
@@ -79,7 +79,7 @@ void rotate_z(t_object *obj, double angle)
     double (cos_z), (sin_z), (y), (x);
     cos_z = cos(angle * (PI / 180));
     sin_z = sin(angle * (PI / 180));
-    if (obj->type == PLANE)
+    if (obj->type == PLANE && obj->t++)
     {
         objs.pl = (t_pl*)obj->object;
         x = objs.pl->normal.x;
@@ -88,7 +88,7 @@ void rotate_z(t_object *obj, double angle)
         objs.pl->normal.y = (x * sin_z) + (y * cos_z);
         objs.pl->normal = vec3d_normalize(&objs.pl->normal);
     }
-    if (obj->type == CYLINDER)
+    if (obj->type == CYLINDER && obj->t++)
     {
         objs.cy = (t_cy*)obj->object;
         x = objs.cy->normal.x;
