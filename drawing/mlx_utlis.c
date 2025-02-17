@@ -6,7 +6,7 @@
 /*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 14:18:46 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:59:26 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void	mlx_putpixel(t_image *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->addr + (y * data->width + x * (data->bpp >> 3));
+	dst = data->addr + (y * data->width + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 

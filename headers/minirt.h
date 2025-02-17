@@ -6,7 +6,7 @@
 /*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 14:23:26 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/13 22:55:18 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@
 # define PLANE 1
 # define CYLINDER 2
 # define LIGHT 3
-# define EPSILON 0.00001
+# define CONE 4
+// # define EPSILON 0.00001
+# define EPSILON 1e-6
 # define SIZE 4
 # define L 2
 # define C 1

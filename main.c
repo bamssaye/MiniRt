@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 07:24:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 19:36:21 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	ft_init(t_minirt *mrt)
 	mrt->object = NULL;
 	mrt->obj_count = 0;
 }
-t_tex    load_img(void *mlx, char *path){
+
+t_tex    load_img(void *mlx, char *path)
+{
 
 	t_tex   tex;
 	if (!access(path, R_OK))
@@ -34,6 +36,7 @@ t_tex    load_img(void *mlx, char *path){
         &tex.line_length, &tex.endian);
     return (tex);
 }
+
 void load_texture(t_minirt *rt, t_list *lst)
 {
 	t_list *tmp;
@@ -63,6 +66,7 @@ void load_texture(t_minirt *rt, t_list *lst)
 		tmp = tmp->next;
 	}
 }
+
 int	main(int ac, char **av)
 {
 	t_minirt	minirt;

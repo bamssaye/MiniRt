@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 06:39:01 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 13:27:34 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb, char *path);
 ////////////////////////// CYLINDER
 double		cy_ray_dista(t_ray ray, t_cylinder cy);
 t_plane		copy_pl(t_vec3d po, t_vec3d no, t_color col, t_vec3d offset);
-void		cy_caps(t_plane *pl, t_cylinder *cy);
+// void		cy_caps(t_plane *pl, t_cylinder *cy);
+void		cy_caps(t_plane *pl, t_cylinder *cy, int is_top);
 int			check_cylinder_hit(t_cylinder *cy, t_in_pa *p);
 int			check_cylinder_caps_intersection(t_cylinder *cy,
 				t_in_pa *intersection);
@@ -86,7 +87,6 @@ t_vec3d		vec3d_plus(t_vec3d a, t_vec3d b);
 t_vec3d		vec3d_minus(t_vec3d a, t_vec3d b);
 t_vec3d		vec3d_normalize(t_vec3d a);
 double		vec3d_dot(t_vec3d a, t_vec3d b);
-t_vec3d		multi_(t_vec3d normal);
 ///////////////////////////////////////////
 ////////////////////////// RAY TRACING
 t_ray		ray_gen(t_camera cam, int x, int y);
@@ -107,9 +107,6 @@ int			render_image(t_minirt *prog);
 ///////////////////////////////////////////
 ////////////////////////// UTILS
 t_color 	cpy_color(t_color co);
-t_vec3d 	cpy_vec(t_vec3d ve);
-t_in_pa 	cpy_tmp_inter(t_in_pa a);
-t_npc		cpy_npc(t_npc a);
 t_atof		ft_atof(char *nptr);
 t_atoi		ft_atoii(const char *nptr);
 int	    	ft_isalnum(int c);
@@ -127,5 +124,16 @@ t_list		*ft_lstnew(void *content);
 void		vec_print(t_vec3d a);
 void		color_prints(t_color a);
 void		free_obj(t_object *obj);
+
+////////////////////////////////////////////
+/////////////////////////// CONE
+
+void cone_caps(t_plane *pl, t_cone *cone);
+double cone_ray_dista(t_ray ray, t_cone cone);
+int check_cone_hit(t_cone *cone, t_in_pa *p);
+int check_cone_caps_intersection(t_cone *cone, t_in_pa *intersection);
+void co_inter(t_cone *cone, t_in_pa *f_inter);
+t_object *cone_ob(t_vec3d point, t_vec3d normal, double *d_h, t_color color);
+int set_cone(char **s, t_minirt *aml);
 
 #endif

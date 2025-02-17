@@ -12,13 +12,9 @@
 
 #include "../headers/minirt.h"
 
-t_tex init_img(char *path)
+t_tex	init_img(char *path)
 {
-	return ((t_tex){
-		.img = NULL,
-		.addr = NULL,
-		.path = path
-	});
+	return ((t_tex){.img = NULL, .addr = NULL, .path = path});
 }
 
 t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path)
@@ -60,7 +56,7 @@ t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb, char *path)
 	obj->normal = vec3d_normalize(v_xyz);
 	obje->type = PLANE;
 	obje->object = obj;
-	if(path)
+	if (path)
 		obje->t = 1;
 	return (obje);
 }

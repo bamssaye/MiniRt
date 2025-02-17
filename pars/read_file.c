@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 02:49:11 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/08 18:06:16 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	tospaces(char *str, t_minirt *mrt)
 	while (str[++i])
 		if (ft_isspace(str[i]))
 			str[i] = ' ';
-	if(str[0] == '#')
+	if (str[0] == '#')
 		return (0);
 	if (check_lis(str))
 		return (0);
@@ -59,7 +59,7 @@ int	ft_readfile(char *path, t_minirt *mrt)
 	static char	*buffer;
 
 	char *(line);
-	int (fd);
+	int(fd);
 	if (check_filename(path))
 		return (1);
 	fd = open(path, O_RDONLY);
@@ -67,7 +67,6 @@ int	ft_readfile(char *path, t_minirt *mrt)
 		return (1);
 	while (1)
 	{
-
 		line = get_next_line(fd, &buffer);
 		if (!line)
 			break ;

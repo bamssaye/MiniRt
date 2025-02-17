@@ -6,7 +6,7 @@
 /*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:18:52 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/08 14:18:55 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/13 14:08:34 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,16 @@ t_vec3d	c_look_at(t_camera *camera)
 {
 	t_vec3d	look_at;
 
-	look_at = vec3d_plus(camera->position, camera->normal);
-	look_at = vec3d_minus(look_at, camera->position);
-	look_at = vec3d_normalize(look_at);
+	look_at = vec3d_normalize(camera->normal);
 	return (look_at);
 }
 
-t_vec3d	c_r_v(t_camera *camera)
+t_vec3d	c_up_v(t_camera *camera)
 {
 	t_vec3d	v;
 
 	v = vec3d_cross(camera->look_at, camera->u);
-	if (vec3d_normalize(v).isv == -6)
+	if (vec3d_normalize(v).isv == -1)
 		exit(1);
 	return (v);
 }
@@ -41,9 +39,8 @@ t_vec3d	c_topleft(t_camera *cam)
 	t_vec3d	tp_left;
 
 	view_d = W_WIDTH / 2;
-	view_d = view_d / (2.0 * tan((double)cam->fov * (PI / 180.0) / 2.0));
-	dir_v = cpy_vec(cam->look_at);
-	dir_v = vec3d_normalize(dir_v);
+	view_d = view_d / (2.0 * tan((double)cam->fov * (PI / 180) / 2.0));
+	dir_v = vec3d_normalize(cam->look_at);
 	dir_v = vec3d_scale(view_d, dir_v);
 	s_u_v = vec3d_scale(W_WIDTH / 2, cam->u);
 	s_v_v = vec3d_scale(W_HEIGHT / 2, cam->v);
@@ -67,7 +64,7 @@ int	is_parallel(t_vec3d v1, t_vec3d v2)
 		return (0);
 }
 
-t_vec3d	c_up_v(t_camera *camera)
+t_vec3d	c_r_v(t_camera *camera)
 {
 	t_vec3d	world_up;
 	t_vec3d	u;

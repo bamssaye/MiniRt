@@ -6,7 +6,7 @@
 /*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 14:20:33 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/09 16:41:08 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ int	set_camera(char **s, t_minirt *aml)
 	aml->camera.normal = vec_xyz;
 	aml->camera.fov = fov;
 	aml->camera.look_at = c_look_at(&aml->camera);
-	aml->camera.u = c_up_v(&aml->camera);
-	aml->camera.v = c_r_v(&aml->camera);
+	aml->camera.u = c_r_v(&aml->camera);
+	aml->camera.v = c_up_v(&aml->camera);
 	aml->camera.top_left = c_topleft(&aml->camera);
 	return (0);
 }
 
 t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 {
-	t_light	*obj;
+	t_light		*obj;
 	t_object	*obje;
 
 	obje = malloc(sizeof(t_object));
@@ -66,7 +66,7 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 		return (free(obje), NULL);
 	obj->intensity = light_bri;
 	obj->color = color;
-	obj->position = vec3d_scale(light_bri, light_vec3d);	
+	obj->position = vec3d_scale(light_bri, light_vec3d);
 	obje->type = LIGHT;
 	obje->object = obj;
 	return (obje);
@@ -74,10 +74,10 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 
 int	set_light(char **s, t_minirt *aml)
 {
-	t_vec3d	light_vec3d;
-	double	light_bri;
-	t_object *light;
-	t_color	color;
+	t_vec3d		light_vec3d;
+	double		light_bri;
+	t_object	*light;
+	t_color		color;
 
 	if (check_str(s, 4) || !ft_ranges(ft_atof(s[2]), 0.0, 1.0))
 		return (1);

@@ -24,6 +24,7 @@ static t_list	*ft_lstlast(t_list *lst)
 	}
 	return (lst);
 }
+
 t_list	*ft_lstnew(void *content)
 {
 	t_list	*node;
