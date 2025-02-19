@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/17 13:27:17 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:01:23 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*check_path(char *str)
 	return (NULL);
 }
 
-int	set_sphere(char **s, t_minirt *aml)
+int	set_sp(char **s, t_minirt *rt)
 {
 	t_object	*sphere;
 	double		dia;
@@ -58,16 +58,16 @@ int	set_sphere(char **s, t_minirt *aml)
 	rgb = check_color(s[3]);
 	path = check_path(s[3]);
 	if (path)
-		aml->count_t++;
+		rt->count_t++;
 	sphere = sphere_ob(xyz, rgb, dia, path); // check  path leaks
-	if (!sphere || xyz.isv || (rgb.isv && !path) || !++(aml->obj_count))
+	if (!sphere || xyz.isv || (rgb.isv && !path) || !++(rt->obj_count))
 		return (free_obj(sphere), 1);
-	sphere->id = aml->obj_count;
-	ft_lstadd_back(&aml->object, ft_lstnew(sphere));
+	sphere->id = rt->obj_count;
+	ft_lstadd_back(&rt->object, ft_lstnew(sphere));
 	return (0);
 }
 
-int	set_plane(char **s, t_minirt *aml)
+int	set_pl(char **s, t_minirt *rt)
 {
 	t_color		rgb;
 	t_object	*plane;
@@ -83,14 +83,14 @@ int	set_plane(char **s, t_minirt *aml)
 	rgb = check_color(s[3]);
 	path = check_path(s[3]);
 	plane = plane_ob(pxyz, vxyz, rgb, path);
-	if (vxyz.isv || pxyz.isv || (rgb.isv && !path) || !++(aml->obj_count))
+	if (vxyz.isv || pxyz.isv || (rgb.isv && !path) || !++(rt->obj_count))
 		return (free_obj(plane), 1);
-	plane->id = aml->obj_count;
-	ft_lstadd_back(&aml->object, ft_lstnew(plane));
+	plane->id = rt->obj_count;
+	ft_lstadd_back(&rt->object, ft_lstnew(plane));
 	return (0);
 }
 
-int	set_cylinder(char **s, t_minirt *aml)
+int	set_cy(char **s, t_minirt *rt)
 {
 	t_object	*cylinder;
 	t_color		rgb;
@@ -106,26 +106,26 @@ int	set_cylinder(char **s, t_minirt *aml)
 	v[0] = ft_atof(s[3]).num;
 	v[1] = ft_atof(s[4]).num;
 	cylinder = cylinder_ob(cxyz, vxyz, v, rgb);
-	if (!cylinder || vxyz.isv || cxyz.isv || rgb.isv || !++(aml->obj_count))
+	if (!cylinder || vxyz.isv || cxyz.isv || rgb.isv || !++(rt->obj_count))
 		return (free_obj(cylinder), 1);
-	cylinder->id = aml->obj_count;
-	ft_lstadd_back(&aml->object, ft_lstnew(cylinder));
+	cylinder->id = rt->obj_count;
+	ft_lstadd_back(&rt->object, ft_lstnew(cylinder));
 	return (0);
 }
 
 t_object	*cone_ob(t_vec3d point, t_vec3d normal, double *d_h, t_color color)
 {
 	t_object	*obje;
-	t_cone		*obj;
+	t_co		*obj;
 
 	obje = malloc(sizeof(t_object));
 	if (!obje)
 		return (NULL);
-	obj = malloc(sizeof(t_cone));
+	obj = malloc(sizeof(t_co));
 	if (!obj)
 		return (NULL);
 	obj->point = point;
-	obj->normal = vec3d_normalize(normal);
+	obj->normal = v_normalize(normal);
 	obj->radius = (d_h[0] / 2);
 	obj->height = d_h[1];
 	obj->color = color;
@@ -134,7 +134,7 @@ t_object	*cone_ob(t_vec3d point, t_vec3d normal, double *d_h, t_color color)
 	return (obje);
 }
 
-int	set_cone(char **s, t_minirt *aml)
+int	set_co(char **s, t_minirt *rt)
 {
 	t_object	*cone;
 	t_vec3d		point;
@@ -150,9 +150,9 @@ int	set_cone(char **s, t_minirt *aml)
 	v[1] = ft_atof(s[4]).num;
 	color = check_color(s[5]);
 	cone = cone_ob(point, normal, v, color);
-	if (!cone || point.isv || normal.isv || color.isv || !++(aml->obj_count))
+	if (!cone || point.isv || normal.isv || color.isv || !++(rt->obj_count))
 		return (free_obj(cone), 1);
-	cone->id = aml->obj_count;
-	ft_lstadd_back(&aml->object, ft_lstnew(cone));
+	cone->id = rt->obj_count;
+	ft_lstadd_back(&rt->object, ft_lstnew(cone));
 	return (0);
 }

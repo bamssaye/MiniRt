@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 19:36:21 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:30:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,47 +22,61 @@ void	ft_init(t_minirt *mrt)
 	mrt->obj_count = 0;
 }
 
-t_tex    load_img(void *mlx, char *path)
+int print_err(char *str, char *s)
 {
-
-	t_tex   tex;
-	if (!access(path, R_OK))
-		exit(1);
-	tex.path = path;
-    tex.img = mlx_xpm_file_to_image(mlx, path+8, &tex.width, &tex.height);
-	if (!tex.img)
-		exit(1);
-    tex.addr = mlx_get_data_addr(tex.img, &tex.bpp,
-        &tex.line_length, &tex.endian);
-    return (tex);
+	return (printf("%s : %s\n", str, s), 1);
+}
+void    load_img(void *mlx, t_tex *img, char *str)
+{
+    char    name[40];
+    int i;
+    
+	i = -1;
+	while (str[++i]){
+        name[i] = str[i];}
+    int j =-1;
+    while (img->path[++j] && i < 30)
+        name[i++] = img->path[j];
+    name[i] = '\0';
+	if (img->path)
+		free(img->path);
+	img->path = name;
+    img->img = mlx_xpm_file_to_image(mlx, name, &img->width, &img->height);
+	if (!img->img){
+		img->check_valid = 1;
+		return ;
+	}	
+    img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length, \
+		&img->endian);
 }
 
 void load_texture(t_minirt *rt, t_list *lst)
 {
 	t_list *tmp;
 	t_object *obj;
-	t_sphere	*sp;
-	// t_plane		*pl;
 	
 	tmp = lst;
 	while (tmp)
 	{
 		obj = (t_object*)tmp->content;
-		if (obj->type == SPHERE && obj->t)
+		if (!obj->t)
 		{
-			sp = (t_sphere*)obj->object;
-			sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
+			tmp = tmp->next;
+			continue;
 		}
-		if (obj->type == PLANE && obj->t)
+		if (obj->type == SPHERE)
 		{
-			sp = (t_sphere*)obj->object;
-			sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
+			load_img(rt->mlx.mlx, &((t_sp*)obj->object)->tex, "./texture/");
+			load_img(rt->mlx.mlx, &((t_sp*)obj->object)->n_map, "./texture/");
 		}
-		// if (obj->type == SPHERE)
-		// {
-		// 	sp = (t_sphere*)obj->object;
-		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
-		// }
+		else if (obj->type == PLANE){
+			load_img(rt->mlx.mlx, &((t_pl*)obj->object)->tex, "./texture/");
+			load_img(rt->mlx.mlx, &((t_pl*)obj->object)->n_map, "./texture/");
+		}
+		// else if (obj->type == CYLINDER && obj->t)
+		// 	load_img(rt->mlx.mlx, &((t_cy*)obj->object)->tex, "./texture/");
+		// else if (obj->type == CYLINDER && obj->t)
+		// 	load_img(rt->mlx.mlx, &((t_*)obj->object)->tex, "./texture/");
 		tmp = tmp->next;
 	}
 }

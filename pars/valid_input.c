@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_input.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:09:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/16 21:36:15 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:01:23 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,12 @@ int	valid_line(char **s, t_minirt *mrt)
 	if (!ft_strncmp(s[0], "L", len))
 		return (set_light(s, mrt));
 	if (!ft_strncmp(s[0], "sp", len))
-		return (set_sphere(s, mrt));
+		return (set_sp(s, mrt));
 	if (!ft_strncmp(s[0], "pl", len))
-		return (set_plane(s, mrt));
+		return (set_pl(s, mrt));
 	if (!ft_strncmp(s[0], "cy", len))
-		return (set_cylinder(s, mrt));
+		return (set_cy(s, mrt));
 	if (!ft_strncmp(s[0], "co", len))
-		return (set_cone(s, mrt));
+		return (set_co(s, mrt));
 	return (1);
 }

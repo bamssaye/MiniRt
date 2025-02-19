@@ -3,65 +3,61 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/17 13:26:20 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:19:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-double	cy_ray_dista(t_ray ray, t_cylinder cy)
+double	cy_ray_dista(t_ray ray, t_cy cy)
 {
 	t_vec3d	ori;
 
-	double(a), (b), (c), (po), (bb), (cc);
-	ori = vec3d_minus(ray.origin, cy.point);
-	po = vec3d_dot(ray.direction, cy.normal);
-	a = vec3d_dot(ray.direction, ray.direction) - pow(po, 2);
-	bb = vec3d_dot(ray.direction, cy.normal);
-	cc = vec3d_dot(ori, cy.normal);
-	b = 2.0 * (vec3d_dot(ori, ray.direction) - bb * cc);
-	c = vec3d_dot(ori, ori) - pow(cc, 2) - (cy.radius * cy.radius);
+	double (a), (b), (c), (d_dn), (d_on);
+	ori = v_minus(ray.origin, cy.point);
+	d_on = v_dot(ori, cy.normal);
+	d_dn = v_dot(ray.direction, cy.normal);
+	a = v_dot(ray.direction, ray.direction) - (d_dn * d_dn);
+	b = 2.0 * (v_dot(ori, ray.direction) - d_dn * d_on);
+	c = v_dot(ori, ori) - (d_on * d_on) - (cy.radius * cy.radius);
 	return (quad_equa(a, b, c));
 }
 
-void cy_caps(t_plane *pl, t_cylinder *cy, int is_top)
+void cy_caps(t_pl *pl, t_cy *cy, int is_top)
 {
     t_vec3d offset;
     t_vec3d cap_ce;
 
     if (is_top)
     {
-        offset = vec3d_scale(cy->len / 2.0, cy->normal);
-        cap_ce = vec3d_plus(cy->point, offset);
+        offset = v_scale(cy->len / 2.0, cy->normal);
+        cap_ce = v_plus(cy->point, offset);
 		offset.isv = 1;
     }
     else
     {
-        offset = vec3d_scale(-cy->len / 2.0, cy->normal);
-        cap_ce = vec3d_plus(cy->point, offset);
+        offset = v_scale(-cy->len / 2.0, cy->normal);
+        cap_ce = v_plus(cy->point, offset);
 		offset.isv = 0;
     }
     *pl = copy_pl(cap_ce, cy->normal, cy->color, offset);
 }
 
-int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
+int	check_cylinder_hit(t_cy *cy, t_hit *p)
 {
 	double	dist;
 	t_vec3d	point_to_center;
 
 	dist = cy_ray_dista(*p->ray, *cy);
-	// printf("|  %f |", dist);
     if (dist > 0.0)
     {
-		// printf("|  %f |", dist);
-	    p->closest.point = vec3d_plus(p->ray->origin, vec3d_scale(dist, p->ray->direction));
-		// printf("  Point: (%.2f, %.2f, %.2f)", p->closest.point.x, p->closest.point.y, p->closest.point.z);
-	    p->closest.normal = vec3d_normalize(vec3d_minus(p->closest.point, cy->point));
-	    point_to_center = vec3d_minus(p->closest.point, cy->point);
-	    if (fabs(vec3d_dot(point_to_center, cy->normal)) < cy->len / 2.0)
+	    p->closest.point = v_plus(p->ray->origin, v_scale(dist, p->ray->direction));
+	    p->closest.normal = v_normalize(v_minus(p->closest.point, cy->point));
+	    point_to_center = v_minus(p->closest.point, cy->point);
+	    if (fabs(v_dot(point_to_center, cy->normal)) < cy->len / 2.0)
 	    {
 		    p->closest.dista = dist;
 		    p->hit_clos = 1;
@@ -73,25 +69,19 @@ int	check_cylinder_hit(t_cylinder *cy, t_in_pa *p)
     return (0);
 }
 
-int check_top_cap_intersection(t_cylinder *cy, t_in_pa *inter)
+int check_top_cap_intersection(t_cy *cy, t_hit *inter)
 {
     t_vec3d point_to_center;
-    t_plane top_cap;
+    t_pl top_cap;
 
     cy_caps(&top_cap, cy, 1);
     if (plane_inter(&top_cap, inter))
     {
-        point_to_center = vec3d_minus(inter->closest.point, top_cap.point);
-        if (vec3d_length(point_to_center) < cy->radius)
+        point_to_center = v_minus(inter->closest.point, top_cap.point);
+        if (v_magnitude(point_to_center) < cy->radius)
         {
-            // printf("  Top Cap Intersection: (%.2f, %.2f, %.2f)\n", 
-            //         inter->closest.point.x, 
-            //         inter->closest.point.y, 
-            //         inter->closest.point.z);
-			// printf("  Top Cap Intersection: (%.2f)\n", 
-			// 	inter->closest.dista);
-            if (vec3d_dot(inter->ray->direction, top_cap.normal) > 0)
-                inter->closest.normal = vec3d_scale(-1, top_cap.normal);
+            if (v_dot(inter->ray->direction, top_cap.normal) > 0)
+                inter->closest.normal = v_scale(-1, top_cap.normal);
             else
                 inter->closest.normal = top_cap.normal;
 			inter->closest.dista = inter->closest.dista;
@@ -103,26 +93,19 @@ int check_top_cap_intersection(t_cylinder *cy, t_in_pa *inter)
     return (0);
 }
 
-int check_bottom_cap_intersection(t_cylinder *cy, t_in_pa *inter)
+int check_bottom_cap_intersection(t_cy *cy, t_hit *inter)
 {
     t_vec3d point_to_center;
-    t_plane bottom_cap;
+    t_pl bottom_cap;
 
     cy_caps(&bottom_cap, cy, 0);
     if (plane_inter(&bottom_cap, inter))
     {
-        point_to_center = vec3d_minus(inter->closest.point, bottom_cap.point);
-        if (vec3d_length(point_to_center) < cy->radius)
+        point_to_center = v_minus(inter->closest.point, bottom_cap.point);
+        if (v_magnitude(point_to_center) < cy->radius)
         {
-            // printf("  Bottom Cap Intersection: (%.2f, %.2f, %.2f)\n", 
-            //         inter->closest.point.x, 
-            //         inter->closest.point.y, 
-            //         inter->closest.point.z);
-
-			// printf("  Bottom Cap Intersection: (%.2f)\n", 
-			// 	inter->closest.dista);
-			if (vec3d_dot(inter->ray->direction, bottom_cap.normal) > 0)
-					inter->closest.normal = vec3d_scale(-1, bottom_cap.normal);
+			if (v_dot(inter->ray->direction, bottom_cap.normal) > 0)
+					inter->closest.normal = v_scale(-1, bottom_cap.normal);
 			else
 					inter->closest.normal = bottom_cap.normal;
 			inter->closest.dista = inter->closest.dista;
@@ -134,14 +117,10 @@ int check_bottom_cap_intersection(t_cylinder *cy, t_in_pa *inter)
     return (0);
 }
 
-int check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *inter)
+int check_cylinder_caps_intersection(t_cy *cy, t_hit *inter)
 {
-    t_in_pa top_inter;
-    t_in_pa bottom_inter;
-
-    int hit_top;
-    int hit_bottom;
-    
+    t_hit (bottom_inter), (top_inter);
+    int (hit_bottom), (hit_top);
     top_inter = *inter;
     bottom_inter = *inter;
     hit_top = check_top_cap_intersection(cy, &top_inter);
@@ -149,13 +128,9 @@ int check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *inter)
     if (hit_top && hit_bottom) 
     {
         if (top_inter.closest.dista < bottom_inter.closest.dista)
-        {
             *inter = top_inter;
-        }
         else
-        {
             *inter = bottom_inter;
-        }
         return 1;
     }
     if (hit_top)
@@ -171,12 +146,9 @@ int check_cylinder_caps_intersection(t_cylinder *cy, t_in_pa *inter)
     return 0;
 }
 
-void cy_inter(t_cylinder *cy, t_in_pa *f_inter)
+void cy_inter(t_cy *cy, t_hit *f_inter)
 {
-    t_in_pa tmp_body = *f_inter;
-    t_in_pa tmp_caps = *f_inter;
-
-
+    t_hit (tmp_body), (tmp_caps);
     tmp_body = *f_inter;
     if (check_cylinder_hit(cy, &tmp_body))
     {

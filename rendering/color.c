@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:18:57 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/08 14:19:01 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:51:05 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,12 @@ int	min(int a, int min)
 
 t_color	color_plus(t_color a, t_color b)
 {
-	return ((t_color){.isv = 0, .r = min(a.r + b.r, 255), .g = min(a.g + b.g,
-			255), .b = min(a.b + b.b, 255)});
+	return ((t_color){
+		.isv = 0,
+		.r = min(a.r + b.r, 255),
+		.g = min(a.g + b.g, 255),
+		.b = min(a.b + b.b, 255)
+	});
 }
 
 int	ctoi(t_color color)
@@ -32,12 +36,20 @@ int	ctoi(t_color color)
 
 t_color	color_scale(double scale, t_color a)
 {
-	return ((t_color){.isv = 0, .r = (scale * (double)a.r), .g = (scale
-			* (double)a.g), .b = (scale * (double)a.b)});
+	return ((t_color){
+		.isv = 0,
+		.r = (scale * (double)a.r),
+		.g = (scale * (double)a.g),
+		.b = (scale * (double)a.b)
+	});
 }
 
 t_color	color_a(t_color a, t_color b)
 {
-	return ((t_color){.isv = 0, .r = (a.r * b.r) / 255, .g = (a.g * b.g) / 255,
-		.b = (a.b * b.b) / 255});
+	return ((t_color){
+		.isv = 0,
+		.r = (a.r * b.r) / 255,
+		.g = (a.g * b.g) / 255,
+		.b = (a.b * b.b) / 255
+	});
 }

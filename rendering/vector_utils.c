@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   vector_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:20:01 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/17 01:04:56 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:19:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_vec3d	vec3d_scale(double scale, t_vec3d a)
+t_vec3d	v_scale(double scale, t_vec3d a)
 {
 	return ((t_vec3d){
 		.x = a.x * scale,
@@ -21,7 +21,7 @@ t_vec3d	vec3d_scale(double scale, t_vec3d a)
 	});
 }
 
-t_vec3d	vec3d_cross(t_vec3d a, t_vec3d b)
+t_vec3d	v_cross(t_vec3d a, t_vec3d b)
 {
 	return ((t_vec3d){
 		.x = a.y * b.z - a.z * b.y,
@@ -30,7 +30,7 @@ t_vec3d	vec3d_cross(t_vec3d a, t_vec3d b)
 	});
 }
 
-t_vec3d	vec3d_plus(t_vec3d a, t_vec3d b)
+t_vec3d	v_plus(t_vec3d a, t_vec3d b)
 {
 	return ((t_vec3d){
 		.x = a.x + b.x,
@@ -39,7 +39,7 @@ t_vec3d	vec3d_plus(t_vec3d a, t_vec3d b)
 	});
 }
 
-t_vec3d	vec3d_minus(t_vec3d a, t_vec3d b)
+t_vec3d	v_minus(t_vec3d a, t_vec3d b)
 {
 	return ((t_vec3d){
 		.x = a.x - b.x,
@@ -48,11 +48,11 @@ t_vec3d	vec3d_minus(t_vec3d a, t_vec3d b)
 	});
 }
 
-t_vec3d	vec3d_normalize(t_vec3d a)
+t_vec3d	v_normalize(t_vec3d a)
 {
 	double	length;
 
-	length = vec3d_length(a);
+	length = v_magnitude(a);
 	return ((t_vec3d){
 		.x = a.x / length,
 		.y = a.y / length,

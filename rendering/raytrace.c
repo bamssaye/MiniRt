@@ -3,29 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:46 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/16 03:34:47 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:13:59 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_ray	ray_gen(t_camera cam, int x, int y) // generate_ray
+
+t_ray	ray_gen(t_camera cam, int x, int y)
 {
 	t_ray	ray;
 
-	ray.direction = vec3d_normalize(vec3d_plus(cam.top_left,
-    	vec3d_plus(vec3d_scale(x, cam.u), vec3d_scale(y, cam.v))));
+	ray.direction = v_normalize(v_plus(cam.top_left,
+    	v_plus(v_scale(x, cam.u), v_scale(y, cam.v))));
 	return ((t_ray){
 		.direction = ray.direction,
 		.origin = cam.position});
 }
-
-void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist,
-		t_minirt *aml)
 // trace ray to light source
+void	trace_ray(t_list *obj, t_hit *pa, int *stuck, double mx_dist, t_minirt *rt)
 {
 	t_list *lst;
 	t_object *objt;
@@ -42,7 +41,7 @@ void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist,
 			lst = lst->next;
 			continue ;
 		}
-		inter_wobject(objt, pa, aml);
+		inter_wobject(objt, pa, rt);
 		lst = lst->next;
 		if (pa->closest.dista <= mx_dist)
 		{
@@ -50,9 +49,8 @@ void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist,
 		}
 	}
 }
-
-void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml)
 // trace_ray_to_objects
+void	trace_rtobj(t_list *obj, t_hit *pa, t_minirt *rt)
 {
 	t_list *lst;
 	t_object *objt;
@@ -63,7 +61,7 @@ void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml)
 		pa->closest.dista = INFINITY;
 		pa->closest.color = (t_color){0, 0, 0, 0};
 		objt = (t_object *)lst->content;
-		inter_wobject(objt, pa, aml);
+		inter_wobject(objt, pa, rt);
 		if (pa->hit_clos)
 		{
 			if (pa->closest.dista < pa->inters.dista)
@@ -77,7 +75,7 @@ void	trace_rtobj(t_list *obj, t_in_pa *pa, t_minirt *aml)
 	}
 }
 
-void	trace_light_at_intersection(t_minirt *prog, t_in_pa *param)
+void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
 {
 	t_trace_light	tr;
 
@@ -99,14 +97,14 @@ void	trace_light_at_intersection(t_minirt *prog, t_in_pa *param)
 				tr.angle_scale = c_light_scale(tr.inters.normal,
 						tr.l_pa.light_dire);
 				tr.color = color_scale(tr.angle_scale, tr.inters.color);
-				reflect_dir = vec3d_normalize(vec3d_minus(vec3d_scale(2.0
-								* vec3d_dot(tr.inters.normal,
+				reflect_dir = v_normalize(v_minus(v_scale(2.0
+								* v_dot(tr.inters.normal,
 									tr.l_pa.light_dire), tr.inters.normal),
 							tr.l_pa.light_dire));
-				view_dir = vec3d_normalize(vec3d_minus(prog->camera.position,
+				view_dir = v_normalize(v_minus(prog->cam.position,
 							tr.inters.point));
 				tr.l_pa.light.specular_color = color_scale(fmin(1.5
-							* pow(fmax(0.0, vec3d_dot(reflect_dir, view_dir)),
+							* pow(fmax(0.0, v_dot(reflect_dir, view_dir)),
 								10), 0.08), (t_color){255, 255, 255, 0});
 				tr.final_c = color_plus(tr.final_c, color_plus(tr.color,
 							tr.l_pa.light.specular_color));
@@ -121,9 +119,9 @@ void	trace_light_at_intersection(t_minirt *prog, t_in_pa *param)
 int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
 {
 	t_color	color;
-	t_in_pa	param;
+	t_hit	param;
 
-	ft_memset(&param, 0, sizeof(t_in_pa));
+	ft_memset(&param, 0, sizeof(t_hit));
 	if (!prog->amc[A])
 		prog->am_light.al_rgb = (t_color){0, 0, 0, 0};
 	param.ray = ray;

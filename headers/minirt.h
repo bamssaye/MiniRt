@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/13 22:55:18 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:24:28 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,23 @@
 # define L 2
 # define C 1
 # define A 0
-
+#define K_UP 126
+#define K_DOWN 125
+#define K_LEFT 123
+#define K_RIGHT 124
+#define K_Z_IN 24
+#define K_Z_OUT 27
+#define K_R 15
+#define K_T 17
+#define YES 1
+#define NO 0
+# define MSG_1 "ERROR, Run : ./miniRt scene/*.rt\n {* : file name}"
+# define MSG_2 "ERROR, File not found... !\n *file name must be .rt"
+# define MSG_3 "ERROR, Check line data..."
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
+// # define MSG_1 ""
 #endif

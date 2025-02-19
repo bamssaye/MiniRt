@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   canvas.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/28 03:30:18 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 19:36:47 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:44:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	render_image(t_minirt *prog)
 		while (prog->y < W_HEIGHT)
 		{
 			printf("\rRendering: %d%%", (prog->x * 100 / W_WIDTH) + 1);
-			ray = ray_gen(prog->camera, prog->x, prog->y);
+			ray = ray_gen(prog->cam, prog->x, prog->y);
 			color = calculate_pixel_color(&ray, prog);
 			mlx_putpixel(&prog->mlx.img, prog->x, prog->y, color);
 			prog->y++;

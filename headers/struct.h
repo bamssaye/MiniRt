@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 19:45:25 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 21:31:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ typedef struct s_tex
 	int		height;
 	int 	line_length;
 	char	*path;
+	int		check_valid;
 }			t_tex;
 
 typedef struct s_sphere
@@ -96,7 +97,8 @@ typedef struct s_sphere
 	t_color		color;
 	double		radius;
 	t_tex		tex;
-}			t_sphere;
+	t_tex		n_map;
+}			t_sp;
 
 typedef struct s_plane
 {
@@ -104,7 +106,8 @@ typedef struct s_plane
 	t_vec3d		normal;
 	t_color		color;
 	t_tex		tex;
-}			t_plane;
+	t_tex		n_map;
+}			t_pl;
 
 typedef struct s_cylinder
 {
@@ -113,16 +116,20 @@ typedef struct s_cylinder
 	t_color		color;
 	double		radius;
 	double		len;
-}			t_cylinder;
+	t_tex		tex;
+	t_tex		n_map;
+}			t_cy;
 
 typedef struct s_cone 
 {
-    t_vec3d point;
-    t_vec3d normal;
-    double radius;
-    double height;
-    t_color color;
-} t_cone;
+    t_vec3d 	point;
+    t_vec3d 	normal;
+    double		radius;
+    double		height;
+    t_color		color;
+	t_tex		tex;
+	t_tex		n_map;
+} t_co;
 
 ///////////////////////////////////////////
 ////////////////////////// ENV : CAMERA, LIGHT, EMBIENT LIGHT
@@ -169,7 +176,7 @@ typedef struct s_inters_params
 	t_npc		closest;
 	t_npc		inters;
 	t_color		final_color;
-}				t_in_pa;
+}				t_hit;
 ///////////////////////////////////////////
 ////////////////////////// OBJECT LIGHT
 
@@ -216,14 +223,42 @@ typedef struct s_trace_light
 
 ///////////////////////////////////////////
 ////////////////////////// MAIN
+typedef struct s_obj
+{
+	t_sp		*sp;
+	t_pl		*pl;
+	t_cy		*cy;
+	t_co		*co;
+	t_object	*obj;
+} t_obj;
+
+typedef struct t_rota
+{
+	int		id_obj;
+	t_object	*slected;
+} t_rota;
+
+typedef struct s_key
+{
+	int rot;
+	int tra;
+	int left;
+	int right;
+	int up;
+	int down;
+	int z_in;
+	int z_out;
+} t_keys;
 
 typedef struct s_minirt
 {
 	t_list		*object;
 	t_a_light	am_light;
-	t_camera	camera;
+	t_camera	cam;
 	t_light		light;
 	t_mlx		mlx;
+	t_rota		selected;
+	t_keys		key;
 	int			obj_count;
 	int			count_t;
 	int			amc[3];

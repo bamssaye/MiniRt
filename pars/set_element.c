@@ -3,53 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   set_element.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/09 16:41:08 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/19 20:55:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-int	set_ambient(char **s, t_minirt *aml)
+int	set_ambient(char **s, t_minirt *rt)
 {
 	double	al;
 	t_color	rgb;
 
-	if (aml->amc[A] || check_str(s, 3) || !ft_ranges(ft_atof(s[1]), 0.0, 1.0))
+	if (rt->amc[A] || check_str(s, 3) || !ft_ranges(ft_atof(s[1]), 0.0, 1.0))
 		return (1);
 	al = ft_atof(s[1]).num;
 	rgb = check_color(s[2]);
 	if (rgb.isv)
 		return (1);
-	aml->amc[A] = 1;
-	aml->am_light.al = al;
-	aml->am_light.al_rgb = color_scale(al, rgb);
+	rt->amc[A] = 1;
+	rt->am_light.al = al;
+	rt->am_light.al_rgb = color_scale(al, rgb);
 	return (0);
 }
 
-int	set_camera(char **s, t_minirt *aml)
+int	set_camera(char **s, t_minirt *rt)
 {
 	t_vec3d	c_xyz;
 	t_vec3d	vec_xyz;
 	int		fov;
 
-	if (aml->amc[C] || check_str(s, 4) || !ft_ranges(ft_atof(s[3]), 0, 180))
+	if (rt->amc[C] || check_str(s, 4) || !ft_ranges(ft_atof(s[3]), 0, 180))
 		return (1);
 	fov = ft_atoii(s[3]).num;
 	c_xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	vec_xyz = check_xyz(s[2], -1.0, 1.0);
 	if (c_xyz.isv || vec_xyz.isv)
 		return (1);
-	aml->amc[C] = 1;
-	aml->camera.position = c_xyz;
-	aml->camera.normal = vec_xyz;
-	aml->camera.fov = fov;
-	aml->camera.look_at = c_look_at(&aml->camera);
-	aml->camera.u = c_r_v(&aml->camera);
-	aml->camera.v = c_up_v(&aml->camera);
-	aml->camera.top_left = c_topleft(&aml->camera);
+	rt->amc[C] = 1;
+	rt->cam.position = c_xyz;
+	rt->cam.normal = vec_xyz;
+	rt->cam.fov = fov;
+	rt->cam.look_at = v_normalize(rt->cam.normal);
+	rt->cam.u = c_r_v(&rt->cam);
+	rt->cam.v = v_normalize(v_cross(rt->cam.look_at, rt->cam.u));
+	rt->cam.top_left = c_topleft(&rt->cam);
 	return (0);
 }
 
@@ -66,13 +66,13 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 		return (free(obje), NULL);
 	obj->intensity = light_bri;
 	obj->color = color;
-	obj->position = vec3d_scale(light_bri, light_vec3d);
+	obj->position = v_scale(light_bri, light_vec3d);
 	obje->type = LIGHT;
 	obje->object = obj;
 	return (obje);
 }
 
-int	set_light(char **s, t_minirt *aml)
+int	set_light(char **s, t_minirt *rt)
 {
 	t_vec3d		light_vec3d;
 	double		light_bri;
@@ -86,8 +86,8 @@ int	set_light(char **s, t_minirt *aml)
 	color = check_color(s[3]);
 	if (light_vec3d.isv || color.isv)
 		return (1);
-	aml->amc[L] = 1;
+	rt->amc[L] = 1;
 	light = light_ob(light_vec3d, light_bri, color);
-	ft_lstadd_back(&aml->object, ft_lstnew(light));
+	ft_lstadd_back(&rt->object, ft_lstnew(light));
 	return (0);
 }
