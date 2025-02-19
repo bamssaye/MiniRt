@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 04:34:35 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:12:02 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,8 @@ char *check_path(char *str, int bouns)
 		return (NULL);
 	if (ft_strncmp(str, "texture:", 8))
 		return (NULL);
-	return (ft_strdup(str+8));
-}
-t_tex init_imgs()
-{
-	return ((t_tex){
-		.img = NULL,
-		.addr = NULL,
-		.path = NULL
-	});
+	// return (ft_strdup(str+8));
+	return(str+8);
 }
 
 int	set_sp(char **s, t_minirt *aml)
@@ -116,8 +109,6 @@ int	set_cy(char **s, t_minirt *aml)
 	v[0] = ft_atof(s[3]).num;
 	v[1] = ft_atof(s[4]).num;
 	path = check_path(s[5], aml->bouns);
-	// printf("%s\n",path);
-	// exit(1);
 	if (path)
 		aml->count_t++;
 	cylinder = cylinder_ob(cxyz, vxyz, v, rgb);

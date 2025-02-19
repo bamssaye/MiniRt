@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:20:34 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 15:04:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/16 12:50:28 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,22 +42,22 @@ t_npc	pl_closest(t_vec3d ray, t_pl pl, double dist, t_vec3d origin)
 	}});
 }
 
-int	plane_inter(t_pl *plane, t_in_pa *param)
+int	plane_inter(t_pl *pl, t_in_pa *param)
 {
 	double	dist;
 	t_vec3d	*ray;
 
 	ray = &param->ray->direction;
-	dist = pl_ray_dista(*(param->ray), *plane, &param->closest);
+	dist = pl_ray_dista(*(param->ray), *pl, &param->closest);
 	if (dist > 0)
 	{
-		// fprintf(stderr, "helllll \n");
-		param->closest = pl_closest(*ray, *plane, dist, param->ray->origin);
+		param->closest = pl_closest(*ray, *pl, dist, param->ray->origin);
 		param->hit_clos = 1;
-		// if (plane->tex.img)
-		// 	param->closest.color = pl_texture_col(plane->tex, param->closest.point, *plane);
+		if (pl->tex.path && pl->tex.img)
+			param->closest.color = pl_texture(&pl->tex, &param->closest.point, pl);
+		if (pl->tex.path && pl->n_map.img)
+			param->closest.normal = pl_nomap(pl, &param->closest, param->ray);
 	}
-	(void)ray;
 	return (dist);
 }
 

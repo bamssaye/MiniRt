@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 17:30:16 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/16 11:02:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,13 @@
 
 
 ///////////////////////////////////////////
+t_vec3d color_map(t_color color);
+t_vec3d sp_nomap(t_sp *sp, t_npc *closest, t_ray *ray);
+t_vec3d pl_nomap(t_pl *pl, t_npc *closest, t_ray *ray);
+t_vec3d cy_nomap(t_cy *cy, t_npc *closest, t_ray *ray);
+t_color pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl);
+t_color sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp);
+t_color cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy);
 void rotate_z(t_object *obj, double angle);
 void rotate_x(t_object *obj, double angle);
 void rotate_y(t_object *obj, double angle);

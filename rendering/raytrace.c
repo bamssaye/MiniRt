@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/06 06:01:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 09:45:29 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/16 09:53:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ t_ray	ray_gen(t_camera cam, int x, int y)
 	ray.direction.x = x * cam.u.x + y * cam.v.x + cam.top_left.x;
 	ray.direction.y = x * cam.u.y + y * cam.v.y + cam.top_left.y;
 	ray.direction.z = x * cam.u.z + y * cam.v.z + cam.top_left.z;
-	return ((t_ray){
-		.direction = vec3d_normalize(&ray.direction),
-		.origin = cam.position});
+	ray.direction = vec3d_normalize(&ray.direction);
+	ray.origin = cam.position;
+	return (ray);
 }
 //trace ray to light source
 void	trace_ray(t_list *obj, t_in_pa *pa, int *stuck, double mx_dist, t_minirt *aml)	

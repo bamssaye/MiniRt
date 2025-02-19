@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 14:24:38 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/16 09:26:06 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	set_camera(char **s, t_minirt *aml)
 		return (1);
 	aml->amc[C] = 1;
 	aml->camera.position = c_xyz;
-	aml->camera.fov = (double)fov / 2 * PI;
+	aml->camera.fov = (double)fov;
 	aml->camera.look_at = vec3d_normalize(&vec_xyz);
 	aml->camera.u = c_up_v(&aml->camera);
 	aml->camera.v = c_r_v(&aml->camera);

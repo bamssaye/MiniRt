@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 10:35:12 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 17:17:36 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/16 09:12:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void transle_x(t_object *obj, double x)
 {
     t_obj objs;
     
-    if (obj->type == PLANE && obj->t++)
+    if (obj->type == SPHERE && obj->t++)
     {
         objs.sp = (t_sp*)obj->object;
         objs.sp->center.x += x;
@@ -42,7 +42,7 @@ void transle_y(t_object *obj, double y)
 {
     t_obj objs;
     
-    if (obj->type == PLANE && obj->t++)
+    if (obj->type == SPHERE && obj->t++)
     {
         objs.sp = (t_sp*)obj->object;
         objs.sp->center.y += y;

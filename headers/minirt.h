@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 16:47:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/16 09:48:01 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@
 # include "struct.h"
 # include "function.h"
 # define P_NAME "miniRT"
-# define W_WIDTH 600
-# define W_HEIGHT 600
+# define W_WIDTH 800
+# define W_HEIGHT 400
 # define IN_MAX 2147483647
 # define IN_MIN 2147483648
 # define PI 3.14159265358979323846f

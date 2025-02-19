@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 17:46:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:42:58 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,14 @@ int	key_hook(int keycode, t_minirt *mrt)
 	return (0);
 }
 
-
+#define K_UP 126
+#define K_DOWN 125
+#define K_LEFT 123
+#define K_RIGHT 124
+#define K_Z_IN 24
+#define K_Z_OUT 27
+#define K_R 15
+#define K_T 17
 
 int mouse_ha(int keycode, int x, int y, t_minirt *prog)
 {
@@ -62,10 +69,11 @@ int mouse_ha(int keycode, int x, int y, t_minirt *prog)
 	trace_rtobj(prog->object, &param, prog);
     if (param.hit_clos)
     {
-		prog->selected.id_obj = param.iobj_id;
+		
 		prog->selected.slected = selected_object(prog->object, param.iobj_id);
 		fprintf(stderr,"[object selected]\n");
 	}
+	prog->selected.id_obj = param.iobj_id;
 	(void)keycode;
 	return 0;
 }
@@ -96,17 +104,15 @@ void rotation_translation(t_minirt *mrt)
 			transle_z(mrt->selected.slected, 5);
 	}
 }
-#define K_UP 126
-#define K_DOWN 125
-#define K_LEFT 123
-#define K_RIGHT 124
-#define K_Z_IN 24
-#define K_Z_OUT 27
-#define K_R 15
-#define K_T 17
-
+void p_cs(t_vec3d a)
+{
+	fprintf(stderr, "[%f, %f, %f]\n", a.x, a.y, a.z);
+}
 int key_press(int button, t_minirt *mrt)
 {
+	// p_cs(mrt->camera.look_at);
+	if (mrt->selected.id_obj == -1)
+		return (print_err("Select an","object..."));
 	if (button == K_R)
 		mrt->key.rot = YES;
 	else if (button == K_T)
@@ -124,13 +130,11 @@ int key_press(int button, t_minirt *mrt)
 	else if (button == K_Z_IN)
 		mrt->key.z_in = YES;
 	rotation_translation(mrt);
-	// fprintf(stderr,"[randering %d]\n", mrt->selected.slected->t);
 	if (mrt->selected.slected->t == 2)
 	{
 		mrt->selected.slected->t = 1;
 		render_image(mrt);
 	}
-		
 	return (0);
 }
 
@@ -154,23 +158,19 @@ int key_relase(int button, t_minirt *mrt)
 		mrt->key.z_in = NO;
 	return 0;
 }
+
+
 void	ft_hooks_fun(t_minirt *mrt)
 {
 	t_mlx	*t;
 
 	t = &mrt->mlx;
-	// mrt->key.tra = 0;
-	// mrt->key.rot = 0;
-	// mrt->key.down = 0;
-	// mrt->key.left = 0;
-	// mrt->key.up = 0;
-	// mrt->key.rot = 0;
+	mrt->selected.id_obj = -1;
 	ft_memset(&mrt->key, 0, sizeof(t_keys));
 	mlx_hook(t->win, 17, 0, ft_clear_all, mrt);
 	mlx_mouse_hook(t->win, mouse_ha, mrt);
 	mlx_hook(t->win, 2, 1L<<0, key_press, mrt);
 	mlx_hook(t->win, 3, 1L<<1, key_relase, mrt);
-	// mlx_key_hook(t->win, key_hook, mrt);
 	mlx_loop(t->mlx);
 }
 

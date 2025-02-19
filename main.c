@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 04:27:47 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:07:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void    load_img(void *mlx, t_tex *img, char *str)
     char    name[40];
     int i;
     
-    i = -1;
-    while (str[++i]){
+	i = -1;
+	while (str[++i]){
         name[i] = str[i];}
     int j =-1;
     while (img->path[++j] && i < 30)
@@ -54,9 +54,14 @@ void load_texture(t_minirt *rt, t_list *lst)
 			continue;
 		}
 		if (obj->type == SPHERE)
+		{
 			load_img(rt->mlx.mlx, &((t_sp*)obj->object)->tex, "./texture/");
-		else if (obj->type == PLANE)
+			load_img(rt->mlx.mlx, &((t_sp*)obj->object)->n_map, "./texture/");
+		}
+		else if (obj->type == PLANE){
 			load_img(rt->mlx.mlx, &((t_pl*)obj->object)->tex, "./texture/");
+			load_img(rt->mlx.mlx, &((t_pl*)obj->object)->n_map, "./texture/");
+		}
 		// else if (obj->type == CYLINDER && obj->t)
 		// 	load_img(rt->mlx.mlx, &((t_cy*)obj->object)->tex, "./texture/");
 		// else if (obj->type == CYLINDER && obj->t)

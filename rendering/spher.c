@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 11:55:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 03:37:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:25:13 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,19 @@ t_npc	c_sp_inter(t_ray ray, double dist, t_sp sp)
 		.point = point});
 }
 
-void	sp_inter(t_sp *sp, t_in_pa *intersection)
+void	sp_inter(t_sp *sp, t_in_pa *inter)
 {
 	double	dist;
 	
-	dist = sp_ray_dista(*(intersection->ray), *sp);
+	dist = sp_ray_dista(*(inter->ray), *sp);
 	if (dist > 0.0)
 	{
-		intersection->closest = c_sp_inter(*intersection->ray, dist, *sp);
-		intersection->hit_clos = 1;
-		// if (sp->tex.img)
-		// 	intersection->closest.color = spher_texture_color(sp->tex, intersection->closest.point, *sp);
+		inter->closest = c_sp_inter(*inter->ray, dist, *sp);
+		inter->hit_clos = 1;
+		if (sp->tex.path && sp->tex.img)
+			inter->closest.color = sp_texture(&sp->tex, &inter->closest.point, sp);
+		if (sp->tex.path && sp->n_map.img){
+				inter->closest.normal = sp_nomap(sp, &inter->closest, inter->ray);
+		}	
 	}
 }

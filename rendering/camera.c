@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 01:17:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/14 15:05:22 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 10:29:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ t_vec3d	c_topleft(t_camera *cam)
 	t_vec3d	s_v_v;
 	double	view_d;
 	t_vec3d	tp_left;
-
-	view_d = (W_WIDTH / 2) / (2.0 * tan(cam->fov / 180));
+	
+	view_d = (W_WIDTH / 2) / (tan((cam->fov * PI) / 180.0));
 	dir_v = v_scale(view_d, &cam->look_at);
 	s_u_v = v_scale(W_WIDTH / 2, &cam->u);
 	s_v_v = v_scale(W_HEIGHT / 2, &cam->v);

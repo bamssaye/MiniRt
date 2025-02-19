@@ -6,18 +6,45 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/15 17:41:15 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/17 09:23:36 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_tex init_img(char *path)
+static char	*ft_strjoin(char *s1, char *s2)
+{
+	int		i;
+	int		j;
+	char	*str;
+
+	i = 0;
+	j = 0;
+	// if (!s1 || !s2)
+	// 	return (NULL);
+	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
+}
+
+t_tex init_img(char *path, char *str)
 {
 	return ((t_tex){
 		.img = NULL,
 		.addr = NULL,
-		.path = path
+		.path = ft_strjoin(str, path)
 	});
 }
 
@@ -35,7 +62,13 @@ t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path)
 	obj->radius = dia;
 	obj->color = rgb;
 	obj->center = xyz;
-	obj->tex = init_img(path);
+	if (path)
+	{
+		obj->tex = init_img(path, "");
+		obj->n_map = init_img(path, "normal_");
+	}
+	else
+		obj->tex.path = NULL;
 	obje->t = 1;
 	obje->type = SPHERE;
 	obje->object = obj;
@@ -55,7 +88,12 @@ t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb, char *path)
 		return (free(obje), NULL);
 	obj->color = rgb;
 	obj->point = p_xyz;
-	obj->tex.path = path;
+	if (path){
+	obj->tex = init_img(path, "");
+	obj->n_map = init_img(path, "normal_");
+	}
+	else
+		obj->tex.path = NULL;
 	obj->normal = vec3d_normalize(&v_xyz);
 	obje->type = PLANE;
 	obje->object = obj;
