@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 14:31:21 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:57:47 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void check_type(char *str, int *style, t_object *obje)
 {
 	if (!ft_strncmp(str, "checkborad", 11))
 		style[CHECKBORAD] = 1;
-	else if (ft_strncmp(str, "texture:", 8))
+	else if (!ft_strncmp(str, "texture:", 8))
 		style[TEXTURE] = 1;
-	obje->path = str;
+	obje->path = strdup(str+8);
+	// fprintf(stderr, "STR{%d}--{%s}\n", style[TEXTURE], str);
+	// obje->path = str;
+	(void)obje;
 }
 t_object	*sphere_ob(t_vec3d point, t_color color, double dia, char *path)
 {
@@ -37,6 +40,7 @@ t_object	*sphere_ob(t_vec3d point, t_color color, double dia, char *path)
 	if (!obje)
 		return (NULL);
 	obj = malloc(sizeof(t_sp));
+	ft_memset(obje->style, 0 , sizeof(int*));
 	if (!obj)
 		return (free(obje), NULL);
 	if (path)

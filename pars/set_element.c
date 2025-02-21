@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 14:03:21 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:34:16 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 	if (!obje)
 		return (NULL);
 	obj = malloc(sizeof(t_light));
+	ft_memset(obje->style, 0 , sizeof(int*));
 	if (!obj)
 		return (free(obje), NULL);
 	obj->intensity = light_bri;

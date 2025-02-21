@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 05:56:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:25:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:34:19 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,35 +35,35 @@ t_tex    load_img(void *mlx, char *path, char *str){
     return (tex);
 }
 
-void load_texture(t_minirt *rt, t_list *lst)
-{
-	t_list *tmp;
-	t_object *obj;
-	t_sp	*sp;
-	// t_pl		*pl;
+// void load_texture(t_minirt *rt, t_list *lst)
+// {
+// 	t_list *tmp;
+// 	t_object *obj;
+// 	t_sp	*sp;
+// 	// t_pl		*pl;
 	
-	tmp = lst;
-	while (tmp)
-	{
-		obj = (t_object*)tmp->content;
-		if (obj->type == SPHERE && obj->t)
-		{
-			sp = (t_sp*)obj->object;
-			sp->tex = load_img(rt->mlx.mlx, sp->tex.path, "./texture/");
-		}
-		// if (obj->type == PLANE && obj->t)
-		// {
-		// 	sp = (t_sp*)obj->object;
-		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
-		// }
-		// if (obj->type == SPHERE)
-		// {
-		// 	sp = (t_sp*)obj->object;
-		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
-		// }
-		tmp = tmp->next;
-	}
-}
+// 	tmp = lst;
+// 	while (tmp)
+// 	{
+// 		obj = (t_object*)tmp->content;
+// 		if (obj->type == SPHERE && obj->t)
+// 		{
+// 			sp = (t_sp*)obj->object;
+// 			sp->tex = load_img(rt->mlx.mlx, sp->tex.path, "./texture/");
+// 		}
+// 		// if (obj->type == PLANE && obj->t)
+// 		// {
+// 		// 	sp = (t_sp*)obj->object;
+// 		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
+// 		// }
+// 		// if (obj->type == SPHERE)
+// 		// {
+// 		// 	sp = (t_sp*)obj->object;
+// 		// 	sp->tex = load_img(rt->mlx.mlx, sp->tex.path);
+// 		// }
+// 		tmp = tmp->next;
+// 	}
+// }
 
 int	main(int ac, char **av)
 {

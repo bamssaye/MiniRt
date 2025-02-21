@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 14:02:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/21 13:01:24 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,14 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (print_err(MSG, MSG_1));
-	minirt.bouns = 0;
+	minirt.bouns = 1;
 	ft_init(&minirt);
 	if (ft_readfile(av[1], &minirt))
 		return (1);
-	fprintf(stderr, "dsdsd\n");
 	ft_init_win(&minirt);
-	// if (minirt.count_t)
-	// 	load_texture(&minirt, minirt.object);
+	if (minirt.count_t){
+		load_texture(&minirt, minirt.object);
+	}
 	render_image(&minirt);
 	ft_hooks_fun(&minirt);
 	return (0);

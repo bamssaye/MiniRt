@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 14:31:56 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:31:05 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 
 ///////////////////////////////////////////
+void load_texture(t_minirt *rt, t_list *lst);
 t_vec3d cy_nomap(t_tex *n_map, t_cy *cy, t_npc *closest, t_ray *ray);
 t_vec3d pl_nomap(t_tex *n_map, t_pl *pl, t_npc *closest, t_ray *ray);
 t_vec3d sp_nomap(t_tex *n_map, t_npc *closest, t_ray *ray, t_sp *sp);

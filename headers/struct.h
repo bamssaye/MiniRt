@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 12:58:18 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/21 12:11:28 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,8 +200,8 @@ typedef struct s_obslight
 ////////////////////////// object
 typedef struct s_bump
 {
-	t_tex		*img;
-	t_tex		*bump;
+	t_tex		img;
+	t_tex		bump;
 }			t_bump;
 typedef struct s_objects
 {

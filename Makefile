@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2025/02/20 13:37:56 by bamssaye         ###   ########.fr        #
+#    Updated: 2025/02/21 11:47:18 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framewor
 
 #################################
 VPATH = utils:pars:drawing:tuples:rendering
-SRC = check_input.c read_file.c set_element.c set_object.c set_style.c
+SRC = check_input.c read_file.c set_element.c set_object.c set_style.c main.c
 SRC += template_ob.c valid_input.c plane.c raytrace.c spher.c mlx_utlis.c
 SRC += camera.c color.c cylinder.c intersection.c math.c vector_utils.c cone.c
 SRC += clean_memory.c ft_atod.c ft_atoii.c pars_utils.c canvas.c new_vec.c
@@ -39,7 +39,7 @@ $(OBGDIR)/%.o:%.c
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS)  main.c -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(MLX_FLAGS) -o $(NAME)
 
 clean:
 	$(RM) $(OBGDIR)
