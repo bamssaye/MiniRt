@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:33:54 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:31:56 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 
 
 ///////////////////////////////////////////
+t_vec3d cy_nomap(t_tex *n_map, t_cy *cy, t_npc *closest, t_ray *ray);
+t_vec3d pl_nomap(t_tex *n_map, t_pl *pl, t_npc *closest, t_ray *ray);
+t_vec3d sp_nomap(t_tex *n_map, t_npc *closest, t_ray *ray, t_sp *sp);
 void p_c(t_color a);
 int print_err(char *str, char *s);
 t_vec3d color_map(t_color color);
-t_vec3d sp_nomap(t_sp *sp, t_npc *closest, t_ray *ray);
-t_vec3d pl_nomap(t_pl *pl, t_npc *closest, t_ray *ray);
-t_vec3d cy_nomap(t_cy *cy, t_npc *closest, t_ray *ray);
+// t_vec3d sp_nomap(t_sp *sp, t_npc *closest, t_ray *ray);
+// t_vec3d pl_nomap(t_pl *pl, t_npc *closest, t_ray *ray);
+// t_vec3d cy_nomap(t_cy *cy, t_npc *closest, t_ray *ray);
 t_color pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl);
 t_color sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp);
 t_color cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy);
@@ -33,6 +36,9 @@ void transle_z(t_object *obj, double z);
 void transle_x(t_object *obj, double x);
 void transle_y(t_object *obj, double y);
 void transle_z(t_object *obj, double z);
+t_color pl_checkerboard(t_vec3d *hpoint, t_pl *pl);
+t_color sp_checkerboard(t_vec3d *hpoint, t_sp *sp);
+t_color cy_checkerboard(t_vec3d *hpoint, t_cy *cy);
 /////////////////////////////// PARSINING
 t_color		check_color(char *str);
 t_vec3d		check_xyz(char *str, double min, double max);
@@ -73,15 +79,21 @@ t_color color_a(t_color a, t_color b);
 ////////////////////////// SPHER
 double		sp_ray_dista(t_ray ray, t_sp sp);
 t_npc		c_sp_inter(t_ray ray, double dist, t_sp sp);
-void		sp_inter(t_sp *sp, t_hit *intersection);
-t_object	*sphere_ob(t_vec3d xyz, t_color rgb, double dia, char *path);
+// void		sp_inter(t_sp *sp, t_hit *intersection);
+void	sp_inter(t_sp *sp, t_hit *intersection, t_bump *bump, int *style);
+// t_object	*sphere_ob(t_vec3d xyz, t_color color, double dia, char *path);
+t_object	*sphere_ob(t_vec3d point, t_color color, double dia, char *path);
+t_object	*plane_ob(t_point_normal *p_n, t_color color, char *path);
+// t_object	*cylinder_ob(t_point_normal *p_n, double *d_h, t_color color);
+t_object	*cylinder_ob(t_point_normal *p_n, double *d_h, t_color color, char *path);
 
+// t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color);
 ///////////////////////////////////////////
 ////////////////////////// PLANE
 double		pl_ray_dista(t_ray ray, t_pl pl, t_npc *closest);
 t_npc		pl_closest(t_vec3d ray, t_pl pl, double dist, t_vec3d origin);
-int			plane_inter(t_pl *plane, t_hit *param);
-t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color rgb, char *path);
+int			plane_inter(t_pl *plane, t_hit *param, t_bump *bump, int *style);
+// t_object	*plane_ob(t_vec3d p_xyz, t_vec3d v_xyz, t_color color, char *path);
 
 ///////////////////////////////////////////
 ////////////////////////// CYLINDER
@@ -92,8 +104,8 @@ void		cy_caps(t_pl *pl, t_cy *cy, int is_top);
 int			check_cylinder_hit(t_cy *cy, t_hit *p);
 int			check_cylinder_caps_intersection(t_cy *cy,
 				t_hit *intersection);
-void		cy_inter(t_cy *cy, t_hit *f_inter);
-t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color rgb);
+void		cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style);
+// t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color color);
 
 ///////////////////////////////////////////
 ////////////////////////// VECTOR
@@ -149,8 +161,13 @@ void cone_caps(t_pl *pl, t_co *cone);
 double cone_ray_dista(t_ray ray, t_co cone);
 int check_cone_hit(t_co *cone, t_hit *p);
 int check_cone_caps_intersection(t_co *cone, t_hit *intersection);
-void co_inter(t_co *cone, t_hit *f_inter);
-t_object *cone_ob(t_vec3d point, t_vec3d normal, double *d_h, t_color color);
+void co_inter(t_co *cone, t_hit *f_inter, t_bump *bump, int *style);
+// t_object *cone_ob(t_vec3d point, t_vec3d normal, double *d_h, t_color color);
+t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color, char *path);
 int set_co(char **s, t_minirt *rt);
+void 	set_style_pl(t_bump *bump, int *style, t_hit *inter, t_pl *pl);
+void 	set_style_cy(t_bump *bump, int *style, t_hit *inter, t_cy *cy);
+void 	set_style_co(t_bump *bump, int *style, t_hit *inter, t_co *co);
+void 	set_style_sp(t_bump *bump, int *style, t_hit *inter, t_sp *sp);
 
 #endif

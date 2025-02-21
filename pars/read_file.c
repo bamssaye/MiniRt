@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 18:06:16 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:04:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-int	check_filename(char *s)
+static int	check_filename(char *s)
 {
 	char	*type;
 
@@ -22,7 +22,7 @@ int	check_filename(char *s)
 	return (0);
 }
 
-int	check_lis(char *str)
+static int	check_lis(char *str)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int	check_lis(char *str)
 	return (0);
 }
 
-int	tospaces(char *str, t_minirt *mrt)
+static int	tospaces(char *str, t_minirt *mrt)
 {
 	char	**line;
 	int		i;
@@ -53,7 +53,14 @@ int	tospaces(char *str, t_minirt *mrt)
 		return (arry_c(line), 1);
 	return (arry_c(line), 0);
 }
-
+static int  free_line_error(char *line, t_list *obj, int *fd, char *buf)
+{
+	free(line);
+	free(buf);
+	free_cmd(obj);
+	close(*fd);
+	return (print_err(MSG, MSG_3));
+}
 int	ft_readfile(char *path, t_minirt *mrt)
 {
 	static char	*buffer;
@@ -61,18 +68,17 @@ int	ft_readfile(char *path, t_minirt *mrt)
 	char *(line);
 	int(fd);
 	if (check_filename(path))
-		return (1);
+		return (print_err(MSG , MSG_2));
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (1);
+		return (print_err(MSG , MSG_2));
 	while (1)
 	{
 		line = get_next_line(fd, &buffer);
 		if (!line)
 			break ;
 		else if (tospaces(line, mrt))
-			return (free(line), free(buffer), free_cmd(mrt->object), close(fd),
-				1);
+			return (free_line_error(line, mrt->object, &fd, buffer));
 		free(line);
 	}
 	close(fd);

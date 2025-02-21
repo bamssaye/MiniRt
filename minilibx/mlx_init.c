@@ -43,7 +43,7 @@ void	*mlx_init()
 	if (xvar->private_cmap)
 		xvar->cmap = XCreateColormap(xvar->display,xvar->root,
 				 xvar->visual,AllocNone);
-	mlx_int_rgb_conversion(xvar);
+	mlx_int_color_conversion(xvar);
 	xvar->end_loop = 0;
 	return (xvar);
 }
@@ -81,19 +81,19 @@ int		mlx_int_deal_shm(t_xvar *xvar)
 ** TrueColor Visual is needed to have *_mask correctly set
 */
 
-int		mlx_int_rgb_conversion(t_xvar *xvar)
+int		mlx_int_color_conversion(t_xvar *xvar)
 {
-	bzero(xvar->decrgb,sizeof(int)*6);
+	bzero(xvar->deccolor,sizeof(int)*6);
 	while (!(xvar->visual->red_mask&1))
-		{ xvar->visual->red_mask >>= 1; xvar->decrgb[0] ++; }
+		{ xvar->visual->red_mask >>= 1; xvar->deccolor[0] ++; }
 	while (xvar->visual->red_mask&1)
-		{ xvar->visual->red_mask >>= 1; xvar->decrgb[1] ++; }
+		{ xvar->visual->red_mask >>= 1; xvar->deccolor[1] ++; }
 	while (!(xvar->visual->green_mask&1))
-		{ xvar->visual->green_mask >>= 1; xvar->decrgb[2] ++; }
+		{ xvar->visual->green_mask >>= 1; xvar->deccolor[2] ++; }
 	while (xvar->visual->green_mask&1)
-		{ xvar->visual->green_mask >>= 1; xvar->decrgb[3] ++; }
+		{ xvar->visual->green_mask >>= 1; xvar->deccolor[3] ++; }
 	while (!(xvar->visual->blue_mask&1))
-		{ xvar->visual->blue_mask >>= 1; xvar->decrgb[4] ++; }
+		{ xvar->visual->blue_mask >>= 1; xvar->deccolor[4] ++; }
 	while (xvar->visual->blue_mask&1)
-		{ xvar->visual->blue_mask >>= 1; xvar->decrgb[5] ++; }
+		{ xvar->visual->blue_mask >>= 1; xvar->deccolor[5] ++; }
 }

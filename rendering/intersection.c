@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:17 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 21:19:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:26:16 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,11 @@ t_obslight	initlight_inter(t_light l_param, t_hit *pa)
 		.stuck = 0});
 }
 // check_intersection_with_object
+// void	sp_inters(t_sp *sp, t_hit *intersection, t_bump *bump, int *style);
+// int		plane_inter(t_pl *plane, t_hit *param, t_bump *bump, int *style);
+// void	co_inter(t_co *cone, t_hit *f_inter, t_bump *bump, int *style);
+// void 	cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style);
+
 void	inter_wobject(t_object *obj, t_hit *param, t_minirt *rt)
 {
 	t_obj objs;
@@ -40,21 +45,21 @@ void	inter_wobject(t_object *obj, t_hit *param, t_minirt *rt)
 	if (obj->type == SPHERE)
 	{
 		objs.sp = (t_sp *)obj->object;
-		sp_inter(objs.sp, param);
+		sp_inter(objs.sp, param, &obj->bum_tex, obj->style);
 	}
 	else if (obj->type == PLANE)
 	{
 		objs.pl = (t_pl *)obj->object;
-		plane_inter(objs.pl, param);
+		plane_inter(objs.pl, param, &obj->bum_tex, obj->style);
 	}
 	else if (obj->type == CYLINDER)
 	{
 		objs.cy = (t_cy *)obj->object;
-		cy_inter(objs.cy, param);
+		cy_inter(objs.cy, param, &obj->bum_tex, obj->style);
 	}
 	else if (obj->type == CONE)
 	{
 		objs.co = (t_co *)obj->object;
-		co_inter(objs.co, param);
+		co_inter(objs.co, param, &obj->bum_tex, obj->style);
 	}
 }

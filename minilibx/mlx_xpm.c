@@ -92,7 +92,7 @@ int	mlx_int_get_col_name(char *str,int size)
 	return (result);
 }
 
-int	mlx_int_get_text_rgb(char *name, char *end)
+int	mlx_int_get_text_color(char *name, char *end)
 {
 	int			i;
 	char		buff[64];
@@ -142,7 +142,7 @@ void	*mlx_int_parse_xpm(t_xvar *xvar,void *info,int info_size,char *(*f)())
 		int		opp;
 		int		cpp;
 		int		col;
-		int		rgb_col;
+		int		color_col;
 		int		col_name;
 		int		method;
 		int		x;
@@ -194,9 +194,9 @@ void	*mlx_int_parse_xpm(t_xvar *xvar,void *info,int info_size,char *(*f)())
 
 				if (!tab[j])
 						RETURN;
-				rgb_col = mlx_int_get_text_rgb(tab[j], tab[j+1]);
+				color_col = mlx_int_get_text_color(tab[j], tab[j+1]);
 				/*
-				if ((rgb_col = mlx_int_get_text_rgb(tab[j], tab[j+1]))==-1)
+				if ((color_col = mlx_int_get_text_color(tab[j], tab[j+1]))==-1)
 				{
 						if (!(clip_data = malloc(4*width*height)) ||   ok, nice size ..
 										!(clip_img = XCreateImage(xvar->display, xvar->visual,
@@ -207,12 +207,12 @@ void	*mlx_int_parse_xpm(t_xvar *xvar,void *info,int info_size,char *(*f)())
 				}
 				*/
 				if (method)
-						colors_direct[mlx_int_get_col_name(line,cpp)] = rgb_col;
-								// rgb_col>=0?mlx_get_color_value(xvar, rgb_col):rgb_col;
+						colors_direct[mlx_int_get_col_name(line,cpp)] = color_col;
+								// color_col>=0?mlx_get_color_value(xvar, color_col):color_col;
 				else
 				{
 						colors[i].name = mlx_int_get_col_name(line,cpp);
-						colors[i].col = rgb_col; //rgb_col>=0?mlx_get_color_value(xvar,rgb_col):rgb_col;
+						colors[i].col = color_col; //color_col>=0?mlx_get_color_value(xvar,color_col):color_col;
 				}
 				free(tab);
 				tab = (void *)0;

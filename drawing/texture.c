@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:38:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:56:36 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ t_color pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl)
     }
     right = v_normalize(right);
     corss = v_cross(right, pl->normal);
-    up_dir = v_normalize(corss);
+    up_dir = v_normalize(&corss);
     u = fmod(v_dot(*hpoint, right) * 0.1, 1.0);
     v = fmod(v_dot(*hpoint, up_dir) * 0.1, 1.0);
     if (u < 0)

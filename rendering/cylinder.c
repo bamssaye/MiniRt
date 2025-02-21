@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 21:19:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:30:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int check_top_cap_intersection(t_cy *cy, t_hit *inter)
     t_pl top_cap;
 
     cy_caps(&top_cap, cy, 1);
-    if (plane_inter(&top_cap, inter))
+    if (plane_inter(&top_cap, inter, NULL, NULL))
     {
         point_to_center = v_minus(inter->closest.point, top_cap.point);
         if (v_magnitude(point_to_center) < cy->radius)
@@ -99,7 +99,7 @@ int check_bottom_cap_intersection(t_cy *cy, t_hit *inter)
     t_pl bottom_cap;
 
     cy_caps(&bottom_cap, cy, 0);
-    if (plane_inter(&bottom_cap, inter))
+    if (plane_inter(&bottom_cap, inter, NULL, NULL))
     {
         point_to_center = v_minus(inter->closest.point, bottom_cap.point);
         if (v_magnitude(point_to_center) < cy->radius)
@@ -146,13 +146,16 @@ int check_cylinder_caps_intersection(t_cy *cy, t_hit *inter)
     return 0;
 }
 
-void cy_inter(t_cy *cy, t_hit *f_inter)
+
+void cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style)
 {
     t_hit (tmp_body), (tmp_caps);
     tmp_body = *f_inter;
     if (check_cylinder_hit(cy, &tmp_body))
     {
         *f_inter = tmp_body;
+        if (style[COLOR] != 1)
+			set_style_cy(bump, style, f_inter, cy);
     }
     tmp_caps = *f_inter;
     if (check_cylinder_caps_intersection(cy, &tmp_caps))
@@ -160,6 +163,9 @@ void cy_inter(t_cy *cy, t_hit *f_inter)
         if (tmp_caps.closest.dista < f_inter->closest.dista)
         {
             *f_inter = tmp_caps;
+            if (style[COLOR] != 1)
+			    set_style_cy(bump, style, f_inter, cy);
         }
     }
 }
+

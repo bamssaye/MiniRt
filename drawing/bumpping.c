@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:30:53 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:36:39 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:12:47 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_vec3d color_map(t_color color)
     });
 }
 
-t_vec3d sp_nomap(t_sp *sp, t_npc *closest, t_ray *ray)
+t_vec3d sp_nomap(t_tex *n_map, t_npc *closest, t_ray *ray, t_sp *sp)
 {
     t_vec3d (normal), (u), (no_map), (v_vec);
     t_vec3d (sca_no_x), (sca_no_y), (sca_nm_z);
@@ -32,7 +32,7 @@ t_vec3d sp_nomap(t_sp *sp, t_npc *closest, t_ray *ray)
     if (v_magnitude(u) > EPSILON)
     {
         v_vec = v_cross(closest->normal, u);
-        no_map = color_map(sp_texture(&sp->n_map, &closest->point, sp));
+        no_map = color_map(sp_texture(n_map, &closest->point, sp));
         sca_no_x = v_scale(no_map.x, u);
         sca_no_y = v_scale(no_map.y, v_vec);
         sca_nm_z = v_scale(no_map.z, closest->normal);
@@ -43,7 +43,8 @@ t_vec3d sp_nomap(t_sp *sp, t_npc *closest, t_ray *ray)
     return normal;
 }
 
-t_vec3d pl_nomap(t_pl *pl, t_npc *closest, t_ray *ray)
+
+t_vec3d pl_nomap(t_tex *n_map, t_pl *pl, t_npc *closest, t_ray *ray)
 {
     t_vec3d (normal), (u), (no_map), (v_vec);
     t_vec3d (sca_no_x), (sca_no_y), (sca_nm_z);
@@ -52,7 +53,7 @@ t_vec3d pl_nomap(t_pl *pl, t_npc *closest, t_ray *ray)
     if (v_magnitude(u) > EPSILON)
     {
         v_vec = v_cross(closest->normal, u);
-        no_map = color_map(pl_texture(&pl->n_map, &closest->point, pl));
+        no_map = color_map(pl_texture(n_map, &closest->point, pl));
         sca_no_x = v_scale(no_map.x, u);
         sca_no_y = v_scale(no_map.y, v_vec);
         sca_nm_z = v_scale(no_map.z, closest->normal);
@@ -62,7 +63,7 @@ t_vec3d pl_nomap(t_pl *pl, t_npc *closest, t_ray *ray)
     }
     return normal;
 }
-t_vec3d cy_nomap(t_cy *cy, t_npc *closest, t_ray *ray)
+t_vec3d cy_nomap(t_tex *n_map, t_cy *cy, t_npc *closest, t_ray *ray)
 {
     t_vec3d (normal), (u), (no_map), (v_vec);
     t_vec3d (sca_no_x), (sca_no_y), (sca_nm_z);
@@ -71,7 +72,7 @@ t_vec3d cy_nomap(t_cy *cy, t_npc *closest, t_ray *ray)
     if (v_magnitude(u) > EPSILON)
     {
         v_vec = v_cross(closest->normal, u);
-        no_map = color_map(cy_texture(&cy->n_map, &closest->point, cy));
+        no_map = color_map(cy_texture(n_map, &closest->point, cy));
         sca_no_x = v_scale(no_map.x, u);
         sca_no_y = v_scale(no_map.y, v_vec);
         sca_nm_z = v_scale(no_map.z, closest->normal);

@@ -422,7 +422,7 @@ int get_mouse_button(NSEventType eventtype)
   pixel_nb = 0;
   glTexImage2D(
 	       GL_TEXTURE_2D, 0,           /* target, level of detail */
-	       GL_RGBA8,                    /* internal format */
+	       GL_colorA8,                    /* internal format */
 	       size_x, size_y, 0,           /* width, height, border */
 	       GL_BGRA, GL_UNSIGNED_BYTE,   /* external format, type */
 	       pixtexbuff                   /* pixels */
@@ -628,7 +628,7 @@ int get_mouse_button(NSEventType eventtype)
 
   pixel_nb = size_x*size_y;
   while (pixel_nb--) pixtexbuff[pixel_nb] = 0xFF000000;
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size_x, size_y, 0, GL_BGRA, GL_UNSIGNED_BYTE, pixtexbuff);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_colorA8, size_x, size_y, 0, GL_BGRA, GL_UNSIGNED_BYTE, pixtexbuff);
   pixel_nb = 0;
   
 }

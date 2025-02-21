@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:24:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:02:51 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,17 @@
 #define K_T 17
 #define YES 1
 #define NO 0
-# define MSG_1 "ERROR, Run : ./miniRt scene/*.rt\n {* : file name}"
-# define MSG_2 "ERROR, File not found... !\n *file name must be .rt"
-# define MSG_3 "ERROR, Check line data..."
-// # define MSG_1 ""
-// # define MSG_1 ""
+#define CHECKBORAD 2
+#define TEXTURE 1
+#define COLOR 0
+#define MSG "Error"
+# define MSG_1 "<./miniRt> <scene/*.rt>\n {* : file name}"
+# define MSG_2 "File not found... !\n *file name must be .rt"
+# define MSG_3 "Check line..., "
+# define MSG_4 "<sp> <0,0,0> <10> 255,0,0\n[SP] [X,Y,Z] [R] [COLOR]"
+# define MSG_5 "<pl> <0,0,0> <1,1,1> 255,255,255" 
+# define MSG_6 "<cy> <0,0,0> <1,1,1>  10 40 255,255,255" 
+# define MSG_7 "<co> <0,0,0> <1,1,1>  10 40 255,255,255" 
 // # define MSG_1 ""
 // # define MSG_1 ""
 // # define MSG_1 ""

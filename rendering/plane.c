@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:37 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 21:13:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:27:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,20 +43,19 @@ t_npc	pl_closest(t_vec3d ray, t_pl pl, double dist, t_vec3d origin)
 	);
 }
 
-int	plane_inter(t_pl *plane, t_hit *param)
+int plane_inter(t_pl *pl, t_hit *inter, t_bump *bump, int *style)
 {
 	double	dist;
 	t_vec3d	*ray;
 
-	ray = &param->ray->direction;
-	dist = pl_ray_dista(*(param->ray), *plane, &param->closest);
+	ray = &inter->ray->direction;
+	dist = pl_ray_dista(*(inter->ray), *pl, &inter->closest);
 	if (dist > 0)
 	{
-		param->closest = pl_closest(*ray, *plane, dist, param->ray->origin);
-		param->hit_clos = 1;
-		// if (plane->tex.img)
-		// 	param->closest.color = pl_texture_col(plane->tex,
-		// 			param->closest.point, *plane);
+		inter->closest = pl_closest(*ray, *pl, dist, inter->ray->origin);
+		inter->hit_clos = 1;
+		if (style && style[COLOR] != 1)
+			set_style_pl(bump, style, inter, pl);
 	}
 	return (dist);
 }

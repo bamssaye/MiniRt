@@ -136,7 +136,7 @@ destroys the given image (
 .SH STORING COLOR INSIDE IMAGES
 
 Depending on the display, the number of bits used to store a pixel color
-can change. The user usually represents a color in RGB mode, using
+can change. The user usually represents a color in color mode, using
 one byte for each component (see
 .B mlx_pixel_put
 manual). This must be translated to fit the
@@ -144,7 +144,7 @@ manual). This must be translated to fit the
 requirement of the image, and make the color understandable to the graphical system.
 That is the purpose of the
 .B mlx_get_color_value
-() function. It takes a standard RGB
+() function. It takes a standard color
 .I color
 parameter, and returns an
 .I unsigned int

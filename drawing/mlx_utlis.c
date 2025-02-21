@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:23:33 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:37:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int mouse_ha(int keycode, int x, int y, t_minirt *prog)
 	prog->selected.slected = NULL;
 	ft_memset(&param, 0, sizeof(t_hit));
 	if(!prog->amc[A])
-		prog->am_light.al_rgb = (t_color){0, 0, 0, 0};
+		prog->am_light.al_color = (t_color){0, 0, 0, 0};
 	param.ray = &ray;
 	param.closest.dista = INFINITY;
 	param.inters.dista = INFINITY;

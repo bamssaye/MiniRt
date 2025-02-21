@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:52 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 21:18:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 13:27:59 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_npc	c_sp_inter(t_ray ray, double dist, t_sp sp)
 	});
 }
 
-void	sp_inter(t_sp *sp, t_hit *intersection)
+void	sp_inter(t_sp *sp, t_hit *intersection, t_bump *bump, int *style)
 {
 	double	dist;
 
@@ -51,7 +51,7 @@ void	sp_inter(t_sp *sp, t_hit *intersection)
 	{
 		intersection->closest = c_sp_inter(*intersection->ray, dist, *sp);
 		intersection->hit_clos = 1;
-		// if (sp->tex.img)
-		// 	intersection->closest.color = spher_texture_color(sp->tex, intersection->closest.point, *sp);
+		if (style[COLOR] != 1)
+			set_style_sp(bump, style, intersection, sp);
 	}
 }

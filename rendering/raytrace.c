@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:46 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 21:13:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 00:04:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
 		}
 		tr.lst = tr.lst->next;
 	}
-	tr.ambient_color = color_a(prog->am_light.al_rgb, tr.inters.color);
+	tr.ambient_color = color_a(prog->am_light.al_color, tr.inters.color);
 	param->final_color = color_plus(tr.ambient_color, tr.final_c);
 }
 
@@ -123,7 +123,7 @@ int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
 
 	ft_memset(&param, 0, sizeof(t_hit));
 	if (!prog->amc[A])
-		prog->am_light.al_rgb = (t_color){0, 0, 0, 0};
+		prog->am_light.al_color = (t_color){0, 0, 0, 0};
 	param.ray = ray;
 	param.closest.dista = INFINITY;
 	param.inters.dista = INFINITY;

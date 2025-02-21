@@ -59,7 +59,7 @@ mlx_img_ctx_t	*add_img_to_ctx(mlx_img_list_t *img, mlx_win_list_t *win)
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T,     GL_CLAMP_TO_EDGE);
   glTexImage2D(
 	       GL_TEXTURE_2D, 0,           /* target, level of detail */
-	       GL_RGBA8,                    /* internal format */
+	       GL_colorA8,                    /* internal format */
 	       img->width, img->height, 0,           /* width, height, border */
 	       GL_BGRA, GL_UNSIGNED_BYTE,   /* external format, type */
 	       img->buffer               /* pixels */
@@ -85,7 +85,7 @@ void    mlx_put_image_to_window(mlx_ptr_t *mlx_ptr, mlx_win_list_t *win_ptr, mlx
 
   // update texture
   glBindTexture(GL_TEXTURE_2D, imgctx->texture);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, img_ptr->width, img_ptr->height, 0,
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_colorA8, img_ptr->width, img_ptr->height, 0,
 	       GL_BGRA, GL_UNSIGNED_BYTE, img_ptr->buffer);
 
   [(id)(win_ptr->winid) mlx_gl_draw_img:img_ptr andCtx:imgctx andX:x andY:y];

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:06:44 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 01:33:39 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/19 23:37:14 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	**tospace(char *str)
 
 t_color	check_color(char *str)
 {
-	t_color	rgb[1];
+	t_color	color[1];
 	char	**s;
 	int		i;
 
@@ -51,10 +51,10 @@ t_color	check_color(char *str)
 	while (s[++i])
 		if (!ft_range(ft_atoii(s[i]), 0, 255))
 			return (arry_c(s), (t_color){-1, -1, -1, 1});
-	rgb[0] = (t_color){ft_atoii(s[0]).num, ft_atoii(s[1]).num,
+	color[0] = (t_color){ft_atoii(s[0]).num, ft_atoii(s[1]).num,
 		ft_atoii(s[2]).num, 0};
 	arry_c(s);
-	return (rgb[0]);
+	return (color[0]);
 }
 
 t_vec3d	check_xyz(char *str, double min, double max)

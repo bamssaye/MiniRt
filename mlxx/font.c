@@ -1,9 +1,9 @@
-/* GIMP RGBA C-Source image dump (font.c) */
+/* GIMP colorA C-Source image dump (font.c) */
 
 static const struct {
   unsigned int 	 width;
   unsigned int 	 height;
-  unsigned int 	 bytes_per_pixel; /* 2:RGB16, 3:RGB, 4:RGBA */ 
+  unsigned int 	 bytes_per_pixel; /* 2:color16, 3:color, 4:colorA */ 
   unsigned char	 pixel_data[1140 * 20 * 4 + 1];
 } font_atlas = {
   1140, 20, 4,

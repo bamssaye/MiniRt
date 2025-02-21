@@ -112,7 +112,7 @@ typedef struct	s_xvar
 	int			use_xshm;
 	int			pshm_format;
 	int			do_flush;
-	int			decrgb[6];
+	int			deccolor[6];
 	Atom		wm_delete_window;
 	Atom		wm_protocols;
 	int 		end_loop;
@@ -125,7 +125,7 @@ int				mlx_int_get_good_color();
 int				mlx_int_find_in_pcm();
 int				mlx_int_anti_resize_win();
 int				mlx_int_wait_first_expose();
-int				mlx_int_rgb_conversion();
+int				mlx_int_color_conversion();
 int				mlx_int_deal_shm();
 void			*mlx_int_new_xshm_image();
 char			**mlx_int_str_to_wordtab();

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 21:31:41 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 12:58:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ typedef struct s_atoi
 	int		isv;
 }			t_atoi;
 ///////////////////////////////////////////
-////////////////////////// RGB && XYZ
+////////////////////////// color && XYZ
 typedef struct s_color
 {
 	int		r;
@@ -96,8 +96,8 @@ typedef struct s_sphere
 	t_vec3d		center;
 	t_color		color;
 	double		radius;
-	t_tex		tex;
-	t_tex		n_map;
+	t_tex		tex;//
+	t_tex		n_map;//
 }			t_sp;
 
 typedef struct s_plane
@@ -105,8 +105,8 @@ typedef struct s_plane
 	t_vec3d		point;
 	t_vec3d		normal;
 	t_color		color;
-	t_tex		tex;
-	t_tex		n_map;
+	t_tex		tex;//
+	t_tex		n_map;//
 }			t_pl;
 
 typedef struct s_cylinder
@@ -116,8 +116,8 @@ typedef struct s_cylinder
 	t_color		color;
 	double		radius;
 	double		len;
-	t_tex		tex;
-	t_tex		n_map;
+	t_tex		tex;//
+	t_tex		n_map;//
 }			t_cy;
 
 typedef struct s_cone 
@@ -127,8 +127,8 @@ typedef struct s_cone
     double		radius;
     double		height;
     t_color		color;
-	t_tex		tex;
-	t_tex		n_map;
+	t_tex		tex;//
+	t_tex		n_map;//
 } t_co;
 
 ///////////////////////////////////////////
@@ -147,7 +147,7 @@ typedef struct s_camera
 
 typedef struct s_a_light
 {
-	t_color		al_rgb;
+	t_color		al_color;
 	double		al;
 }			t_a_light;
 
@@ -198,11 +198,21 @@ typedef struct s_obslight
 
 ///////////////////////////////////////////
 ////////////////////////// object
+typedef struct s_bump
+{
+	t_tex		*img;
+	t_tex		*bump;
+}			t_bump;
 typedef struct s_objects
 {
 	void		*object;
 	int			type;
 	int			id;
+	t_tex		img; //
+	t_tex		bump; //
+	char 		*path;
+	t_bump		bum_tex;
+	int         style[3];
 	int			t;
 }			t_object;
 
@@ -250,6 +260,12 @@ typedef struct s_key
 	int z_out;
 } t_keys;
 
+typedef struct  s_point_normal
+{
+	t_vec3d		point;
+	t_vec3d		normal;
+} t_point_normal;
+
 typedef struct s_minirt
 {
 	t_list		*object;
@@ -261,6 +277,7 @@ typedef struct s_minirt
 	t_keys		key;
 	int			obj_count;
 	int			count_t;
+	int 		bouns;
 	int			amc[3];
 	char		buffer[BUFFER_SIZE];
 	int			x;

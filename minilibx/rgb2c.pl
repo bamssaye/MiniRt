@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 #
-## rgb2c.pl for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
+## color2c.pl for MiniLibX in /home/boulon/work/c/raytraceur/minilibx
 ## 
 ## Made by Olivier Crouzet
 ## Login   <ol@epitech.net>
@@ -11,17 +11,17 @@
 
 
 #
-# Generate a .c file with encoded colors, from the XFree86 rgb.txt file.
+# Generate a .c file with encoded colors, from the XFree86 color.txt file.
 #
 
-open(RGB, "/usr/X11/lib/X11/rgb.txt");
+open(color, "/usr/X11/lib/X11/color.txt");
 
 
-printf("/*\n** This is a generated file with rgb2c.pl and rgb.txt from\n");
+printf("/*\n** This is a generated file with color2c.pl and color.txt from\n");
 printf("** the XFree86 distribution.\n*/\n\n");
 printf("struct s_col_name mlx_col_name[] =\n{\n");
 
-while (<RGB>)
+while (<color>)
 {
     @tab = split;
     if ($tab[0] ne "!")

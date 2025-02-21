@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 20:55:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/20 14:03:21 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,17 @@
 int	set_ambient(char **s, t_minirt *rt)
 {
 	double	al;
-	t_color	rgb;
+	t_color	color;
 
 	if (rt->amc[A] || check_str(s, 3) || !ft_ranges(ft_atof(s[1]), 0.0, 1.0))
-		return (1);
+		return (print_err("\t{check Ambient data }", ""));
 	al = ft_atof(s[1]).num;
-	rgb = check_color(s[2]);
-	if (rgb.isv)
-		return (1);
+	color = check_color(s[2]);
+	if (color.isv)
+		return (print_err("\t{check Ambient data }", ""));
 	rt->amc[A] = 1;
 	rt->am_light.al = al;
-	rt->am_light.al_rgb = color_scale(al, rgb);
+	rt->am_light.al_color = color_scale(al, color);
 	return (0);
 }
 
@@ -36,12 +36,12 @@ int	set_camera(char **s, t_minirt *rt)
 	int		fov;
 
 	if (rt->amc[C] || check_str(s, 4) || !ft_ranges(ft_atof(s[3]), 0, 180))
-		return (1);
+		return (print_err("\t{check Camera data}", ""));
 	fov = ft_atoii(s[3]).num;
 	c_xyz = check_xyz(s[1], -IN_MIN, IN_MAX);
 	vec_xyz = check_xyz(s[2], -1.0, 1.0);
 	if (c_xyz.isv || vec_xyz.isv)
-		return (1);
+		return (print_err("\t{check Camera data}", ""));
 	rt->amc[C] = 1;
 	rt->cam.position = c_xyz;
 	rt->cam.normal = vec_xyz;
@@ -79,13 +79,15 @@ int	set_light(char **s, t_minirt *rt)
 	t_object	*light;
 	t_color		color;
 
+	if (rt->amc[L] && !rt->bouns)
+		return (print_err("\t{multiple spot in bouns part}", ""));
 	if (check_str(s, 4) || !ft_ranges(ft_atof(s[2]), 0.0, 1.0))
-		return (1);
+		return (print_err("\t{check Light data}", ""));
 	light_bri = ft_atof(s[2]).num;
 	light_vec3d = check_xyz(s[1], -IN_MIN, IN_MAX);
 	color = check_color(s[3]);
 	if (light_vec3d.isv || color.isv)
-		return (1);
+		return (print_err("\t{check Light data}", ""));
 	rt->amc[L] = 1;
 	light = light_ob(light_vec3d, light_bri, color);
 	ft_lstadd_back(&rt->object, ft_lstnew(light));
