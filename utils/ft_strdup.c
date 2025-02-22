@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   new_vec.c                                          :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/07 02:05:33 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:29:10 by bamssaye         ###   ########.fr       */
+/*   Created: 2025/02/22 11:26:13 by bamssaye          #+#    #+#             */
+/*   Updated: 2025/02/22 11:26:49 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_color cpy_color(t_color co)
+char	*ft_strdup(const char *s)
 {
-	return((t_color){
-		.isv = co.isv,
-		.r = min(co.r, 255),
-		.g = min(co.g, 255),
-		.b = min(co.b, 255)
-	});
-}
+	char	*str;
+	size_t	len;
+	int		i;
 
-int print_err(char *str, char *s)
-{
-	return (printf("%s : %s\n", str, s), 1);
+	len = ft_strlen(s);
+	str = malloc((len + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = 0;
+	return (str);
 }

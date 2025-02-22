@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 02:16:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/08 04:12:15 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:31:27 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 static int	ft_getline(char *getline, char *buffer);
 static char	*ft_free(char *getline, char **buffer);
 
-static char	*ft_strjoin(char *s1, char *s2)
+static char	*ft_strj(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -58,7 +58,7 @@ char	*get_next_line(int fd, char **buffer)
 		*buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
 	while (1)
 	{
-		getline = ft_strjoin(getline, *buffer);
+		getline = ft_strj(getline, *buffer);
 		if (ft_getline(getline, *buffer))
 			return (getline);
 		bytes = read(fd, *buffer, BUFFER_SIZE);

@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2025/02/21 11:47:18 by bamssaye         ###   ########.fr        #
+#    Updated: 2025/02/22 12:18:26 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ SRC += template_ob.c valid_input.c plane.c raytrace.c spher.c mlx_utlis.c
 SRC += camera.c color.c cylinder.c intersection.c math.c vector_utils.c cone.c
 SRC += clean_memory.c ft_atod.c ft_atoii.c pars_utils.c canvas.c new_vec.c
 SRC += libft_utils.c get_line.c ft_split.c lst_addback.c load_texture.c
-SRC += bumpping.c checkborad.c rotation.c texture.c translation.c 
+SRC += bumpping.c checkborad.c rotation.c texture.c translation.c ft_strjoin.c ft_strdup.c
 OBJ =  $(addprefix $(OBGDIR)/,  $(notdir $(SRC:.c=.o)))
 
 $(OBGDIR)/%.o:%.c

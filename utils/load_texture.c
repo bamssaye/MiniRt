@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 23:52:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/21 12:53:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:27:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,31 +32,6 @@ static void    load_img(void *mlx, t_tex *img, char *path, char *str)
 	}	
     img->addr = mlx_get_data_addr(img->img, &img->bpp, &img->line_length, \
 		&img->endian);
-}
-static char	*ft_strjoin(char *s1, char *s2)
-{
-	int		i;
-	int		j;
-	char	*str;
-
-	i = 0;
-	j = 0;
-	str = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!str)
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	while (s2[j])
-	{
-		str[i + j] = s2[j];
-		j++;
-	}
-	str[i + j] = '\0';
-	free(s2);
-	return (str);
 }
 
 void load_texture(t_minirt *rt, t_list *lst)

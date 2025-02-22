@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/09 19:56:21 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/20 14:27:42 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:56:40 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,11 @@ void	co_inter(t_co *cone, t_hit *f_inter, t_bump *bump, int *style)
 	t_hit (tmp_inter), (cap_inter);
 	t_vec3d (hit_point), (cap_center);
 	tmp_inter = *f_inter;
-	if (check_cone_hit(cone, &tmp_inter) && tmp_inter.closest.dista < f_inter->closest.dista)
+	if (check_cone_hit(cone, &tmp_inter) && tmp_inter.closest.dista < f_inter->closest.dista){
 		*f_inter = tmp_inter;
+		if (style[COLOR] != 1)
+			set_style_co(bump, style, f_inter, cone);
+	}
 	cap_inter = *f_inter;
 	cone_caps(&base_cap, cone);
 	if (plane_inter(&base_cap, &cap_inter, NULL, NULL)) // to check nULL 
@@ -90,8 +93,8 @@ void	co_inter(t_co *cone, t_hit *f_inter, t_bump *bump, int *style)
 			f_inter->closest = cap_inter.closest;
 			f_inter->closest.normal = base_cap.normal;
 			f_inter->hit_clos = 1;
-			(void)bump;
-			(void)style;
+			if (style[COLOR] != 1)
+				set_style_co(bump, style, f_inter, cone);
 		}
 	}
 }

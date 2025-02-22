@@ -6,31 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 14:32:31 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:26:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
-char	*ft_strdup(const char *s)
-{
-	char	*str;
-	size_t	len;
-	int		i;
-
-	len = ft_strlen(s);
-	str = malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (s[i])
-	{
-		str[i] = s[i];
-		i++;
-	}
-	str[i] = 0;
-	return (str);
-}
 
 char *check_path(char *str, int bouns)
 {

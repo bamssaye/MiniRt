@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/20 14:04:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:25:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static int	tospaces(char *str, t_minirt *mrt)
 		return (arry_c(line), 1);
 	return (arry_c(line), 0);
 }
+
 static int  free_line_error(char *line, t_list *obj, int *fd, char *buf)
 {
 	free(line);
@@ -61,6 +62,7 @@ static int  free_line_error(char *line, t_list *obj, int *fd, char *buf)
 	close(*fd);
 	return (print_err(MSG, MSG_3));
 }
+
 int	ft_readfile(char *path, t_minirt *mrt)
 {
 	static char	*buffer;

@@ -6,28 +6,28 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 13:22:22 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/21 12:59:19 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:56:17 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
 
-// void 	set_style_co(t_bump *bump, int *style, t_hit *inter, t_co *co);
+void set_style_co(t_bump *bump, int *style, t_hit *inter, t_co *co);
 void set_style_cy(t_bump *bump, int *style, t_hit *inter, t_cy *cy);
 void set_style_pl(t_bump *bump, int *style, t_hit *inter, t_pl *pl);
 void set_style_sp(t_bump *bump, int *style, t_hit *inter, t_sp *sp);
 
-// void set_style_co(t_bump *bump, int *style, t_hit *inter, t_co *co)
-// {
-// 	if (style[TEXTURE] == 1)
-// 	{
-// 		// inter->closest.color = co_texture(bump->img, &inter->closest.point, co);
-// 		// inter->closest.normal = co_nomap(bump, co, &inter->closest, inter->ray);
-// 	}
-// 	else if (style[CHECKBORAD] == 1)
-// 		// inter->closest.color = co_checkerboard(&inter->closest.point, co);
-// }
+void set_style_co(t_bump *bump, int *style, t_hit *inter, t_co *co)
+{
+	if (style[TEXTURE] == 1)
+	{
+		inter->closest.color = co_texture(&bump->img, &inter->closest.point, co);
+		inter->closest.normal = co_nomap(&bump->bump, co, &inter->closest, inter->ray);
+	}
+	else if (style[CHECKBORAD] == 1)
+		inter->closest.color = co_checkerboard(&inter->closest.point, co);
+}
 
 void set_style_cy(t_bump *bump, int *style, t_hit *inter, t_cy *cy)
 {

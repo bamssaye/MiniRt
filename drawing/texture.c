@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/21 11:22:25 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 11:53:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,25 @@ t_color cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy)
     int (x),(y);
     u = 0.5 + atan2(hpoint->z - cy->point.z, hpoint->x - cy->point.x) / (2 * PI);
     v = fabs((hpoint->y - cy->point.y) / cy->len);
+    x = (int)(u * tex->width);
+    y = (int)(v * tex->height);
+    pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
+    return ((t_color){
+        (unsigned char)pixel[2],
+        (unsigned char)pixel[1],
+        (unsigned char)pixel[0],
+        0
+    });
+}
+
+t_color co_texture(t_tex *tex, t_vec3d *hpoint, t_co *co)
+{
+	char *pixel;
+
+    double (u), (v);
+    int (x),(y);
+    u = 0.5 + atan2(hpoint->z - co->point.z, hpoint->x - co->point.x) / (2 * PI);
+    v = fabs((hpoint->y - co->point.y) / co->height);
     x = (int)(u * tex->width);
     y = (int)(v * tex->height);
     pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
