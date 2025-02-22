@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:53:33 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:43:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ t_color sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp)
     x = (int)(u * tex->width) % tex->width;
     y = (int)(v * tex->height) % tex->height;
     pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
+    
     return ((t_color){
         (unsigned char)pixel[2],
         (unsigned char)pixel[1],

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:25:22 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 12:29:55 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	check_filename(char *s)
 	return (0);
 }
 
-static int	check_lis(char *str)
+static int	line_space(char *str)
 {
 	int	i;
 
@@ -44,7 +44,7 @@ static int	tospaces(char *str, t_minirt *mrt)
 			str[i] = ' ';
 	if (str[0] == '#')
 		return (0);
-	if (check_lis(str))
+	if (line_space(str))
 		return (0);
 	line = ft_split(str, ' ');
 	if (!*line)
@@ -69,6 +69,7 @@ int	ft_readfile(char *path, t_minirt *mrt)
 
 	char *(line);
 	int(fd);
+	
 	if (check_filename(path))
 		return (print_err(MSG , MSG_2));
 	fd = open(path, O_RDONLY);

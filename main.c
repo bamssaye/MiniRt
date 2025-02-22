@@ -6,21 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:44:30 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:38:29 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:45:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headers/minirt.h"
-
-void	ft_init(t_minirt *mrt)
-{
-	ft_memset(mrt->amc, 0, sizeof(mrt->amc));
-	mrt->x = 0;
-	mrt->y = 0;
-	mrt->count_t = 0;
-	mrt->object = NULL;
-	mrt->obj_count = 0;
-}
 
 int	main(int ac, char **av)
 {
@@ -28,11 +18,18 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 		return (print_err(MSG, MSG_1));
+	ft_memset(&minirt, 0, sizeof(minirt));
+	// 1 bouns 0 Mandatory
 	minirt.bouns = 0;
-	ft_init(&minirt);
+	// pars file and set data 
 	if (ft_readfile(av[1], &minirt))
 		return (1);
+	// init window
 	ft_init_win(&minirt);
+	// bouns leaod texture / bumpmap
+	// if (minirt.count_t)
+	// 	load_texture(&minirt, minirt.object);
+	// rendering 	
 	render_image(&minirt);
 	ft_hooks_fun(&minirt);
 	return (0);

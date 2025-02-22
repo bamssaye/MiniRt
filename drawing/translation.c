@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 10:35:12 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/16 09:12:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 13:00:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void transle_x(t_object *obj, double x)
         objs.cy = (t_cy*)obj->object;
         objs.cy->point.x += x;
     }
+    else if (obj->type == CONE && obj->t++)
+    {
+        objs.co = (t_co*)obj->object;
+        objs.co->point.x += x;
+    }
 }
 
 void transle_y(t_object *obj, double y)
@@ -56,7 +61,12 @@ void transle_y(t_object *obj, double y)
     {
         objs.cy = (t_cy*)obj->object;
         objs.cy->point.y += y;
-    }	
+    }
+    else if (obj->type == CONE && obj->t++)
+    {
+        objs.co = (t_co*)obj->object;
+        objs.co->point.y += y;
+    }
 }
 
 void transle_z(t_object *obj, double z)
@@ -77,5 +87,10 @@ void transle_z(t_object *obj, double z)
     {
         objs.cy = (t_cy*)obj->object;
         objs.cy->point.z +=z;
-    }	
+    }
+    else if (obj->type == CONE && obj->t++)
+    {
+        objs.co = (t_co*)obj->object;
+        objs.co->point.z += z;
+    }
 }
