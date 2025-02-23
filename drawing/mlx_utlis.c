@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/19 23:37:14 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 14:00:43 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,6 @@ void p_cs(t_vec3d a)
 }
 int key_press(int button, t_minirt *mrt)
 {
-	// p_cs(mrt->camera.look_at);
 	if (mrt->selected.id_obj == -1)
 		return (print_err("Select an","object..."));
 	if (button == K_R)

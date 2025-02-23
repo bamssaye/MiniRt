@@ -21,7 +21,7 @@ int	main(int ac, char **av)
 	ft_memset(&minirt, 0, sizeof(minirt));
 	// 1 bouns 0 Mandatory
 	minirt.bouns = 1;
-	// pars file and set data 
+	// pars file and set data
 	if (ft_readfile(av[1], &minirt))
 		return (1);
 	// init window
@@ -29,7 +29,7 @@ int	main(int ac, char **av)
 	// bouns leaod texture / bumpmap
 	if (minirt.count_t)
 		load_texture(&minirt, minirt.object);
-	// rendering 	
+	// rendering
 	render_image(&minirt);
 	ft_hooks_fun(&minirt);
 	return (0);

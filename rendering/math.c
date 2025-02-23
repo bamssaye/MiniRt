@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:24 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/22 22:45:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:57:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,33 +14,24 @@
 
 double quad_equa(double a, double b, double c)
 {
-	 double discriminant;
-	 double t1;
-	 double t2;
-	 double sqrtdiscriminant;
-
-	 if (a == 0.0)
-		 return -1;
-	 discriminant = b * b - 4.0 * a * c;
-	 if (discriminant < 0.0)
-		 return (-1);
-	 sqrtdiscriminant = sqrt(discriminant);
-	 t1 = (-b + sqrtdiscriminant) / (2.0 * a);
-	 t2 = (-b - sqrtdiscriminant) / (2.0 * a);
-	 if (discriminant == 0)
-		 return (t1);
-	 if (discriminant > 0.0)
-	 {
-		if (t1 < 0.0 && t2 < 0.0)
-			return (-1);
-		else if (t1 < 0.0)
-			return t2;
-		else if (t2 < 0.0)
-			return t1;
-		else
-			return fmin(t1, t2);
-	 }
-	 return (-1);
+	double (x1), (x2), (delta), (sq_delta);
+	delta = (b * b) - (4.0 * a * c);
+	if (a == 0.0 || delta < 0.0)
+		return (-1);
+	sq_delta = sqrt(delta);
+	x1 = (-b + sq_delta) / (2.0 * a);
+	x2 = (-b - sq_delta) / (2.0 * a);
+	if (delta == 0.0)
+		return (x1);
+	if (x1 < 0.0 && x2 < 0.0)
+		return (-1);
+	else if (x1 < 0.0)
+		return (x2);
+	else if (x2 < 0.0)
+		return (x1);
+	else
+		return (fmin(x1, x2));
+	return (-1);
 }
 
 double	v_dot(t_vec3d a, t_vec3d b)

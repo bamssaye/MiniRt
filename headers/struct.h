@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/21 12:11:28 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:20:03 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -265,6 +265,25 @@ typedef struct  s_point_normal
 	t_vec3d		point;
 	t_vec3d		normal;
 } t_point_normal;
+
+typedef struct s_cone_utils
+{
+	t_pl		base_cap;
+	double		distance;
+	t_hit 		tmp_inter;
+	t_hit 		cap_inter;
+	t_vec3d 	hit_point;
+	t_vec3d 	cap_center;
+	
+} t_cone_utils;
+typedef struct s_cone_hit
+{
+	t_vec3d 	normal;
+	t_vec3d 	axis_proj;
+	t_vec3d 	apex_to_hit;
+	t_vec3d 	point;
+	
+} t_cone_hit;
 
 typedef struct s_minirt
 {

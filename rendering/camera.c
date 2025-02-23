@@ -6,29 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:18:52 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 20:55:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:38:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
-// t_vec3d	c_look_at(t_camera *camera)
-// {
-// 	t_vec3d	look_at;
-
-// 	look_at = v_normalize(camera->normal);
-// 	return (look_at);
-// }
-
-// t_vec3d	c_up_v(t_camera *camera)
-// {
-// 	t_vec3d	v;
-
-// 	v = v_cross(camera->look_at, camera->u);
-// 	if (
-// 		exit(1);
-// 	return (v);
-// }
 
 t_vec3d	c_topleft(t_camera *cam)
 {

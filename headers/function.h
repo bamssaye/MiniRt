@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:55:45 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 12:33:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,7 +160,7 @@ void		free_obj(t_object *obj);
 ////////////////////////////////////////////
 /////////////////////////// CONE
 
-void cone_caps(t_pl *pl, t_co *cone);
+int cone_caps(t_pl *pl, t_co *cone, t_cone_utils *co);
 double cone_ray_dista(t_ray ray, t_co cone);
 int check_cone_hit(t_co *cone, t_hit *p);
 int check_cone_caps_intersection(t_co *cone, t_hit *intersection);

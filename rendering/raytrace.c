@@ -6,31 +6,35 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:46 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/22 22:45:29 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:39:03 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-
 t_ray	ray_gen(t_camera cam, int x, int y)
 {
 	t_ray	ray;
 
-	ray.direction = v_normalize(v_plus(cam.top_left,
-    	v_plus(v_scale(x, cam.u), v_scale(y, cam.v))));
+	ray.direction = v_normalize(
+		v_plus(
+			cam.top_left,
+			v_plus(
+				v_scale(x, cam.u),
+				v_scale(y, cam.v))));
 	return ((t_ray){
 		.direction = ray.direction,
 		.origin = cam.position});
 }
+
 // trace ray to light source
-void	trace_ray(t_list *obj, t_hit *pa, int *stuck, double mx_dist, t_minirt *rt)
+void	trace_ray(t_hit *pa, int *stuck, double mx_dist, t_minirt *rt)
 {
-	t_list *lst;
-	t_object *objt;
+	t_list		*lst;
+	t_object	*objt;
 
 	*stuck = 0;
-	lst = obj;
+	lst = rt->object;
 	while (lst && !*stuck)
 	{
 		pa->closest.dista = INFINITY;
@@ -49,13 +53,14 @@ void	trace_ray(t_list *obj, t_hit *pa, int *stuck, double mx_dist, t_minirt *rt)
 		}
 	}
 }
-// trace_ray_to_objects
-void	trace_rtobj(t_list *obj, t_hit *pa, t_minirt *rt)
-{
-	t_list *lst;
-	t_object *objt;
 
-	lst = obj;
+// trace_ray_to_objects
+void	trace_rtobj(t_hit *pa, t_minirt *rt)
+{
+	t_list		*lst;
+	t_object	*objt;
+
+	lst = rt->object;
 	while (lst)
 	{
 		pa->closest.dista = INFINITY;
@@ -75,31 +80,8 @@ void	trace_rtobj(t_list *obj, t_hit *pa, t_minirt *rt)
 	}
 }
 
-t_color specular_light(t_trace_light *t_li, t_vec3d position)
-{
-	t_color		color;
-
-	t_vec3d (ref_dir),	(view_dir);
-	ref_dir = v_normalize(
-			v_minus(
-				v_scale(
-					2.0 * v_dot(t_li->inters.normal, t_li->l_pa.light_dire),
-					t_li->inters.normal),
-				t_li->l_pa.light_dire));
-	view_dir = v_normalize(
-			v_minus(
-				position,
-				t_li->inters.point
-				));
-	color = c_scale(
-			fmin(
-				1.5 * pow(fmax(0.0, v_dot(ref_dir, view_dir)), 10), 0.08),
-			(t_color){255, 255, 255, 0}
-			);
-	return (color);
-}
 //li_scale
-void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
+void	trace_light_at_intersection(t_minirt *prog, t_hit *hit)
 {
 	t_trace_light	tr;
 
@@ -110,14 +92,14 @@ void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
 		tr.objt = (t_object *)tr.lst->content;
 		if (tr.objt->type == LIGHT)
 		{
-			tr.l_pa = initlight_inter(*((t_light *)tr.objt->object), param);
-			param->ray = &tr.l_pa.ray;
-			trace_ray(prog->object, param, &tr.l_pa.stuck, tr.l_pa.m_dis, prog);
-			tr.inters = param->inters;
+			tr.l_pa = initlight_inter(*((t_light *)tr.objt->object), hit);
+			hit->ray = &tr.l_pa.ray;
+			trace_ray(hit, &tr.l_pa.stuck, tr.l_pa.m_dis, prog);
+			tr.inters = hit->inters;
 			if (!tr.l_pa.stuck)
 			{
 				tr.angle = lig_scale(tr.inters.normal, tr.l_pa.light_dire);
-				tr.color = c_scale(tr.angle, tr.inters.color);	
+				tr.color = c_scale(tr.angle, tr.inters.color);
 				tr.l_pa.light.spc = specular_light(&tr, prog->cam.position);
 				tr.f_c = c_plus(tr.f_c, c_plus(tr.color, tr.l_pa.light.spc));
 			}
@@ -125,7 +107,7 @@ void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
 		tr.lst = tr.lst->next;
 	}
 	tr.ambient_color = color_a(prog->am_light.al_color, tr.inters.color);
-	param->final_color = c_plus(tr.ambient_color, tr.f_c);
+	hit->final_color = c_plus(tr.ambient_color, tr.f_c);
 }
 
 int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
@@ -140,7 +122,7 @@ int	calculate_pixel_color(t_ray *ray, t_minirt *prog)
 	param.closest.dista = INFINITY;
 	param.inters.dista = INFINITY;
 	param.iobj_id = -1;
-	trace_rtobj(prog->object, &param, prog);
+	trace_rtobj(&param, prog);
 	trace_light_at_intersection(prog, &param);
 	color = cpy_color(param.final_color);
 	return (ctoi(color));

@@ -6,28 +6,12 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:37 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/20 14:27:30 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:25:35 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-double	pl_ray_dista(t_ray ray, t_pl pl, t_npc *closest)
-{
-	t_vec3d	inter_p;
-
-	double(dist), (dot);
-	dist = -1;
-	dot = v_dot(pl.normal, ray.direction);
-	inter_p = v_minus(pl.point, ray.origin);
-	dist = v_dot(inter_p, pl.normal) / dot;
-	if ((dist <= 0) || (fabs(dot) < EPSILON))
-		return (0);
-	closest->normal = pl.normal;
-	if (dot < 0)
-		closest->normal = v_scale(-1, closest->normal);
-	return (dist);
-}
 
 t_npc	pl_closest(t_vec3d ray, t_pl pl, double dist, t_vec3d origin)
 {
