@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:46 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/20 00:04:38 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 22:45:29 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,35 @@ void	trace_rtobj(t_list *obj, t_hit *pa, t_minirt *rt)
 	}
 }
 
+t_color specular_light(t_trace_light *t_li, t_vec3d position)
+{
+	t_color		color;
+
+	t_vec3d (ref_dir),	(view_dir);
+	ref_dir = v_normalize(
+			v_minus(
+				v_scale(
+					2.0 * v_dot(t_li->inters.normal, t_li->l_pa.light_dire),
+					t_li->inters.normal),
+				t_li->l_pa.light_dire));
+	view_dir = v_normalize(
+			v_minus(
+				position,
+				t_li->inters.point
+				));
+	color = c_scale(
+			fmin(
+				1.5 * pow(fmax(0.0, v_dot(ref_dir, view_dir)), 10), 0.08),
+			(t_color){255, 255, 255, 0}
+			);
+	return (color);
+}
+//li_scale
 void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
 {
 	t_trace_light	tr;
 
-	t_vec3d reflect_dir, view_dir;
-	tr.final_c = (t_color){0, 0, 0, 0};
+	tr.f_c = (t_color){0, 0, 0, 0};
 	tr.lst = prog->object;
 	while (tr.lst)
 	{
@@ -89,31 +112,20 @@ void	trace_light_at_intersection(t_minirt *prog, t_hit *param)
 		{
 			tr.l_pa = initlight_inter(*((t_light *)tr.objt->object), param);
 			param->ray = &tr.l_pa.ray;
-			trace_ray(prog->object, param, &tr.l_pa.stuck, tr.l_pa.max_dista,
-				prog);
+			trace_ray(prog->object, param, &tr.l_pa.stuck, tr.l_pa.m_dis, prog);
 			tr.inters = param->inters;
 			if (!tr.l_pa.stuck)
 			{
-				tr.angle_scale = c_light_scale(tr.inters.normal,
-						tr.l_pa.light_dire);
-				tr.color = color_scale(tr.angle_scale, tr.inters.color);
-				reflect_dir = v_normalize(v_minus(v_scale(2.0
-								* v_dot(tr.inters.normal,
-									tr.l_pa.light_dire), tr.inters.normal),
-							tr.l_pa.light_dire));
-				view_dir = v_normalize(v_minus(prog->cam.position,
-							tr.inters.point));
-				tr.l_pa.light.specular_color = color_scale(fmin(1.5
-							* pow(fmax(0.0, v_dot(reflect_dir, view_dir)),
-								10), 0.08), (t_color){255, 255, 255, 0});
-				tr.final_c = color_plus(tr.final_c, color_plus(tr.color,
-							tr.l_pa.light.specular_color));
+				tr.angle = lig_scale(tr.inters.normal, tr.l_pa.light_dire);
+				tr.color = c_scale(tr.angle, tr.inters.color);	
+				tr.l_pa.light.spc = specular_light(&tr, prog->cam.position);
+				tr.f_c = c_plus(tr.f_c, c_plus(tr.color, tr.l_pa.light.spc));
 			}
 		}
 		tr.lst = tr.lst->next;
 	}
 	tr.ambient_color = color_a(prog->am_light.al_color, tr.inters.color);
-	param->final_color = color_plus(tr.ambient_color, tr.final_c);
+	param->final_color = c_plus(tr.ambient_color, tr.f_c);
 }
 
 int	calculate_pixel_color(t_ray *ray, t_minirt *prog)

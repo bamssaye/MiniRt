@@ -23,7 +23,7 @@ t_obslight	initlight_inter(t_light l_param, t_hit *pa)
 				.light_color = (t_color){0, 0, 0, 0},
 			},
 		.light_dire = v_normalize(light_dire),
-		.max_dista = v_magnitude(light_dire),
+		.m_dis = v_magnitude(light_dire),
 		.ray =
 			(t_ray){
 				.origin = pa->inters.point,

@@ -184,14 +184,14 @@ typedef struct s_slight
 {
 	t_color		light_color;
 	t_color		ambient_color;
-	t_color 	specular_color;
+	t_color 	spc;
 }			t_slight;
 
 typedef struct s_obslight
 {
 	t_ray		ray;
 	t_vec3d		light_dire;
-	double		max_dista;
+	double		m_dis;
 	int			stuck;
 	t_slight	light;
 }				t_obslight;
@@ -225,10 +225,10 @@ typedef struct s_trace_light
 	t_npc		inters;
 	t_list		*lst;
 	t_object	*objt;
-	t_color		final_c;
+	t_color		f_c;
 	t_color		color;
 	t_color		ambient_color;
-	double		angle_scale;
+	double		angle;
 } t_trace_light;
 
 ///////////////////////////////////////////

@@ -25,7 +25,7 @@ int	set_ambient(char **s, t_minirt *rt)
 		return (print_err("\t{check Ambient data }", ""));
 	rt->amc[A] = 1;
 	rt->am_light.al = al;
-	rt->am_light.al_color = color_scale(al, color);
+	rt->am_light.al_color = c_scale(al, color);
 	return (0);
 }
 

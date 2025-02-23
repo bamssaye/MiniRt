@@ -18,8 +18,8 @@ int	min(int a, int min)
 		return (min);
 	return (a);
 }
-
-t_color	color_plus(t_color a, t_color b)
+// color pluse
+t_color	c_plus(t_color a, t_color b)
 {
 	return ((t_color){
 		.isv = 0,
@@ -33,8 +33,8 @@ int	ctoi(t_color color)
 {
 	return (color.r << 16 | color.g << 8 | color.b);
 }
-
-t_color	color_scale(double scale, t_color a)
+// color scale
+t_color	c_scale(double scale, t_color a)
 {
 	return ((t_color){
 		.isv = 0,

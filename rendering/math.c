@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:24 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 21:19:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/22 22:45:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,11 @@ double	v_magnitude(t_vec3d a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
-
-double c_light_scale(t_vec3d a, t_vec3d b) // Lambertian diffuse
+// Lambertian diffuse / light scale 
+double lig_scale(t_vec3d a, t_vec3d b) 
 {
     double cosine;
 
 	cosine = v_dot(a, b);
-	return fmax(cosine, 0.0);
+	return (fmax(cosine, 0.0));
 }

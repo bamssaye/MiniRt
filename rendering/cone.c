@@ -12,6 +12,12 @@
 
 #include "../headers/minirt.h"
 
+/*
+   a   = D|D - (1+k*k)*(D|V)^2
+   b/2 = D|X - (1+k*k)*(D|V)*(X|V)
+   c   = X|X - (1+k*k)*(X|V)^2
+*/
+
 double	cone_ray_dista(t_ray ray, t_co cone)
 {
 	t_vec3d	ori;
@@ -98,5 +104,3 @@ void	co_inter(t_co *cone, t_hit *f_inter, t_bump *bump, int *style)
 		}
 	}
 }
-// if (style[COLOR] != 1)
-// 	set_style_co(bump, style, f_inter, cone);

@@ -17,10 +17,10 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address -g3
 RM = rm -rf
 # LIBFT = ./libft/libft.a
-# MLX_DIR = minilibx
-# MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-MLX_DIR = mlxx
-MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+MLX_DIR = minilibx
+MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+# MLX_DIR = mlxx
+# MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
 
 #################################
 VPATH = utils:pars:drawing:tuples:rendering

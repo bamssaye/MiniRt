@@ -73,9 +73,9 @@ int			is_parallel(t_vec3d v1, t_vec3d v2);
 double		quad_equa(double a, double b, double c);
 ///////////////////////////////////////////
 ////////////////////////// Color Utils
-t_color		color_scale(double scale, t_color a);
+t_color		c_scale(double scale, t_color a);
 int			min(int a, int min);
-t_color		color_plus(t_color a, t_color b);
+t_color		c_plus(t_color a, t_color b);
 int			ctoi(t_color color);
 t_color color_a(t_color a, t_color b);
 ///////////////////////////////////////////
@@ -128,7 +128,7 @@ void		trace_rtobj(t_list *obj, t_hit *pa, t_minirt *rt);
 t_obslight	initlight_inter(t_light l_param, t_hit *pa);
 void		trace_light_at_intersection(t_minirt *prog, t_hit *param);
 int			calculate_pixel_color(t_ray *ray, t_minirt *prog);
-double		c_light_scale(t_vec3d a, t_vec3d b);
+double		lig_scale(t_vec3d a, t_vec3d b);
 ///////////////////////////////////////////
 ////////////////////////// INIT MLX
 void		ft_init_win(t_minirt *mrt);
