@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 11:10:51 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:25:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 
 ///////////////////////////////////////////
+int select_object(int keycode, int x, int y, t_minirt *prog);
 t_color co_texture(t_tex *tex, t_vec3d *hpoint, t_co *co);
 t_vec3d co_nomap(t_tex *n_map, t_co *co, t_npc *closest, t_ray *ray);
 t_color co_checkerboard(t_vec3d *hpoint, t_co *co);
@@ -109,7 +110,9 @@ int			check_cylinder_caps_intersection(t_cy *cy,
 				t_hit *intersection);
 void		cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style);
 // t_object	*cylinder_ob(t_vec3d cxyz, t_vec3d vxyz, double *d_h, t_color color);
-
+int key_press(int button, t_minirt *mrt);
+int key_relase(int button, t_minirt *mrt);
+int rotation_translation(t_minirt *mrt);
 ///////////////////////////////////////////
 ////////////////////////// VECTOR
 t_vec3d		v_scale(double scale, t_vec3d a);

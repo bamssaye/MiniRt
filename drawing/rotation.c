@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 06:13:09 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 13:42:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:19:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,14 @@ t_vec3d rotat_e(double a, double b, double angle, int sign)
 void rotate_x(t_object *obj, double angle)
 {
     t_vec3d (rot), (*rot_x);
-    if (obj->type == PLANE && obj->t++)
+    if (obj->type == PLANE)
     {
         rot_x = &(((t_sp*)obj->object)->center);
         rot = rotat_e(rot_x->y, rot_x->z, angle, 1);
         rot_x->y = rot.x;
         rot_x->z = rot.y;
     }
-    if (obj->type == CYLINDER && obj->t++)
+    if (obj->type == CYLINDER)
     {
         rot_x = &(((t_cy*)obj->object)->normal);
         rot = rotat_e(rot_x->y, rot_x->z, angle, 1);
@@ -46,7 +46,7 @@ void rotate_x(t_object *obj, double angle)
         rot_x->z = rot.y;
         *rot_x = v_normalize(*rot_x);
     }
-    if (obj->type == CONE && obj->t++)
+    if (obj->type == CONE)
     {
         rot_x = &(((t_co*)obj->object)->normal);
         rot = rotat_e(rot_x->y, rot_x->z, angle, 1);
@@ -58,14 +58,14 @@ void rotate_x(t_object *obj, double angle)
 void rotate_y(t_object *obj, double angle)
 {
     t_vec3d (rot), (*rot_x);
-    if (obj->type == PLANE && obj->t++)
+    if (obj->type == PLANE)
     {
         rot_x = &(((t_sp*)obj->object)->center);
         rot = rotat_e(rot_x->x, rot_x->z, angle, -1);
         rot_x->x = rot.x;
         rot_x->z = rot.y;
     }
-    if (obj->type == CYLINDER && obj->t++)
+    if (obj->type == CYLINDER)
     {
         rot_x = &(((t_cy*)obj->object)->normal);
         rot = rotat_e(rot_x->x, rot_x->z, angle, -1);
@@ -73,7 +73,7 @@ void rotate_y(t_object *obj, double angle)
         rot_x->z = rot.y;
         *rot_x = v_normalize(*rot_x);
     }
-    if (obj->type == CONE && obj->t++)
+    if (obj->type == CONE)
     {
         rot_x = &(((t_co*)obj->object)->normal);
         rot = rotat_e(rot_x->x, rot_x->z, angle, -1);
@@ -86,14 +86,14 @@ void rotate_y(t_object *obj, double angle)
 void rotate_z(t_object *obj, double angle)
 {
     t_vec3d (rot), (*rot_x);
-    if (obj->type == PLANE && obj->t++)
+    if (obj->type == PLANE)
     {
         rot_x = &(((t_sp*)obj->object)->center);
         rot = rotat_e(rot_x->x, rot_x->y, angle, 1);
         rot_x->x = rot.x;
         rot_x->y = rot.y;
     }
-    if (obj->type == CYLINDER && obj->t++)
+    if (obj->type == CYLINDER)
     {
         rot_x = &(((t_cy*)obj->object)->normal);
         rot = rotat_e(rot_x->x, rot_x->y, angle, 1);
@@ -101,7 +101,7 @@ void rotate_z(t_object *obj, double angle)
         rot_x->y = rot.y;
         *rot_x = v_normalize(*rot_x);
     }
-    if (obj->type == CONE && obj->t++)
+    if (obj->type == CONE)
     {
         rot_x = &(((t_co*)obj->object)->normal);
         rot = rotat_e(rot_x->x, rot_x->y, angle, 1);

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 11:06:31 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:47:31 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,131 +22,6 @@ void	ft_init_win(t_minirt *mrt)
 			&mrt->mlx.img.width,
 			&mrt->mlx.img.endian);
 }
-t_object *selected_object(t_list *obj, int id)
-{
-	t_list *tmp;
-	t_object *objt;
-	tmp = obj;
-	while(tmp)
-	{
-		objt = (t_object *)tmp->content;
-		if (objt->id == id)
-			return (objt);
-		tmp = tmp->next;
-	}
-	return (NULL);
-}
-
-int	key_hook(int keycode, t_minirt *mrt)
-{
-	if (keycode == 65307)
-		ft_clear_all(mrt);
-	return (0);
-}
-int mouse_ha(int keycode, int x, int y, t_minirt *prog)
-{
-	t_hit param;
-	t_ray ray = ray_gen(prog->cam, x, y);
-	prog->selected.slected = NULL;
-	ft_memset(&param, 0, sizeof(t_hit));
-	if(!prog->amc[A])
-		prog->am_light.al_color = (t_color){0, 0, 0, 0};
-	param.ray = &ray;
-	param.closest.dista = INFINITY;
-	param.inters.dista = INFINITY;
-	param.iobj_id = -1;
-	trace_rtobj(&param, prog);
-    if (param.hit_clos)
-    {
-		
-		prog->selected.slected = selected_object(prog->object, param.iobj_id);
-		fprintf(stderr,"[object selected]\n");
-	}
-	prog->selected.id_obj = param.iobj_id;
-	(void)keycode;
-	return 0;
-}
-void rotation_translation(t_minirt *mrt)
-{
-	if (mrt->key.rot)
-	{
-		if(mrt->key.right)
-			rotate_x(mrt->selected.slected, 45.0);
-		else if(mrt->key.up)
-			rotate_y(mrt->selected.slected, 45.0);
-		else if(mrt->key.down)
-			rotate_z(mrt->selected.slected, 45.0);
-	}
-	else if (mrt->key.tra)
-	{
-		if(mrt->key.right)
-			transle_x(mrt->selected.slected, 5);
-		else if(mrt->key.left)
-			transle_x(mrt->selected.slected, -5);
-		else if(mrt->key.up)
-			transle_y(mrt->selected.slected, 5);
-		else if(mrt->key.down)
-			transle_y(mrt->selected.slected, -5);
-		else if(mrt->key.z_out)
-			transle_z(mrt->selected.slected, -5);
-		else if(mrt->key.z_in)
-			transle_z(mrt->selected.slected, 5);
-	}
-}
-void p_cs(t_vec3d a)
-{
-	fprintf(stderr, "[%f, %f, %f]\n", a.x, a.y, a.z);
-}
-int key_press(int button, t_minirt *mrt)
-{
-	if (mrt->selected.id_obj == -1)
-		return (print_err("Select an","object..."));
-	if (button == K_R)
-		mrt->key.rot = YES;
-	else if (button == K_T)
-		mrt->key.tra = YES;
-	else if (button == K_RIGHT)
-		mrt->key.right = YES;
-	else if (button == K_LEFT)
-		mrt->key.left = YES;
-	else if (button == K_UP)
-		mrt->key.up = YES;
-	else if (button == K_DOWN)
-		mrt->key.down = YES;
-	else if (button == K_Z_OUT)
-		mrt->key.z_out = YES;
-	else if (button == K_Z_IN)
-		mrt->key.z_in = YES;
-	rotation_translation(mrt);
-	if (mrt->selected.slected->t == 2)
-	{
-		mrt->selected.slected->t = 1;
-		render_image(mrt);
-	}
-	return (0);
-}
-
-int key_relase(int button, t_minirt *mrt)
-{
-	if (button == K_R)
-		mrt->key.rot = NO;
-	else if (button == K_T)
-		mrt->key.tra = NO;
-	else if (button == K_RIGHT)
-		mrt->key.right = NO;
-	else if (button == K_LEFT)
-		mrt->key.left = NO;
-	else if (button == K_UP)
-		mrt->key.up = NO;
-	else if (button == K_DOWN)
-		mrt->key.down = NO;
-	else if (button == K_Z_OUT)
-		mrt->key.z_out = NO;
-	else if (button == K_Z_IN)
-		mrt->key.z_in = NO;
-	return 0;
-}
-
 
 void	ft_hooks_fun(t_minirt *mrt)
 {
@@ -156,12 +31,17 @@ void	ft_hooks_fun(t_minirt *mrt)
 	mrt->selected.id_obj = -1;
 	ft_memset(&mrt->key, 0, sizeof(t_keys));
 	mlx_hook(t->win, 17, 0, ft_clear_all, mrt);
-	mlx_mouse_hook(t->win, mouse_ha, mrt);
+	mlx_mouse_hook(t->win, select_object, mrt);
 	mlx_hook(t->win, 2, 1L<<0, key_press, mrt);
 	mlx_hook(t->win, 3, 1L<<1, key_relase, mrt);
 	mlx_loop(t->mlx);
 }
-
+int	key_hook(int keycode, t_minirt *mrt)
+{
+	if (keycode == K_ESC)
+		ft_clear_all(mrt);
+	return (0);
+}
 
 void	mlx_putpixel(t_image *data, int x, int y, int color)
 {

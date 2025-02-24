@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/23 13:20:03 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:08:54 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,8 +256,8 @@ typedef struct s_key
 	int right;
 	int up;
 	int down;
-	int z_in;
-	int z_out;
+	int z_i;
+	int z_o;
 } t_keys;
 
 typedef struct  s_point_normal

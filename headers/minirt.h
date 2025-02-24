@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 11:19:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:14:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-# include <mlx.h>
-// #include "../mlxx/mlx.h"
+// # include <mlx.h>
+#include "../mlxx/mlx.h"
 # include <fcntl.h>
 # include "struct.h"
 # include "function.h"
@@ -48,14 +48,29 @@
 # define L 2
 # define C 1
 # define A 0
-#define K_UP 126
-#define K_DOWN 125
-#define K_LEFT 123
-#define K_RIGHT 124
-#define K_Z_IN 24
-#define K_Z_OUT 27
-#define K_R 15
-#define K_T 17
+/// mac
+// #define K_UP 126 // key UP 
+// #define K_DOWN 125
+// #define K_LEFT 123
+// #define K_RIGHT 124 
+// #define K_Z_IN 24  // key zoom in +
+// #define K_Z_OUT 27 // key zoom out -
+// #define K_R 15 // key R
+// #define K_T 17 // key T
+///// lunix
+# define K_R 114
+# define K_T 116
+# define K_ESC 65307
+# define K_LEFT 65361
+# define K_RIGHT 65363
+# define K_UP 65362
+# define K_DOWN 65364
+#define K_Z_I 105  // fe laix z key I puls key O fe min
+#define K_Z_O 111 
+# define K_IN 97 //zide hena key code + 
+# define K_OUT 98 //zide hena key code - bache dire zoom in wela out le object 
+
+//////
 #define YES 1
 #define NO 0
 #define CHECKBORAD 2
