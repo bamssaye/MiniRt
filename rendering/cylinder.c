@@ -6,16 +6,16 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/23 13:35:29 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:07:27 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-static void		cy_caps(t_pl *pl, t_cy *cy, int is_top);
-static int		check_cap_intersection(t_cy *cy, t_hit *inter, int type);
-static int		check_cylinder_caps_intersection(t_cy *cy, t_hit *inter);
-static int		check_cylinder_hit(t_cy *cy, t_hit *p);
+// static void		cy_caps(t_pl *pl, t_cy *cy, int is_top);
+// static int		check_cap_intersection(t_cy *cy, t_hit *inter, int type);
+// static int		check_cylinder_caps_intersection(t_cy *cy, t_hit *inter);
+// static int		check_cylinder_hit(t_cy *cy, t_hit *p);
 
 void	cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style)
 {

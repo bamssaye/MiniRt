@@ -6,11 +6,15 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/23 13:22:56 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/23 13:25:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:18:32 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
+
+double	cy_ray_dista(t_ray ray, t_cy cy);
+double	pl_ray_dista(t_ray ray, t_pl pl, t_npc *closest);
+double	sp_ray_dista(t_ray ray, t_sp sp);
 
 double	sp_ray_dista(t_ray ray, t_sp sp)
 {
@@ -55,23 +59,23 @@ double	cy_ray_dista(t_ray ray, t_cy cy)
 	return (quad_equa(a, b, c));
 }
 
-double	cone_ray_dista(t_ray ray, t_co cone)
-{
-	t_vec3d	ori;
+// double	cone_ray_dista(t_ray ray, t_co cone)
+// {
+// 	t_vec3d	ori;
 
-	double (a), (b), (c), (k), (k_sq);
-	double (dir_dot_n), (dir_dot_dir);
-	double (ori_dot_ori), (ori_dot_n);
-	ori = v_minus(ray.origin, cone.point);
-	dir_dot_n = v_dot(ray.direction, cone.normal);
-	ori_dot_n = v_dot(ori, cone.normal);
-	k = cone.radius / cone.height;
-	k_sq = k * k;
-	dir_dot_dir = v_dot(ray.direction, ray.direction);
-	ori_dot_ori = v_dot(ori, ori);
-	a = dir_dot_dir - dir_dot_n * dir_dot_n - k_sq * dir_dot_n * dir_dot_n;
-	b = 2.0 * (v_dot(ori, ray.direction) - ori_dot_n * dir_dot_n - k_sq
-			* ori_dot_n * dir_dot_n);
-	c = ori_dot_ori - ori_dot_n * ori_dot_n - k_sq * ori_dot_n * ori_dot_n;
-	return (quad_equa(a, b, c));
-}
+// 	double (a), (b), (c), (k), (k_sq);
+// 	double (dir_dot_n), (dir_dot_dir);
+// 	double (ori_dot_ori), (ori_dot_n);
+// 	ori = v_minus(ray.origin, cone.point);
+// 	dir_dot_n = v_dot(ray.direction, cone.normal);
+// 	ori_dot_n = v_dot(ori, cone.normal);
+// 	k = cone.radius / cone.height;
+// 	k_sq = k * k;
+// 	dir_dot_dir = v_dot(ray.direction, ray.direction);
+// 	ori_dot_ori = v_dot(ori, ori);
+// 	a = dir_dot_dir - dir_dot_n * dir_dot_n - k_sq * dir_dot_n * dir_dot_n;
+// 	b = 2.0 * (v_dot(ori, ray.direction) - ori_dot_n * dir_dot_n - k_sq
+// 			* ori_dot_n * dir_dot_n);
+// 	c = ori_dot_ori - ori_dot_n * ori_dot_n - k_sq * ori_dot_n * ori_dot_n;
+// 	return (quad_equa(a, b, c));
+// }

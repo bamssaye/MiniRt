@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/23 12:33:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:10:51 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,10 +121,11 @@ t_vec3d		v_normalize(t_vec3d a);
 double		v_dot(t_vec3d a, t_vec3d b);
 ///////////////////////////////////////////
 ////////////////////////// RAY TRACING
+t_color	specular_light(t_trace_light *t_li, t_vec3d position);
 t_ray		ray_gen(t_camera cam, int x, int y);
 void		inter_wobject(t_object *obj, t_hit *param, t_minirt *rt);
-void		trace_ray(t_list *obj, t_hit *pa, int *stuck, double mx_dist, t_minirt *rt);
-void		trace_rtobj(t_list *obj, t_hit *pa, t_minirt *rt);
+void		trace_ray(t_hit *pa, int *stuck, double mx_dist, t_minirt *rt);
+void		trace_rtobj(t_hit *pa, t_minirt *rt);
 t_obslight	initlight_inter(t_light l_param, t_hit *pa);
 void		trace_light_at_intersection(t_minirt *prog, t_hit *param);
 int			calculate_pixel_color(t_ray *ray, t_minirt *prog);
@@ -160,7 +161,7 @@ void		free_obj(t_object *obj);
 ////////////////////////////////////////////
 /////////////////////////// CONE
 
-int cone_caps(t_pl *pl, t_co *cone, t_cone_utils *co);
+// int cone_caps(t_pl *pl, t_co *cone, t_cone_utils *co);
 double cone_ray_dista(t_ray ray, t_co cone);
 int check_cone_hit(t_co *cone, t_hit *p);
 int check_cone_caps_intersection(t_co *cone, t_hit *intersection);

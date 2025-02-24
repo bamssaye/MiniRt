@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/23 14:00:43 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:06:31 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int mouse_ha(int keycode, int x, int y, t_minirt *prog)
 	param.closest.dista = INFINITY;
 	param.inters.dista = INFINITY;
 	param.iobj_id = -1;
-	trace_rtobj(prog->object, &param, prog);
+	trace_rtobj(&param, prog);
     if (param.hit_clos)
     {
 		

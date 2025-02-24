@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/23 15:05:29 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/24 11:19:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-// # include <mlx.h>
-#include "../mlxx/mlx.h"
+# include <mlx.h>
+// #include "../mlxx/mlx.h"
 # include <fcntl.h>
 # include "struct.h"
 # include "function.h"
