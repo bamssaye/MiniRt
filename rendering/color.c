@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:18:57 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/19 20:51:05 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:26:49 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	min(int a, int min)
 		return (min);
 	return (a);
 }
-// color pluse
+
 t_color	c_plus(t_color a, t_color b)
 {
 	return ((t_color){
@@ -33,7 +33,7 @@ int	ctoi(t_color color)
 {
 	return (color.r << 16 | color.g << 8 | color.b);
 }
-// color scale
+
 t_color	c_scale(double scale, t_color a)
 {
 	return ((t_color){

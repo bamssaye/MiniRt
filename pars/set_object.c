@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:26:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:40:49 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	set_cy(char **s, t_minirt *rt)
 	ft_lstadd_back(&rt->object, ft_lstnew(cylinder));
 	return (0);
 }
-
 
 int	set_co(char **s, t_minirt *rt)
 {

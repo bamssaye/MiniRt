@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   function.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 12:25:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:58:25 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,12 +164,10 @@ void		free_obj(t_object *obj);
 ////////////////////////////////////////////
 /////////////////////////// CONE
 
-// int cone_caps(t_pl *pl, t_co *cone, t_cone_utils *co);
 double cone_ray_dista(t_ray ray, t_co cone);
 int check_cone_hit(t_co *cone, t_hit *p);
 int check_cone_caps_intersection(t_co *cone, t_hit *intersection);
 void co_inter(t_co *cone, t_hit *f_inter, t_bump *bump, int *style);
-// t_object *cone_ob(t_vec3d point, t_vec3d normal, double *d_h, t_color color);
 t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color, char *path);
 int set_co(char **s, t_minirt *rt);
 void 	set_style_pl(t_bump *bump, int *style, t_hit *inter, t_pl *pl);

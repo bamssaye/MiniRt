@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rotation.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 06:13:09 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 13:19:09 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 17:21:06 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ t_vec3d rotat_e(double a, double b, double angle, int sign)
         .y = (sign * (a * t_sin)) + (b * t_cos)
     });
 }
+
 void rotate_x(t_object *obj, double angle)
 {
     t_vec3d (rot), (*rot_x);
@@ -55,6 +56,7 @@ void rotate_x(t_object *obj, double angle)
         *rot_x = v_normalize(*rot_x);
     }
 }
+
 void rotate_y(t_object *obj, double angle)
 {
     t_vec3d (rot), (*rot_x);

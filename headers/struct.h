@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   struct.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 13:08:54 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 15:57:47 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,8 @@ typedef struct s_cylinder
 	t_tex		tex;//
 	t_tex		n_map;//
 }			t_cy;
-
+/////////////////////////////////////////
+///////////////////////////////// cone
 typedef struct s_cone 
 {
     t_vec3d 	point;
@@ -131,6 +132,36 @@ typedef struct s_cone
 	t_tex		n_map;//
 } t_co;
 
+typedef struct s_cone_inter
+{
+	double	dn;
+	double	on;
+	double	k;
+	double	k_sq;
+	double	a;
+	double	b;
+	double	c;
+}	t_cone_inter;
+
+typedef struct s_cone_dist
+{
+	double		t1;
+	double		t2;
+	double		min_t;
+	double		h;
+	int			i;
+	double		roots[2];
+	t_vec3d		hit;
+	t_vec3d		ori;
+}	t_cone_dist;
+
+typedef struct s_cone_hit
+{
+	double		t;
+	t_vec3d		a2h;
+	double		proj;
+	double		k_sq;
+}	t_cone_hit;
 ///////////////////////////////////////////
 ////////////////////////// ENV : CAMERA, LIGHT, EMBIENT LIGHT
 typedef struct s_camera
@@ -265,25 +296,6 @@ typedef struct  s_point_normal
 	t_vec3d		point;
 	t_vec3d		normal;
 } t_point_normal;
-
-typedef struct s_cone_utils
-{
-	t_pl		base_cap;
-	double		distance;
-	t_hit 		tmp_inter;
-	t_hit 		cap_inter;
-	t_vec3d 	hit_point;
-	t_vec3d 	cap_center;
-	
-} t_cone_utils;
-typedef struct s_cone_hit
-{
-	t_vec3d 	normal;
-	t_vec3d 	axis_proj;
-	t_vec3d 	apex_to_hit;
-	t_vec3d 	point;
-	
-} t_cone_hit;
 
 typedef struct s_minirt
 {

@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   spher.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:52 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/23 13:38:05 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:50:34 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
 
 t_npc	c_sp_inter(t_ray ray, double dist, t_sp sp)
 {

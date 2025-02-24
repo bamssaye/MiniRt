@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 13:14:38 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 14:43:40 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <sys/stat.h>
-// # include <mlx.h>
-#include "../mlxx/mlx.h"
+# include <mlx.h>
+// #include "../mlxx/mlx.h"
 # include <fcntl.h>
 # include "struct.h"
 # include "function.h"
@@ -67,8 +67,8 @@
 # define K_DOWN 65364
 #define K_Z_I 105  // fe laix z key I puls key O fe min
 #define K_Z_O 111 
-# define K_IN 97 //zide hena key code + 
-# define K_OUT 98 //zide hena key code - bache dire zoom in wela out le object 
+# define K_IN 61 //zide hena key code + 
+# define K_OUT 45 //zide hena key code - bache dire zoom in wela out le object 
 
 //////
 #define YES 1

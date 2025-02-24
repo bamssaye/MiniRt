@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raytrace.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:46 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/23 13:39:03 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:49:48 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,9 @@ t_ray	ray_gen(t_camera cam, int x, int y)
 {
 	t_ray	ray;
 
-	ray.direction = v_normalize(
-		v_plus(
-			cam.top_left,
-			v_plus(
-				v_scale(x, cam.u),
-				v_scale(y, cam.v))));
-	return ((t_ray){
-		.direction = ray.direction,
-		.origin = cam.position});
+	ray.direction = v_normalize(v_plus(cam.top_left, v_plus(v_scale(x, cam.u),
+					v_scale(y, cam.v))));
+	return ((t_ray){.direction = ray.direction, .origin = cam.position});
 }
 
 // trace ray to light source
@@ -80,7 +74,7 @@ void	trace_rtobj(t_hit *pa, t_minirt *rt)
 	}
 }
 
-//li_scale
+// li_scale
 void	trace_light_at_intersection(t_minirt *prog, t_hit *hit)
 {
 	t_trace_light	tr;

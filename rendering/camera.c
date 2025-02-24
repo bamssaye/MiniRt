@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   camera.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:18:52 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/23 13:38:48 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:26:28 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_vec3d	c_topleft(t_camera *cam)
 int	is_parallel(t_vec3d v1, t_vec3d v2)
 {
 	double	dot;
+
 	dot = v_dot(v2, v1);
 	if (fabs(dot) > EPSILON)
 		return (1);

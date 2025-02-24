@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:24 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/23 13:57:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:46:05 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-double quad_equa(double a, double b, double c)
+double	quad_equa(double a, double b, double c)
 {
 	double (x1), (x2), (delta), (sq_delta);
 	delta = (b * b) - (4.0 * a * c);
@@ -43,10 +43,11 @@ double	v_magnitude(t_vec3d a)
 {
 	return (sqrt(a.x * a.x + a.y * a.y + a.z * a.z));
 }
-// Lambertian diffuse / light scale 
-double lig_scale(t_vec3d a, t_vec3d b) 
+
+// Lambertian diffuse / light scale
+double	lig_scale(t_vec3d a, t_vec3d b)
 {
-    double cosine;
+	double	cosine;
 
 	cosine = v_dot(a, b);
 	return (fmax(cosine, 0.0));

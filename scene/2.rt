@@ -1,13 +1,13 @@
 A   0.2              255,255,255
-C   0,0,100          0,0,-1        70
-L   100,0,105        0.7          255,255,255
+C   0,0,90          0,0,-1        70
+L   100,0,90        0.7          255,255,255
 
 
-# sp -20,10,40 10 texture:earth.xpm
+# sp 2,10,40 70 texture:earth.xpm
 # co  0,0,0    0,1,0    20   40    255,0,0
-# co 0,10,40 0,-1,0 10 15 checkborad
-# co 20,10,40 -1,-1,0 10 15 texture:earth.xpm
-# cy -40,10,40 0,-1,0 10 15 texture:earth.xpm
+# co 0,10,50 0,-1,0 20 30 checkborad
+# co 1,10,50 -1,-1,0 20 30 texture:earth.xpm
+cy 3,10,50 0,0,-1 20 30 texture:earth.xpm
 # pl 0,0,0 1,0,1 texture:stars.xpm
 #texture:earth.xpm
 #255,0,0

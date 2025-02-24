@@ -3,23 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/24 11:07:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:07:49 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-// static void		cy_caps(t_pl *pl, t_cy *cy, int is_top);
-// static int		check_cap_intersection(t_cy *cy, t_hit *inter, int type);
-// static int		check_cylinder_caps_intersection(t_cy *cy, t_hit *inter);
-// static int		check_cylinder_hit(t_cy *cy, t_hit *p);
-
 void	cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style)
 {
-	t_hit (tmp_body), (tmp_caps);
+	t_hit (tmp_body);
+	t_hit (tmp_caps);
 	tmp_body = *f_inter;
 	if (check_cylinder_hit(cy, &tmp_body))
 	{
@@ -85,28 +81,23 @@ int	check_cap_intersection(t_cy *cy, t_hit *inter, int type)
 
 int	check_cylinder_caps_intersection(t_cy *cy, t_hit *inter)
 {
-	t_hit (bottom_inter), (top_inter);
+	t_hit (bottom_inter);
+	t_hit (top_inter);
 	int (hit_bottom), (hit_top);
+	t_hit (*best);
 	top_inter = *inter;
 	bottom_inter = *inter;
 	hit_top = check_cap_intersection(cy, &top_inter, 1);
 	hit_bottom = check_cap_intersection(cy, &bottom_inter, 0);
-	if (hit_top && hit_bottom)
-	{
-		if (top_inter.closest.dista < bottom_inter.closest.dista)
-			*inter = top_inter;
-		else
-			*inter = bottom_inter;
-		return (1);
-	}
+	best = NULL;
 	if (hit_top)
+		best = &top_inter;
+	if (hit_bottom && (!best || \
+		bottom_inter.closest.dista < best->closest.dista))
+		best = &bottom_inter;
+	if (best)
 	{
-		*inter = top_inter;
-		return (1);
-	}
-	if (hit_bottom)
-	{
-		*inter = bottom_inter;
+		*inter = *best;
 		return (1);
 	}
 	return (0);

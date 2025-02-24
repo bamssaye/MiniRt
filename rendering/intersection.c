@@ -3,20 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   intersection.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
+/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:17 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/23 13:39:46 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/24 12:45:17 by iel-koub         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-
-
 void	inter_wobject(t_object *obj, t_hit *param, t_minirt *rt)
 {
-	t_obj objs;
+	t_obj	objs;
 
 	(void)rt;
 	if (obj->type == SPHERE)
@@ -41,14 +39,13 @@ void	inter_wobject(t_object *obj, t_hit *param, t_minirt *rt)
 	}
 }
 
-// initialize_light_parameters
 t_obslight	initlight_inter(t_light l_param, t_hit *pa)
 {
-	t_vec3d light_dire;
+	t_vec3d	light_dire;
 
 	light_dire = v_minus(l_param.position, pa->inters.point);
 	return ((t_obslight){.light = (t_slight){
-				.ambient_color = (t_color){0, 0, 0, 0},
+		.ambient_color = (t_color){0, 0, 0, 0},
 				.light_color = (t_color){0, 0, 0, 0},
 			},
 		.light_dire = v_normalize(light_dire),
@@ -65,20 +62,13 @@ t_color	specular_light(t_trace_light *t_li, t_vec3d position)
 {
 	t_color	color;
 
-	t_vec3d (ref_dir), (view_dir);
-	ref_dir = v_normalize(
-		v_minus(
-			v_scale(
-				2.0 * v_dot(t_li->inters.normal, t_li->l_pa.light_dire),
-				t_li->inters.normal),
-			t_li->l_pa.light_dire));
-	view_dir = v_normalize(
-		v_minus(
-			position,
-			t_li->inters.point));
-	color = c_scale(
-		fmin(
-			1.5 * pow(fmax(0.0, v_dot(ref_dir, view_dir)), 10), 0.08),
-		(t_color){255, 255, 255, 0});
+	t_vec3d(ref_dir);
+	t_vec3d(view_dir);
+	ref_dir = v_normalize(v_minus(v_scale(2.0 * v_dot(t_li->inters.normal,
+						t_li->l_pa.light_dire), t_li->inters.normal),
+				t_li->l_pa.light_dire));
+	view_dir = v_normalize(v_minus(position, t_li->inters.point));
+	color = c_scale(fmin(1.5 * pow(fmax(0.0, v_dot(ref_dir, view_dir)), 10),
+				0.08), (t_color){255, 255, 255, 0});
 	return (color);
 }
