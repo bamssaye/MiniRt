@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 12:43:41 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/25 15:01:01 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,21 @@ t_color pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl)
 {
     char *pixel;
 
-    t_vec3d (up), (right), (up_dir), (corss);
+    int (x), (y);
     double (u), (v);
-    up = (t_vec3d){0, 1, 0, 0};
-    right = v_cross(pl->normal, up);
-    if (v_magnitude(right) < 0.01)
-    {
-        up = (t_vec3d){0, 0, 1, 0};
-        right = v_cross(pl->normal, up);
-    }
-    right = v_normalize(right);
-    corss = v_cross(right, pl->normal);
-    up_dir = v_normalize(corss);
-    u = fmod(v_dot(*hpoint, right) * 0.1, 1.0);
-    v = fmod(v_dot(*hpoint, up_dir) * 0.1, 1.0);
-    if (u < 0)
-        u += 1.0;
-    if (v < 0)
-        v += 1.0;
-    pixel = tex->addr + ((int)(v * tex->height) % tex->height) * \
-     tex->line_length + ((int)(u * tex->width) % tex->width) * (tex->bpp / 8);
-    return ((t_color){(unsigned char)pixel[2], (unsigned char)pixel[1], \
-        (unsigned char)pixel[0], 0});
+    t_vec3d local = find_perpendicular(pl->normal, *hpoint, pl->point);
+    double scale = 0.01;
+    u = fmod(fabs(local.x * scale), 1.0);
+    v = fmod(fabs(local.y * scale), 1.0);
+    x = (int)(u * tex->width) % tex->width;
+    y = (int)(v * tex->height) % tex->height;
+    pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
+    return ((t_color){
+        (unsigned char)pixel[2],
+        (unsigned char)pixel[1],
+        (unsigned char)pixel[0],
+        0
+    });
 }
 
 t_color cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy)

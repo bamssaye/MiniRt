@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 10:35:12 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 13:18:34 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/25 13:21:02 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void transle_x(t_object *obj, double x)
     }
     else if (obj->type == PLANE)
     {
-        objs.sp = (t_sp*)obj->object;
-        objs.cy->point.x += x;
+        objs.pl = (t_pl*)obj->object;
+        objs.pl->point.x += x;
     }
     else if (obj->type == CYLINDER)
     {

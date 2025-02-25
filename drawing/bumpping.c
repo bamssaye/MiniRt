@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 13:30:53 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/23 14:00:10 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:38:41 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,20 @@ t_vec3d sp_nomap(t_tex *n_map, t_npc *closest, t_ray *ray, t_sp *sp)
     }
     return normal;
 }
-
+// t_vec3d tangent_world(t_vec3d tang_normal, t_vec3d world, t_vec3d normal)
+// {
+//     return ((t_vec3d){
+//         .x = ,
+//         .y = ,
+//         .z = 
+//     });
+// }
 
 t_vec3d pl_nomap(t_tex *n_map, t_pl *pl, t_npc *closest, t_ray *ray)
 {
     t_vec3d (normal), (u), (no_map), (v_vec);
     t_vec3d (sca_no_x), (sca_no_y), (sca_nm_z);
+    // normal = pl_normal_map(n_map, &closest->point, pl);
     normal = closest->normal;
     u = v_cross(closest->normal, ray->direction);
     if (v_magnitude(u) > EPSILON)
