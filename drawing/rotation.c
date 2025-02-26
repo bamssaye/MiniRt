@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 06:13:09 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:11:31 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:02:58 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void	rotate_y(t_object *obj, double angle)
 		rot = rotat_e(rot_y->x, rot_y->z, angle, -1);
 		rot_y->x = rot.x;
 		rot_y->z = rot.y;
-		*rot_y = v_normalize(*rot_x);
+		*rot_y = v_normalize(*rot_y);
 	}
 	if (obj->type == CONE)
 	{

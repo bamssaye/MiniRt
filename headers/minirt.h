@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:26:20 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:04:51 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,9 @@
 # include <sys/stat.h>
 # include <sys/types.h>
 # include <unistd.h>
-// #include "../mlxx/mlx.h"
-# include "function.h"
 # include "struct.h"
+# include "function.h"
+// # include "../mlxx/mlx.h"
 # include <fcntl.h>
 # define P_NAME "miniRT"
 # define W_WIDTH 500

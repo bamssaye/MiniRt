@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:14:12 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:03:55 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,6 @@
 
 ///////////////////////////////////////////
 ////////////////////////// MLX STRUCT
-typedef struct s_normal_map
-{
-	t_vec3d			normal;
-	t_vec3d			u;
-}					t_normal_map;
-typedef struct s_normal_map
-{
-	t_vec3d			normal;
-	t_vec3d			u;
-	t_vec3d			no_map;
-	t_vec3d			v_vec;
-	t_vec3d			sca_no_x;
-	t_vec3d			sca_no_y;
-	t_vec3d			sca_nm_z;
-}					t_normal_map;
-
 typedef struct s_img
 {
 	void			*img;
@@ -84,6 +68,17 @@ typedef struct s_xyz
 	double			z;
 	int				isv;
 }					t_vec3d;
+
+typedef struct s_normal_map
+{
+	t_vec3d			normal;
+	t_vec3d			u;
+	t_vec3d			no_map;
+	t_vec3d			v_vec;
+	t_vec3d			sca_no_x;
+	t_vec3d			sca_no_y;
+	t_vec3d			sca_nm_z;
+}					t_normal_map;
 ///////////////////////////////////////////
 ////////////////////////// RAY
 typedef struct s_ray
@@ -242,6 +237,7 @@ typedef struct s_bump
 	t_tex			img;
 	t_tex			bump;
 }					t_bump;
+
 typedef struct s_objects
 {
 	void			*object;
