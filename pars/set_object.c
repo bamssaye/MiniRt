@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   set_object.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 17:40:49 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/26 00:25:59 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,23 @@
 
 char *check_path(char *str, int bouns)
 {
-	if (!bouns)
-		return (NULL);
+	// if (!bouns)
+	// 	return (NULL);
 	if (!ft_strncmp(str, "texture:", 8))
-		return (str);
+	{
+		if (!bouns)
+			return (print_err("\t{Bonus}", "texture in Bonus Part"), NULL);			
+		else
+			return (str);
+	}
 	if (!ft_strncmp(str, "checkborad", 11))
-		return (str);
-	return(NULL);
+	{
+		if (!bouns)
+			return (print_err("\t{Bonus}", "Checkborad, in Bonus Part"), NULL);
+		else
+			return (str);
+	}
+	return (NULL);
 }
 
 
@@ -106,6 +116,8 @@ int	set_co(char **s, t_minirt *rt)
 	double			v[2];
 	t_color			color;
 
+	if (!rt->bouns)
+		return (print_err("\t{CONE}", "Bouns part"));
 	if (check_str(s, 6) || ft_atof(s[3]).isv || ft_atof(s[4]).isv)
 		return (print_err("\t{CONE}", MSG_7));
 	p_n.point = check_xyz(s[1], -IN_MIN, IN_MAX);

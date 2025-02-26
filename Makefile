@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+         #
+#    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2025/02/24 16:59:21 by iel-koub         ###   ########.fr        #
+#    Updated: 2025/02/26 00:04:15 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
 #################################
 VPATH = utils:pars:drawing:tuples:rendering
 SRC = check_input.c read_file.c set_element.c set_object.c set_style.c
-SRC += template_ob.c valid_input.c plane.c raytrace.c spher.c mlx_utlis.c
+SRC += template_ob.c valid_input.c plane.c raytrace.c spher.c mlx_utlis.c key_utils.c
 SRC += camera.c color.c cylinder.c intersection.c math.c vector_utils.c cone.c cone2.c
 SRC += clean_memory.c ft_atod.c ft_atoii.c pars_utils.c canvas.c new_vec.c select_object.c
 SRC += libft_utils.c get_line.c ft_split.c lst_addback.c load_texture.c ray_distance.c
@@ -54,6 +54,6 @@ clean:
 	$(RM) $(OBGDIR)
 
 fclean: clean
-	$(RM) $(NAME)
+	$(RM) $(NAME) $(NAME_B)
 
 re : fclean all

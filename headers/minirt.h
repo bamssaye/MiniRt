@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minirt.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/07 01:39:39 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 14:43:40 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/25 23:02:15 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@
 # include "struct.h"
 # include "function.h"
 # define P_NAME "miniRT"
-# define W_WIDTH 800
-# define W_HEIGHT 800
+# define W_WIDTH 500 
+# define W_HEIGHT 500
 # define IN_MAX 2147483647
 # define IN_MIN 2147483648
 # define PI 3.14159265358979323846f

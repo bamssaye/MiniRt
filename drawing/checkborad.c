@@ -6,15 +6,13 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:49 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/25 14:41:49 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:49:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_color pl_checkerboard(t_vec3d *hpoint, t_pl *pl);
-t_color sp_checkerboard(t_vec3d *hpoint, t_sp *sp);
-t_color cy_checkerboard(t_vec3d *hpoint, t_cy *cy);
+
 t_vec3d find_perpendicular(t_vec3d normal, t_vec3d hpoint, t_vec3d point)
 {
     t_vec3d right;

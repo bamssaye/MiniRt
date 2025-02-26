@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:18:37 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/24 16:15:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 00:02:25 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int rotation_translation(t_minirt *mrt)
 	return (0);
 }
 
-void o_zoom(t_object *obj, double x)
+static void o_zoom(t_object *obj, double x)
 {
     t_obj objs;
     
@@ -107,62 +107,9 @@ void o_zoom(t_object *obj, double x)
 int obj_zoom(int button, t_minirt *mrt)
 {
 	if (button == K_IN)
-		return (o_zoom(mrt->selected.slected, 5), 1);
+		return (o_zoom(mrt->selected.slected, 3), 1);
 	else if (button == K_OUT)
-		return (o_zoom(mrt->selected.slected, -5), 1);
-	return (0);
-}
-int	key_hook(int keycode, t_minirt *mrt)
-{
-	if (keycode == K_ESC)
-		ft_clear_all(mrt);
-	return (0);
-}
-int key_press(int button, t_minirt *mrt)
-{
-	if (mrt->selected.id_obj == -1 || button == K_ESC)
-		return (key_hook(button, mrt), print_err("\nNo object","."));
-	if (button == K_R)
-		mrt->key.rot = YES;
-	else if (button == K_T)
-		mrt->key.tra = YES;
-	else if (button == K_RIGHT)
-		mrt->key.right = YES;
-	else if (button == K_LEFT)
-		mrt->key.left = YES;
-	else if (button == K_UP)
-		mrt->key.up = YES;
-	else if (button == K_DOWN)
-		mrt->key.down = YES;
-	else if (button == K_Z_O)
-		mrt->key.z_i = YES;
-	else if (button == K_Z_I)
-		mrt->key.z_o = YES;
-	else if (button == K_IN || button == K_OUT)
-		if (obj_zoom(button, mrt) && mrt->selected.id_obj != -1)
-			render_image(mrt);
-	if (rotation_translation(mrt) && mrt->selected.id_obj != -1)
-		render_image(mrt);
+		return (o_zoom(mrt->selected.slected, -3), 1);
 	return (0);
 }
 
-int key_relase(int button, t_minirt *mrt)
-{
-	if (button == K_R)
-		mrt->key.rot = NO;
-	else if (button == K_T)
-		mrt->key.tra = NO;
-	else if (button == K_RIGHT)
-		mrt->key.right = NO;
-	else if (button == K_LEFT)
-		mrt->key.left = NO;
-	else if (button == K_UP)
-		mrt->key.up = NO;
-	else if (button == K_DOWN)
-		mrt->key.down = NO;
-	else if (button == K_Z_O)
-		mrt->key.z_o = NO;
-	else if (button == K_Z_I)
-		mrt->key.z_i = NO;
-	return 0;
-}
