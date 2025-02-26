@@ -6,7 +6,7 @@
 #    By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 01:39:23 by bamssaye          #+#    #+#              #
-#    Updated: 2025/02/26 00:04:15 by bamssaye         ###   ########.fr        #
+#    Updated: 2025/02/26 14:23:59 by bamssaye         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,10 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address -g3
 RM = rm -rf
 # LIBFT = ./libft/libft.a
-MLX_DIR = minilibx
-MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
-# MLX_DIR = mlxx
-# MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
+# MLX_DIR = minilibx
+# MLX_FLAGS = -L$(MLX_DIR) -lmlx -lXext -lX11 -lm
+MLX_DIR = mlxx
+MLX_FLAGS = -L$(MLX_DIR) -I /usr/X11/include -g -L /usr/X11/lib -l mlx -framework OpenGL -framework AppKit
 
 #################################
 VPATH = utils:pars:drawing:tuples:rendering

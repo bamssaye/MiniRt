@@ -6,12 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 02:16:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 11:31:27 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:17:28 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
 
 static int	ft_getline(char *getline, char *buffer);
 static char	*ft_free(char *getline, char **buffer);
@@ -46,8 +45,8 @@ static char	*ft_strj(char *s1, char *s2)
 
 char	*get_next_line(int fd, char **buffer)
 {
-	char		*getline;
-	int			bytes;
+	char	*getline;
+	int		bytes;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
@@ -64,7 +63,6 @@ char	*get_next_line(int fd, char **buffer)
 		bytes = read(fd, *buffer, BUFFER_SIZE);
 		if (bytes <= 0)
 			return (ft_free(getline, buffer));
-		// *(buffer + bytes) = 0;
 	}
 	return (NULL);
 }

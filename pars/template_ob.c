@@ -6,41 +6,31 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/21 12:57:47 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:34:55 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-// t_tex	init_img(char *path)
-// {
-// 	return ((t_tex){
-// 		.img = NULL,
-// 		.addr = NULL,
-// 		.path = path
-// 	});
-// }
-void check_type(char *str, int *style, t_object *obje)
+void	check_type(char *str, int *style, t_object *obje)
 {
 	if (!ft_strncmp(str, "checkborad", 11))
 		style[CHECKBORAD] = 1;
 	else if (!ft_strncmp(str, "texture:", 8))
 		style[TEXTURE] = 1;
-	obje->path = strdup(str+8);
-	// fprintf(stderr, "STR{%d}--{%s}\n", style[TEXTURE], str);
-	// obje->path = str;
-	(void)obje;
+	obje->path = ft_strdup(str + 8);
 }
+
 t_object	*sphere_ob(t_vec3d point, t_color color, double dia, char *path)
 {
-	t_sp	*obj;
+	t_sp		*obj;
 	t_object	*obje;
 
 	obje = malloc(sizeof(t_object));
 	if (!obje)
 		return (NULL);
 	obj = malloc(sizeof(t_sp));
-	ft_memset(obje->style, 0 , sizeof(int*));
+	ft_memset(obje->style, 0, sizeof(int *));
 	if (!obj)
 		return (free(obje), NULL);
 	if (path)
@@ -78,9 +68,10 @@ t_object	*plane_ob(t_point_normal *p_n, t_color color, char *path)
 	return (obje);
 }
 
-t_object	*cylinder_ob(t_point_normal *p_n, double *d_h, t_color color, char *path)
+t_object	*cylinder_ob(t_point_normal *p_n, double *d_h, t_color color,
+		char *path)
 {
-	t_cy	*obj;
+	t_cy		*obj;
 	t_object	*obje;
 
 	obje = malloc(sizeof(t_object));
@@ -100,12 +91,11 @@ t_object	*cylinder_ob(t_point_normal *p_n, double *d_h, t_color color, char *pat
 	obj->normal = v_normalize(p_n->normal);
 	obje->type = CYLINDER;
 	obje->object = obj;
-	// if (obje->style[COLOR] != 1)
-		// obje->path = path;
 	return (obje);
 }
 
-t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color, char *path)
+t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color,
+		char *path)
 {
 	t_object	*obje;
 	t_co		*obj;
@@ -127,7 +117,5 @@ t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color, char *path)
 	obj->color = color;
 	obje->type = CONE;
 	obje->object = obj;
-	// if (obje->style[COLOR] != 1)
-		// obje->path = path;
 	return (obje);
 }

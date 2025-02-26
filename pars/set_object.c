@@ -6,20 +6,18 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 00:25:59 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:59:26 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-char *check_path(char *str, int bouns)
+char	*check_path(char *str, int bouns)
 {
-	// if (!bouns)
-	// 	return (NULL);
 	if (!ft_strncmp(str, "texture:", 8))
 	{
 		if (!bouns)
-			return (print_err("\t{Bonus}", "texture in Bonus Part"), NULL);			
+			return (print_err("\t{Bonus}", "texture in Bonus Part"), NULL);
 		else
 			return (str);
 	}
@@ -32,7 +30,6 @@ char *check_path(char *str, int bouns)
 	}
 	return (NULL);
 }
-
 
 int	set_sp(char **s, t_minirt *rt)
 {
@@ -75,7 +72,8 @@ int	set_pl(char **s, t_minirt *rt)
 	plane = plane_ob(&p_n, color, path);
 	if (path)
 		rt->count_t++;
-	if (p_n.normal.isv || p_n.point.isv || (color.isv && !path) || !++(rt->obj_count))
+	if (p_n.normal.isv || p_n.point.isv || (color.isv && !path)
+		|| !++(rt->obj_count))
 		return (free(path), free_obj(plane), print_err("\t{PLANE}", MSG_5));
 	plane->id = rt->obj_count;
 	ft_lstadd_back(&rt->object, ft_lstnew(plane));
@@ -87,7 +85,7 @@ int	set_cy(char **s, t_minirt *rt)
 	t_object		*cylinder;
 	t_color			color;
 	t_point_normal	p_n;
-	char 			*path;
+	char			*path;
 	double			v[2];
 
 	if (check_str(s, 6) || ft_atof(s[3]).isv || ft_atof(s[4]).isv)
@@ -101,8 +99,10 @@ int	set_cy(char **s, t_minirt *rt)
 	if (path)
 		rt->count_t++;
 	cylinder = cylinder_ob(&p_n, v, color, path);
-	if (!cylinder || p_n.normal.isv || p_n.point.isv || (color.isv && !path) || !++(rt->obj_count))
-		return (free(path), free_obj(cylinder), print_err("\t{CYLINDER}", MSG_6));
+	if (!cylinder || p_n.normal.isv || p_n.point.isv || (color.isv && !path)
+		|| !++(rt->obj_count))
+		return (free(path), free_obj(cylinder), print_err("\t{CYLINDER}",
+				MSG_6));
 	cylinder->id = rt->obj_count;
 	ft_lstadd_back(&rt->object, ft_lstnew(cylinder));
 	return (0);
@@ -129,7 +129,8 @@ int	set_co(char **s, t_minirt *rt)
 	if (path)
 		rt->count_t++;
 	cone = cone_ob(&p_n, v, color, path);
-	if (!cone || p_n.point.isv || p_n.normal.isv || (color.isv && !path) || !++(rt->obj_count))
+	if (!cone || p_n.point.isv || p_n.normal.isv || (color.isv && !path)
+		|| !++(rt->obj_count))
 		return (free(path), free_obj(cone), print_err("\t{CONE}", MSG_7));
 	cone->id = rt->obj_count;
 	ft_lstadd_back(&rt->object, ft_lstnew(cone));

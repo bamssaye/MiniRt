@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:10:57 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/22 12:29:55 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 13:58:42 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ static int	tospaces(char *str, t_minirt *mrt)
 	return (arry_c(line), 0);
 }
 
-static int  free_line_error(char *line, t_list *obj, int *fd, char *buf)
+static int	free_line_error(char *line, t_list *obj, int *fd, char *buf)
 {
 	free(line);
 	free(buf);
@@ -68,13 +68,12 @@ int	ft_readfile(char *path, t_minirt *mrt)
 	static char	*buffer;
 
 	char *(line);
-	int(fd);
-	
+	int (fd);
 	if (check_filename(path))
-		return (print_err(MSG , MSG_2));
+		return (print_err(MSG, MSG_2));
 	fd = open(path, O_RDONLY);
 	if (fd < 0)
-		return (print_err(MSG , MSG_2));
+		return (print_err(MSG, MSG_2));
 	while (1)
 	{
 		line = get_next_line(fd, &buffer);

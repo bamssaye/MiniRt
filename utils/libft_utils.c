@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 02:11:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 02:49:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:18:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 int	ft_isalnum(int c)
 {
-	return ((c >= '0' && c <= '9') || ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z')));
+	return ((c >= '0' && c <= '9') || ((c >= 'A' && c <= 'Z') || (c >= 'a'
+				&& c <= 'z')));
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -53,7 +54,9 @@ void	*ft_memset(void *s, int c, size_t n)
 	i = 0;
 	p = (unsigned char *)s;
 	if (!s && !n)
+	{
 		return (0);
+	}
 	while (i < n)
 	{
 		p[i] = (unsigned char)c;
@@ -76,4 +79,3 @@ void	*ft_calloc(size_t nmemb, size_t size)
 	ft_memset(p, 0, s);
 	return (p);
 }
-

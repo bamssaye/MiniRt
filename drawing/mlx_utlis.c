@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/25 23:13:08 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:05:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,10 @@ void	ft_hooks_fun(t_minirt *mrt)
 	ft_memset(&mrt->key, 0, sizeof(t_keys));
 	mlx_hook(t->win, 17, 0, ft_clear_all, mrt);
 	mlx_mouse_hook(t->win, select_object, mrt);
-	mlx_hook(t->win, 2, 1L<<0, key_press, mrt);
-	mlx_hook(t->win, 3, 1L<<1, key_relase, mrt);
+	mlx_hook(t->win, 2, 1L << 0, key_press, mrt);
+	mlx_hook(t->win, 3, 1L << 1, key_relase, mrt);
 	mlx_loop(t->mlx);
 }
-
 
 void	mlx_putpixel(t_image *data, int x, int y, int color)
 {

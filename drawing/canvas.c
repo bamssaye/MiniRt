@@ -12,7 +12,6 @@
 
 #include "../headers/minirt.h"
 
-
 int	render_image(t_minirt *prog)
 {
 	t_ray	ray;

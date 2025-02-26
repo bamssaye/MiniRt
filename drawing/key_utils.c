@@ -6,12 +6,11 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 00:00:53 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 00:01:01 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:06:36 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
-
 
 int	key_hook(int keycode, t_minirt *mrt)
 {
@@ -19,11 +18,11 @@ int	key_hook(int keycode, t_minirt *mrt)
 		ft_clear_all(mrt);
 	return (0);
 }
-int key_press(int button, t_minirt *mrt)
+
+int	key_press(int button, t_minirt *mrt)
 {
-	
 	if (mrt->selected.id_obj == -1 || button == K_ESC)
-		return (key_hook(button, mrt), print_err("\nNo object","."));
+		return (key_hook(button, mrt), print_err("\nNo object", "."));
 	if (button == K_R)
 		mrt->key.rot = YES;
 	else if (button == K_T)
@@ -48,9 +47,9 @@ int key_press(int button, t_minirt *mrt)
 	return (0);
 }
 
-int key_relase(int button, t_minirt *mrt)
+int	key_relase(int button, t_minirt *mrt)
 {
 	(void)button;
 	ft_memset(&mrt->key, 0, sizeof(t_keys));
-	return 0;
+	return (0);
 }

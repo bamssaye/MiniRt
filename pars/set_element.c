@@ -62,7 +62,7 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 	if (!obje)
 		return (NULL);
 	obj = malloc(sizeof(t_light));
-	ft_memset(obje->style, 0 , sizeof(int*));
+	ft_memset(obje->style, 0, sizeof(int *));
 	if (!obj)
 		return (free(obje), NULL);
 	obj->intensity = light_bri;

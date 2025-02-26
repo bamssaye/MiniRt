@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/05 04:15:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/07 02:19:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:19:38 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_ranges(t_atof n, double min, double max)
 
 size_t	ft_strlen(const char *s)
 {
-	size_t	i;
+	size_t		i;
 
 	i = 0;
 	if (!s)

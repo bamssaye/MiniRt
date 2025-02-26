@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:07:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/01/27 23:41:11 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:42:50 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ void	free_cmd(t_list *cmd)
 		tmp = cmd;
 		cmd = cmd->next;
 		t = (t_object *)tmp->content;
+		if (t->path)
+			free(t->path);
 		free(t->object);
 		free(t);
 		free(tmp);
