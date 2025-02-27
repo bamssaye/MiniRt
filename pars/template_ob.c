@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/04 00:24:05 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:34:55 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:28:48 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ t_object	*sphere_ob(t_vec3d point, t_color color, double dia, char *path)
 	if (path)
 		check_type(path, obje->style, obje);
 	else
+	{
+		obje->path = NULL;
 		obje->style[COLOR] = 1;
+	}
 	obj->radius = (dia / 2);
 	obj->color = color;
 	obj->center = point;
@@ -59,7 +62,10 @@ t_object	*plane_ob(t_point_normal *p_n, t_color color, char *path)
 	if (path)
 		check_type(path, obje->style, obje);
 	else
+	{
+		obje->path = NULL;
 		obje->style[COLOR] = 1;
+	}
 	obj->color = color;
 	obj->point = p_n->point;
 	obj->normal = v_normalize(p_n->normal);
@@ -83,7 +89,10 @@ t_object	*cylinder_ob(t_point_normal *p_n, double *d_h, t_color color,
 	if (path)
 		check_type(path, obje->style, obje);
 	else
+	{
+		obje->path = NULL;
 		obje->style[COLOR] = 1;
+	}
 	obj->radius = (d_h[0] / 2);
 	obj->len = d_h[1];
 	obj->point = p_n->point;
@@ -109,7 +118,10 @@ t_object	*cone_ob(t_point_normal *p_n, double *d_h, t_color color,
 	if (path)
 		check_type(path, obje->style, obje);
 	else
+	{
+		obje->path = NULL;
 		obje->style[COLOR] = 1;
+	}
 	obj->point = p_n->point;
 	obj->normal = v_normalize(p_n->normal);
 	obj->radius = (d_h[0] / 2);

@@ -15,7 +15,7 @@ pl 0,0,50 		0,0,-1 	    0,0,0
 
 
 # cy 0,10,0 0,1,0 8 30 0,0,255
-sp 0,10,0 10 texture:./texture/earth_night.xpm
-sp -15,17,-14.7 10 texture:./texture/mars.xpm
-sp 25.5,10,-9.5 10 texture:./texture/venus.xpm
+sp 0,10,0 10 texture:earth_night.xpm
+sp -15,17,-14.7 10 texture:mars.xpm
+sp 25.5,10,-9.5 10 texture:venus.xpm
 # sp 0,10,0 10 texture:./texture/earth.xpm

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/24 12:18:37 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 00:02:25 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:24:52 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,27 +89,27 @@ static void	o_zoom(t_object *obj, double x)
 	if (obj->type == SPHERE && obj->t++)
 	{
 		objs.sp = (t_sp *)obj->object;
-		objs.sp->radius += x;
+		objs.sp->radius *= x;
 	}
 	else if (obj->type == CYLINDER && obj->t++)
 	{
 		objs.cy = (t_cy *)obj->object;
-		objs.cy->radius += x;
-		objs.cy->len += x;
+		objs.cy->radius *= x;
+		objs.cy->len *= x;
 	}
 	else if (obj->type == CONE && obj->t++)
 	{
 		objs.co = (t_co *)obj->object;
-		objs.co->radius += x;
-		objs.co->height += x;
+		objs.co->radius *= x;
+		objs.co->height *= x;
 	}
 }
 
 int	obj_zoom(int button, t_minirt *mrt)
 {
 	if (button == K_IN)
-		return (o_zoom(mrt->selected.slected, 3), 1);
+		return (o_zoom(mrt->selected.slected, 0.72), 1);
 	else if (button == K_OUT)
-		return (o_zoom(mrt->selected.slected, -3), 1);
+		return (o_zoom(mrt->selected.slected, 1.27), 1);
 	return (0);
 }

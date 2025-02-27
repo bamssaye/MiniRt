@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:59:40 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 01:46:03 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ t_vec3d		find_perpendicular(t_vec3d normal, t_vec3d hpoint, t_vec3d point);
 int			obj_zoom(int button, t_minirt *mrt);
 int			select_object(int keycode, int x, int y, t_minirt *prog);
 t_color		co_texture(t_tex *tex, t_vec3d *hpoint, t_co *co);
-t_vec3d		co_nomap(t_tex *n_map, t_co *co, t_npc *closest, t_ray *ray);
+t_vec3d		co_nomap(t_tex *n_map, t_co *co, t_npc *closest);
+t_vec3d		cy_nomap(t_tex *n_map, t_cy *cy, t_npc *closest);
+t_vec3d		pl_nomap(t_tex *n_map, t_pl *pl, t_npc *closest);
+t_vec3d		sp_nomap(t_tex *n_map, t_sp *sp, t_npc *closest);
 t_color		co_checkerboard(t_vec3d *hpoint, t_co *co);
 char		*ft_strdup(const char *s);
 char		*ft_strjoin(char *s1, char *s2);
 int			load_texture(t_minirt *rt, t_list *lst);
-t_vec3d		cy_nomap(t_tex *n_map, t_cy *cy, t_npc *closest, t_ray *ray);
-t_vec3d		pl_nomap(t_tex *n_map, t_pl *pl, t_npc *closest, t_ray *ray);
-t_vec3d		sp_nomap(t_tex *n_map, t_npc *closest, t_ray *ray, t_sp *sp);
 void		p_c(t_color a);
 int			print_err(char *str, char *s);
 t_vec3d		color_map(t_color color);

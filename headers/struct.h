@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 15:03:55 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 01:51:57 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,12 @@ typedef struct s_xyz
 	int				isv;
 }					t_vec3d;
 
-typedef struct s_normal_map
+typedef struct s_tbitan
 {
+	t_vec3d			tan;
+	t_vec3d			bitan;
 	t_vec3d			normal;
-	t_vec3d			u;
-	t_vec3d			no_map;
-	t_vec3d			v_vec;
-	t_vec3d			sca_no_x;
-	t_vec3d			sca_no_y;
-	t_vec3d			sca_nm_z;
-}					t_normal_map;
+}					t_tbitan;
 ///////////////////////////////////////////
 ////////////////////////// RAY
 typedef struct s_ray

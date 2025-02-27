@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   math.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:24 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/24 12:46:05 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/02/27 01:52:11 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,4 +51,30 @@ double	lig_scale(t_vec3d a, t_vec3d b)
 
 	cosine = v_dot(a, b);
 	return (fmax(cosine, 0.0));
+}
+
+t_tbitan	tan_bitan_n(t_vec3d normal, t_vec3d no_map)
+{
+	t_tbitan	tbn;
+
+	if (fabs(normal.x) < fabs(normal.y))
+	{
+		if (fabs(normal.x) < fabs(normal.z))
+			tbn.tan = v_normalize(v_cross((t_vec3d){1, 0, 0, 0}, normal));
+		else
+			tbn.tan = v_normalize(v_cross((t_vec3d){0, 0, 1, 0}, normal));
+	}
+	else
+	{
+		if (fabs(normal.y) < fabs(normal.z))
+			tbn.tan = v_normalize(v_cross((t_vec3d){0, 1, 0, 0}, normal));
+		else
+			tbn.tan = v_normalize(v_cross((t_vec3d){0, 0, 1, 0}, normal));
+	}
+	tbn.bitan = v_normalize(v_cross(normal, tbn.tan));
+	return ((t_tbitan){
+		.tan = v_scale(no_map.x, tbn.tan),
+		.bitan = v_scale(no_map.y, tbn.bitan),
+		.normal = v_scale(no_map.z, normal)
+	});
 }

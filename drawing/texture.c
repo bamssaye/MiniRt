@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:06:07 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 01:51:32 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,13 @@ t_color	cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy)
 t_color	co_texture(t_tex *tex, t_vec3d *hpoint, t_co *co)
 {
 	char	*pixel;
+	t_vec3d	local;
 
 	double (u), (v);
 	int (x), (y);
-	u = 0.5 + atan2(hpoint->z - co->point.z, hpoint->x - co->point.x) / (2
-			* PI);
-	v = fabs((hpoint->y - co->point.y) / co->height);
+	local = find_perpendicular(co->normal, *hpoint, co->point);
+	u = 0.5 + atan2(local.x, local.y) / (2 * PI);
+	v = fabs(local.z / co->height);
 	x = (int)(u * tex->width);
 	y = (int)(v * tex->height);
 	pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));

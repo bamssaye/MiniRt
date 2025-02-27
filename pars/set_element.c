@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 02:11:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 00:11:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/26 22:27:07 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ t_object	*light_ob(t_vec3d light_vec3d, double light_bri, t_color color)
 	obj->color = color;
 	obj->position = v_scale(light_bri, light_vec3d);
 	obje->type = LIGHT;
+	obje->path = NULL;
 	obje->object = obj;
 	return (obje);
 }
