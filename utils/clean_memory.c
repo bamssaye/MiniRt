@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:07:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:42:50 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 03:05:53 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	arry_c(char **str)
 	str = NULL;
 }
 
-void	free_cmd(t_list *cmd)
+void	free_cmd(t_list *cmd, t_minirt *rt, int f)
 {
 	t_list		*tmp;
 	t_object	*t;
@@ -40,6 +40,11 @@ void	free_cmd(t_list *cmd)
 		tmp = cmd;
 		cmd = cmd->next;
 		t = (t_object *)tmp->content;
+		if (rt->bouns && !f && t->type != 3)
+		{
+			mlx_destroy_image(rt->mlx.mlx, t->bum_tex.img.img);
+			mlx_destroy_image(rt->mlx.mlx, t->bum_tex.bump.img);
+		}
 		if (t->path)
 			free(t->path);
 		free(t->object);

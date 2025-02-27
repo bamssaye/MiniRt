@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 00:00:53 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:06:36 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:35:55 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	key_hook(int keycode, t_minirt *mrt)
 {
 	if (keycode == K_ESC)
-		ft_clear_all(mrt);
+		ft_clear_all(mrt, 0);
 	return (0);
 }
 

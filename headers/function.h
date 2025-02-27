@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/27 01:46:03 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:36:37 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 ///////////////////////////////////////////
 t_vec3d		find_perpendicular(t_vec3d normal, t_vec3d hpoint, t_vec3d point);
+t_tbitan	tan_bitan_n(t_vec3d normal, t_vec3d no_map);
 int			obj_zoom(int button, t_minirt *mrt);
 int			select_object(int keycode, int x, int y, t_minirt *prog);
 t_color		co_texture(t_tex *tex, t_vec3d *hpoint, t_co *co);
@@ -49,7 +50,7 @@ t_color		check_color(char *str);
 t_vec3d		check_xyz(char *str, double min, double max);
 char		**tospace(char *str);
 void		arry_c(char **str);
-void		free_cmd(t_list *cmd);
+void		free_cmd(t_list *cmd, t_minirt *rt, int f);
 int			ft_readfile(char *path, t_minirt *mrt);
 int			set_ambient(char **s, t_minirt *rt);
 int			set_camera(char **s, t_minirt *rt);
@@ -130,7 +131,7 @@ double		lig_scale(t_vec3d a, t_vec3d b);
 ////////////////////////// INIT MLX
 void		ft_init_win(t_minirt *mrt);
 void		ft_hooks_fun(t_minirt *mrt);
-int			ft_clear_all(t_minirt *mrt);
+int			ft_clear_all(t_minirt *mrt, int f);
 void		mlx_putpixel(t_image *data, int x, int y, int color);
 int			render_image(t_minirt *prog);
 ///////////////////////////////////////////

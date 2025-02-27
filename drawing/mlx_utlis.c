@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/12 03:16:52 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 15:04:44 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 02:40:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ void	mlx_putpixel(t_image *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
-int	ft_clear_all(t_minirt *mrt)
+int	ft_clear_all(t_minirt *mrt, int f)
 {
 	mlx_destroy_image(mrt->mlx.mlx, mrt->mlx.img.img);
 	mlx_destroy_window(mrt->mlx.mlx, mrt->mlx.win);
+	free_cmd(mrt->object, mrt, f);
 	mlx_destroy_display(mrt->mlx.mlx);
-	free_cmd(mrt->object);
 	free(mrt->mlx.mlx);
 	exit(0);
 	return (0);

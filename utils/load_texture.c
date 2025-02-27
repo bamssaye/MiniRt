@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 23:52:32 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 14:41:56 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 03:09:22 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static void	load_img(void *mlx, t_tex *img, char *path, char *str)
 	int		j;
 
 	i = -1;
+	img->check_valid = 0;
 	while (str[++i])
 	{
 		name[i] = str[i];
@@ -51,7 +52,7 @@ int	load_texture(t_minirt *rt, t_list *lst)
 			load_img(rt->mlx.mlx, &obj->bum_tex.img, obj->path, "./texture/");
 			obj->path = ft_strjoin("normal_", obj->path);
 			load_img(rt->mlx.mlx, &obj->bum_tex.bump, obj->path, "./texture/");
-			if (obj->bum_tex.bump.check_valid || obj->bum_tex.img.check_valid)
+			if (obj->bum_tex.img.check_valid || obj->bum_tex.bump.check_valid)
 				return (1);
 		}
 		tmp = tmp->next;
