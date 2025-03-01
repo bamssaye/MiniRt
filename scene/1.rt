@@ -1,0 +1,24 @@
+A 0.8 255,255,255
+C 00,00,100 0,0,-1 70
+L 100,00,100 0.8 255,255,255
+
+# sp 0,0,0 70 texture:earth.xpm
+# pl -40,0,0 1,0,0 texture:rock.xpm
+# pl 40,0,0 1,0,0 texture:rock.xpm
+# pl 0,-20,0 0,1,0 texture:stone.xpm
+# pl 0,0,-40 0,0,1 texture:rock.xpm
+cy 0,0,0 0,0,1 40 80 texture:stone.xpm
+# co 0,0,0 1,0,0 40 80 texture:stone.xpm
+#/////////////////
+# sp 0,0,0 70 checkborad
+# pl 0,0,-40 0,0,1 checkborad
+# pl 40,0,0 1,0,0     checkborad
+# pl 0,-20,0 0,1,0  checkborad
+# pl 0,0,-40 0,0,1  checkborad
+# cy 0,0,0 1,0,0 40 80 checkborad
+# cy 20,0,0 0,1,0 40 80 checkborad
+# cy -20,0,0 0,0,1 40 80 checkborad
+# co 0,0,0 0,1,0 40 80 checkborad
+# co 0,0,0 1,0,0 40 80 checkborad
+# co 0,0,0 -1,0,0 40 80 checkborad
+# co 0,0,0 0,-1,0 40 80 checkborad
