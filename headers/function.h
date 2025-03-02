@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:13:45 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/27 02:36:37 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:49:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define FUNCTION_H
 
 ///////////////////////////////////////////
-t_vec3d		find_perpendicular(t_vec3d normal, t_vec3d hpoint, t_vec3d point);
+t_vec3d		hight_right_up(t_vec3d normal, t_vec3d local, int pl);
+t_vec3d		normal_sp(t_vec3d no, t_tbitan tbn);
+t_vec3d		v_perpendicular(t_vec3d v);
 t_tbitan	tan_bitan_n(t_vec3d normal, t_vec3d no_map);
 int			obj_zoom(int button, t_minirt *mrt);
 int			select_object(int keycode, int x, int y, t_minirt *prog);

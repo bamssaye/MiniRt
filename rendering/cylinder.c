@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylinder.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:04 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/24 13:07:49 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:06:09 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	cy_inter(t_cy *cy, t_hit *f_inter, t_bump *bump, int *style)
 	t_hit (tmp_body);
 	t_hit (tmp_caps);
 	tmp_body = *f_inter;
+	(void)bump;
+	(void)style;
 	if (check_cylinder_hit(cy, &tmp_body))
 	{
 		*f_inter = tmp_body;

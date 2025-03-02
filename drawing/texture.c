@@ -6,25 +6,42 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/14 11:33:08 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/27 01:51:32 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:48:30 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../headers/minirt.h"
 
-t_color	pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl);
-t_color	sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp);
-t_color	cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy);
+t_vec3d	hight_right_up(t_vec3d normal, t_vec3d local, int pl)
+{
+	t_vec3d		right;
+	t_vec3d		up;
+
+	double (hight), (x), (y);
+	right = v_perpendicular(normal);
+	up = v_cross(normal, right);
+	x = v_dot(local, right);
+	y = v_dot(local, up);
+	hight = v_dot(local, normal);
+	if (pl)
+		return ((t_vec3d){.x = x, .y = y});
+	return ((t_vec3d){
+		.x = atan2(x, y),
+		.y = hight,
+		.z = v_dot(local, right)
+	});
+}
 
 t_color	sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp)
 {
 	char	*pixel;
+	t_vec3d	local;
 
 	double (u), (v);
 	int (x), (y);
-	u = 0.5 + atan2(hpoint->z - sp->center.z, hpoint->x - sp->center.x) / (2
-			* PI);
-	v = 0.5 - asin((hpoint->y - sp->center.y) / sp->radius) / PI;
+	local = v_minus(*hpoint, sp->center);
+	u = (-(atan2(local.z, local.x)) + PI) / (2.0 * PI);
+	v = (acos(local.y / sp->radius) / PI);
 	x = (int)(u * tex->width) % tex->width;
 	y = (int)(v * tex->height) % tex->height;
 	pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
@@ -37,16 +54,16 @@ t_color	sp_texture(t_tex *tex, t_vec3d *hpoint, t_sp *sp)
 
 t_color	pl_texture(t_tex *tex, t_vec3d *hpoint, t_pl *pl)
 {
-	char	*pixel;
-	t_vec3d	local;
-	double	scale;
+	char		*pixel;
+	t_vec3d		local;
+	t_vec3d		uv;
 
 	int (x), (y);
 	double (u), (v);
-	local = find_perpendicular(pl->normal, *hpoint, pl->point);
-	scale = 0.01;
-	u = fmod(fabs(local.x * scale), 1.0);
-	v = fmod(fabs(local.y * scale), 1.0);
+	local = v_minus(*hpoint, pl->point);
+	uv = hight_right_up(pl->normal, local, 1);
+	u = fmod(fabs(uv.x * 0.01), 1.0);
+	v = fmod(fabs(uv.y * 0.01), 1.0);
 	x = (int)(u * tex->width) % tex->width;
 	y = (int)(v * tex->height) % tex->height;
 	pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
@@ -61,12 +78,14 @@ t_color	cy_texture(t_tex *tex, t_vec3d *hpoint, t_cy *cy)
 {
 	char	*pixel;
 	t_vec3d	local;
+	t_vec3d	uv;
 
 	double (u), (v);
 	int (x), (y);
-	local = find_perpendicular(cy->normal, *hpoint, cy->point);
-	u = 0.5 + atan2(local.x, local.y) / (2 * PI);
-	v = fabs(local.z / cy->len);
+	local = v_minus(*hpoint, cy->point);
+	uv = hight_right_up(cy->normal, local, 0);
+	u = 0.5 + uv.x / (2 * PI);
+	v = fmod(uv.y / cy->len + 1.0, 1.0);
 	x = (int)(u * tex->width);
 	y = (int)(v * tex->height);
 	pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));
@@ -81,12 +100,14 @@ t_color	co_texture(t_tex *tex, t_vec3d *hpoint, t_co *co)
 {
 	char	*pixel;
 	t_vec3d	local;
+	t_vec3d	uv;
 
 	double (u), (v);
 	int (x), (y);
-	local = find_perpendicular(co->normal, *hpoint, co->point);
-	u = 0.5 + atan2(local.x, local.y) / (2 * PI);
-	v = fabs(local.z / co->height);
+	local = v_minus(*hpoint, co->point);
+	uv = hight_right_up(co->normal, local, 0);
+	u = 0.5 + uv.x / (2 * PI);
+	v = fmod(uv.y / co->height + 1, 1.0);
 	x = (int)(u * tex->width);
 	y = (int)(v * tex->height);
 	pixel = tex->addr + (y * tex->line_length + x * (tex->bpp / 8));

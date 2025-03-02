@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:46 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/26 00:12:06 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:53:18 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,9 +93,9 @@ void	trace_light_at_intersection(t_minirt *prog, t_hit *hit)
 			if (!tr.l_pa.stuck)
 			{
 				tr.angle = lig_scale(tr.inters.normal, tr.l_pa.light_dire);
-				tr.color = c_scale(tr.angle, tr.inters.color);
-				tr.l_pa.light.spc = specular_light(&tr, prog->cam.position);
-				tr.f_c = c_plus(tr.f_c, c_plus(tr.color, tr.l_pa.light.spc));
+				tr.col = c_plus(tr.l_pa.c, c_scale(tr.angle, tr.inters.color));
+				tr.l_pa.spc = specular_light(&tr, prog->cam.position);
+				tr.f_c = c_plus(tr.f_c, c_plus(tr.col, tr.l_pa.spc));
 			}
 		}
 		tr.lst = tr.lst->next;

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 05:47:14 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 13:59:26 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/03/01 21:32:33 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,15 @@ int	set_sp(char **s, t_minirt *rt)
 	if (check_str(s, 4) || ft_atof(s[2]).isv)
 		return (print_err("\t{SPHER}", MSG_4));
 	point = check_xyz(s[1], -IN_MIN, IN_MAX);
+	if (point.isv)
+		return (print_err("\t{SPHER}", MSG_4));
 	dia = ft_atof(s[2]).num;
 	color = check_color(s[3]);
 	path = check_path(s[3], rt->bouns);
 	if (path)
 		rt->count_t++;
 	sphere = sphere_ob(point, color, dia, path);
-	if (!sphere || point.isv || (color.isv && !path) || !++(rt->obj_count))
+	if (!sphere || (color.isv && !path) || !++(rt->obj_count))
 		return (free(path), free_obj(sphere), print_err("\t{SPHER}", MSG_4));
 	sphere->id = rt->obj_count;
 	ft_lstadd_back(&rt->object, ft_lstnew(sphere));
@@ -67,13 +69,14 @@ int	set_pl(char **s, t_minirt *rt)
 		return (print_err("\t{PLANE}", MSG_5));
 	p_n.normal = check_xyz(s[2], -1, 1);
 	p_n.point = check_xyz(s[1], -IN_MIN, IN_MAX);
+	if (p_n.normal.isv || p_n.point.isv)
+		return (print_err("\t{PLANE}", MSG_5));
 	color = check_color(s[3]);
 	path = check_path(s[3], rt->bouns);
 	plane = plane_ob(&p_n, color, path);
 	if (path)
 		rt->count_t++;
-	if (p_n.normal.isv || p_n.point.isv || (color.isv && !path)
-		|| !++(rt->obj_count))
+	if ((color.isv && !path) || !++(rt->obj_count))
 		return (free(path), free_obj(plane), print_err("\t{PLANE}", MSG_5));
 	plane->id = rt->obj_count;
 	ft_lstadd_back(&rt->object, ft_lstnew(plane));
@@ -92,6 +95,8 @@ int	set_cy(char **s, t_minirt *rt)
 		return (print_err("\t{CYLINDER}", MSG_6));
 	p_n.normal = check_xyz(s[2], -1, 1);
 	p_n.point = check_xyz(s[1], -IN_MIN, IN_MAX);
+	if (p_n.normal.isv || p_n.point.isv)
+		return (print_err("\t{CYLINDER}", MSG_6));
 	color = check_color(s[5]);
 	path = check_path(s[5], rt->bouns);
 	v[0] = ft_atof(s[3]).num;
@@ -99,8 +104,7 @@ int	set_cy(char **s, t_minirt *rt)
 	if (path)
 		rt->count_t++;
 	cylinder = cylinder_ob(&p_n, v, color, path);
-	if (!cylinder || p_n.normal.isv || p_n.point.isv || (color.isv && !path)
-		|| !++(rt->obj_count))
+	if (!cylinder || (color.isv && !path) || !++(rt->obj_count))
 		return (free(path), free_obj(cylinder), print_err("\t{CYLINDER}",
 				MSG_6));
 	cylinder->id = rt->obj_count;
@@ -116,12 +120,12 @@ int	set_co(char **s, t_minirt *rt)
 	double			v[2];
 	t_color			color;
 
-	if (!rt->bouns)
-		return (print_err("\t{CONE}", "Bouns part"));
 	if (check_str(s, 6) || ft_atof(s[3]).isv || ft_atof(s[4]).isv)
 		return (print_err("\t{CONE}", MSG_7));
 	p_n.point = check_xyz(s[1], -IN_MIN, IN_MAX);
 	p_n.normal = check_xyz(s[2], -1, 1);
+	if (p_n.normal.isv || p_n.point.isv)
+		return (print_err("\t{CONE}", MSG_7));
 	v[0] = ft_atof(s[3]).num;
 	v[1] = ft_atof(s[4]).num;
 	color = check_color(s[5]);
@@ -129,8 +133,7 @@ int	set_co(char **s, t_minirt *rt)
 	if (path)
 		rt->count_t++;
 	cone = cone_ob(&p_n, v, color, path);
-	if (!cone || p_n.point.isv || p_n.normal.isv || (color.isv && !path)
-		|| !++(rt->obj_count))
+	if (!cone || (color.isv && !path) || !++(rt->obj_count))
 		return (free(path), free_obj(cone), print_err("\t{CONE}", MSG_7));
 	cone->id = rt->obj_count;
 	ft_lstadd_back(&rt->object, ft_lstnew(cone));

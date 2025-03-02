@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/15 06:13:09 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/26 15:02:58 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/02/27 17:41:44 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	rotate_x(t_object *obj, double angle)
 	t_vec3d (*rot_x);
 	if (obj->type == PLANE)
 	{
-		rot_x = &(((t_sp *)obj->object)->center);
+		rot_x = &(((t_pl *)obj->object)->normal);
 		rot = rotat_e(rot_x->y, rot_x->z, angle, 1);
 		rot_x->y = rot.x;
 		rot_x->z = rot.y;
@@ -61,7 +61,7 @@ void	rotate_y(t_object *obj, double angle)
 	t_vec3d (*rot_y);
 	if (obj->type == PLANE)
 	{
-		rot_y = &(((t_sp *)obj->object)->center);
+		rot_y = &(((t_pl *)obj->object)->normal);
 		rot = rotat_e(rot_y->x, rot_y->z, angle, -1);
 		rot_y->x = rot.x;
 		rot_y->z = rot.y;
@@ -90,7 +90,7 @@ void	rotate_z(t_object *obj, double angle)
 	t_vec3d (*rot_z);
 	if (obj->type == PLANE)
 	{
-		rot_z = &(((t_sp *)obj->object)->center);
+		rot_z = &(((t_pl *)obj->object)->normal);
 		rot = rotat_e(rot_z->x, rot_z->y, angle, 1);
 		rot_z->x = rot.x;
 		rot_z->y = rot.y;

@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/01 01:07:59 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/27 03:05:53 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:39:27 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_cmd(t_list *cmd, t_minirt *rt, int f)
 	t_list		*tmp;
 	t_object	*t;
 
+	(void)f;
 	if (!cmd)
 		return ;
 	while (cmd)
@@ -40,11 +41,10 @@ void	free_cmd(t_list *cmd, t_minirt *rt, int f)
 		tmp = cmd;
 		cmd = cmd->next;
 		t = (t_object *)tmp->content;
-		if (rt->bouns && !f && t->type != 3)
-		{
+		if (t->bum_tex.img.img)
 			mlx_destroy_image(rt->mlx.mlx, t->bum_tex.img.img);
+		if (t->bum_tex.bump.img)
 			mlx_destroy_image(rt->mlx.mlx, t->bum_tex.bump.img);
-		}
 		if (t->path)
 			free(t->path);
 		free(t->object);
@@ -54,7 +54,7 @@ void	free_cmd(t_list *cmd, t_minirt *rt, int f)
 	}
 }
 
-void	free_obj(t_object *obj)
+void	free_obj(t_object *obj) //
 {
 	if (!obj)
 		return ;

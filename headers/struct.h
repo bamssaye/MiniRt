@@ -6,7 +6,7 @@
 /*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 16:03:03 by bamssaye          #+#    #+#             */
-/*   Updated: 2025/02/27 01:51:57 by bamssaye         ###   ########.fr       */
+/*   Updated: 2025/03/02 23:44:08 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -210,20 +210,15 @@ typedef struct s_inters_params
 ///////////////////////////////////////////
 ////////////////////////// OBJECT LIGHT
 
-typedef struct s_slight
-{
-	t_color			light_color;
-	t_color			ambient_color;
-	t_color			spc;
-}					t_slight;
-
 typedef struct s_obslight
 {
 	t_ray			ray;
 	t_vec3d			light_dire;
 	double			m_dis;
 	int				stuck;
-	t_slight		light;
+	t_color			c;
+	t_color			spc;
+	// t_slight		light;
 }					t_obslight;
 
 ///////////////////////////////////////////
@@ -255,7 +250,7 @@ typedef struct s_trace_light
 	t_list			*lst;
 	t_object		*objt;
 	t_color			f_c;
-	t_color			color;
+	t_color			col;
 	t_color			ambient_color;
 	double			angle;
 }					t_trace_light;

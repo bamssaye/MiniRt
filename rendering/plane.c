@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   plane.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: iel-koub <iel-koub@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bamssaye <bamssaye@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/08 14:19:37 by iel-koub          #+#    #+#             */
-/*   Updated: 2025/02/24 12:46:37 by iel-koub         ###   ########.fr       */
+/*   Updated: 2025/03/01 18:06:01 by bamssaye         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	plane_inter(t_pl *pl, t_hit *inter, t_bump *bump, int *style)
 	t_vec3d	*ray;
 
 	ray = &inter->ray->direction;
+	(void)bump;
+	(void)style;
 	dist = pl_ray_dista(*(inter->ray), *pl, &inter->closest);
 	if (dist > 0)
 	{
