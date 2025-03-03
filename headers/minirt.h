@@ -29,8 +29,8 @@
 # include "function.h"
 # include <fcntl.h>
 # define P_NAME "miniRT"
-# define W_WIDTH 500
-# define W_HEIGHT 500
+# define W_WIDTH 1000
+# define W_HEIGHT 1000
 # define IN_MAX 2147483647
 # define IN_MIN 2147483648
 # define PI 3.14159265358979323846f
